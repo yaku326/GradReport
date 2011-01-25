@@ -1,0 +1,310 @@
+\documentclass[morisawa]{jsarticle}
+\usepackage[dvipdfm,bookmarks=true,bookmarksnumbered=true,%
+bookmarkstype=tocx,a4paper]{hyperref}
+
+\begin{document}
+
+\title{Visual Synthesizer := \huge{$Sonitus \over Lucis \times Colorum$}\\
+\Large{Lucis et Colorum Sonitus}\\
+}
+\author{Iori yoneji}
+\maketitle
+\begin{flushright}
+writtern with \pLaTeX2e
+\end{flushright}
+\part{この論文の目的}
+この論文は、\begin{itemize}
+\item ソースコードを実際に読み、書くことによって、ソフトウエアとハードウェアの製作について実例を挙げ、現状の開発環境の問題点を指摘しつつ、実地での開発について詳細に説明する。
+\item オープンソフトウェア/ハードウェア、オープンノウハウによる恩恵をどのように享受しているか、また、実際に自分がオープンソフトウェア/ハードウェア、オープンノウハウについての公開を通して、これらの活動の参加容易性について論じ、これに対する読者の心のハードルを下げる。
+\item パーソナルファブリケーションとオープンソースについて、実際の作成のほか、社会の現状とビジネスモデルについて言及する。
+\item まだ一般に公開された環境で創られていないものを創る。
+\end{itemize}
+ことを目的とする。\\
+今回の製作対象の、外から見た仕様について\begin{itemize}
+\item 学生が買える、廉価なカメラモジュールで、室内等の明るさや色などを元にパラメータを作成する。
+\item パラメータを元にスピーカから音が鳴る。
+\end{itemize}
+と定める。
+\tableofcontents
+
+\part{哲学}
+\section{前口上 -お目汚し-}
+過去に様々な形において、音楽と映像の関連づけが行われてきた。\\
+映画中の音楽であったり...といった面もあるが、それはむしろ視聴者への心理的な関連付けを両者が並列して行っているということである。\\
+ここで私が言いたいのは、むしろビジュアライザやイコライザの類についてである。\\
+つらつら長く書いてしまいそうで怖い。意味の希薄な前口上を冗長に書いて見たところでなにもない。当然だ。つまるところ、と結論を急いでしまおう。詰まるところ、私の言いたいのは、iTunesやRhythmboxのようなビジュアライザのような音楽のデータの(ごく一部をランダムに用いた)画像の自動生成システムを、なんの価値もなく、ただいたずらにPCに負担をかけるばかりで、あきるほど見てきた。しかし、いままでにおいて、その逆のハードウェアを作ってみようという試みは寡聞にして聞かない。\\
+音楽は、
+\begin{itemize}
+ \item 作業中、考え中、読書中の類のときのBGMとして。またトーク番組のBGMとして
+ \item その音楽を楽しむ。
+　\item その曲を覚えてなにか自分で歌って踊って演奏してみたいなことをする。
+\end{itemize}
+といった用途が考えられる訳だけれども、とにもかくにも、再生中のディスプレイを凝視することなんて(むしろそのウィンドウが開かれていることだって)、普通に考えて、ないことなのだ。
+
+ところが、である。なにか外を向いてみる、とかその類の、目で見ているもの、顔を向けている対象に特定の意味と意志をフォーカスしていないときには、その風景が音楽化(soundlize)されても、困らない。
+..んじゃないかなあと考えたわけである。\\
+
+崩して言ってみる。
+
+飽きているからかも知れないけれど、音楽が(機械的に)映像化されているのをみても、何とも思わないか、ムッとする。遅いPCを使って作業しているとなおさらだ。
+
+けれど、外を見たときとかみたいな、Not Watch nor Look, But seeな状況の時、それが音楽化されてみたら、ちょっと楽しいかもしれない。
+
+そういうことを企んだのだった。
+
+\section{実用性 -音楽的要素がなくても-}
+音楽的要素が無くしても、視覚情報を音声に変換するという試みは、例えば後天的に目の見えなくなってしまった人への、わずかな手助けとなる可能性を秘めている。\\
+音を位置と色で対応付けることができれば、ある程度の視覚補助になろう。もし、その目的で特化させたものを作るに至れば(今回の開発では到底無理そうだが)、日常的な交通の用に供することすら出来るかもしれない。\\
+
+\subsection{こういった、直接の役に立たない物作りの土壌}
+物作りとは、役に立つと万人が思うものを作ることのみであろうか。
+
+ある日、東京工業大学の大岡山キャンパスで開かれたMake: Tokyo Meetingに行ってきた訳だが、半球のボールにたくさんつまみがついていて、大人の科学の付録のシンセとマイコンの接続をわざわざ信号でなくてサーボモータでつまみを動かすことで音作りを視覚化したり、テスラコイルで音楽を再生してみたり、そういった、電気、光、音の融合したような分野での趣味の工作と研究の成果が大小様々に配置されては製作者(高専生、大学生、院生を中心として高校生も含む)がそばにいて、お互い、または見学者と話しているといった雰囲気であった。それに触発もされて、私はこうしてこの文章を書いている。\\
+
+幸い、先述のものを個人で、実現している例はまだない様なので良かった。\\
+
+Make:や、筑波大学主催の、産学共同で行われたprosumeといった企画は、どういう目的なのだろうか。\\
+そのままでは、役にたたないかも知れないものを作る必要がどこにあるのだろうか。\\
+引用開始***参考1\\
+\begin{verse}
+PROSUME 2010 は、個人でもここまでできる！をコンセプトとした、クリエーターのためのイベントです。電子工作、機械工作、科学実験、クラフト、音響、映像パフォーマンスなど、基本的に個人やサークル等で開発、作成したものであれば何でも出展可能です。またこれらクリエーターを応援してくれる企業の出展も募集します。\\
+
+Prosume(プロシューム)とは、produce (生産) + consume (消費)を組み合せた造語です。1980年にAlvin Toffler氏の「第三の波」の中で、生産者であり、消費者であるという意味の、Prosumer が提唱されたのが最初とされています。消費者の個別のニーズに応じた製品は、消費者自身が作り出すというもので、それを可能にするのが従来技術の低コスト化と、身近になった最新技術です。キーワードは、オープンソース、ラピッド・プロトタイピング、そしてパーソナル・ファブリケーションです。\\
+\end{verse}
+これは、prosumeに実際に出展した人との会話を通して得た、私の解釈であるが、"産業資本主義の末期的構造"として一般に問題提起されている構造-すなわち生産者(企業)というブラックボックスから与えられたものを「欲しい！」という動機のみで消費し、"需要が供給を生み出しているのではなく、「開発された量産製品」の存在が需要を生み出している"-に対する一つの答えだと思っている。\\
+具体的には、こんなものがあったら良いなというものを作り、そこから情報やアイディアを(消費者として、かつ製作者として)シェアすることにより、他人の作った物より斬新なもの、より複雑なものを目指すことが容易になり、PROSUMEにあげられた"従来技術の低コスト化"と、情報技術の高度な発達によってそれが加速されたということである。\\
+もし、一般の「消費者であり生産者ではない」人への応用が可能になるものをそこから「純粋な生産ブラックボックス」である企業が見いだし、量産し、人類の生活をわずかでも向上できれば、"Prosumer"として本望なのではないか。\\
+
+\subsection{キーワードとしての オープンソース ラピット・プロトタイピング パーソナル・ファブリケーション}
+
+「第三の波」が1980年に書かれていることは非常に衝撃的である。なぜか？それは、上にあげた様々な革命がほとんど無名の赤ん坊でしかなかった時代だからだ。\\
+\subsubsection{オープンソースとは一体何か}
+参考2として、最も普及しているオープンソースライセンス及び哲学のうちの特に歴史があるものとして、GPL(GNU General Public License)の原文のリンクを示す。\\
+これが何を示しているのか。引用開始\\
+\begin{verse}
+You may convey verbatim copies of the Program's source code as you receive it,in any medium, provided that you conspicuously and appropriately publish on each copy an appropriate copyright notice;
+\end{verse}
+拙訳-入手した(GPLでライセンスされた)ソースコードの(一字一句正しい)原本をどんな形でも配布できる。そのとき、GPLライセンスされたソフトウェアであることを、明らかに分かるように示さなければならない\\
+\begin{verse}
+a) The work must carry prominent notices stating that you modified it, and giving a relevant date.
+b) The work must carry prominent notices stating that it is released under this License and any conditions added under section 7. This requirement modifies the requirement in section 4 to “keep intact all notices”.
+c) You must license the entire work, as a whole, under this License to anyone who comes into possession of a copy. This License will therefore apply, along with any applicable section 7 additional terms, to the whole of the work, and all its parts, regardless of how they are packaged. This License gives no permission to license the work in any other way, but it does not invalidate such permission if you have separately received it.
+d) If the work has interactive user interfaces, each must display Appropriate Legal Notices; however, if the Program has interactive interfaces that do not display Appropriate Legal Notices, your work need not make them do so.
+\end{verse}
+参考3にしめすのはsourceforge社(オープンソース文化のハブとして活躍し続けるプログラム開発支援やテクノロジ系ニュースコミュニティのホスト会社として世界的に有名)にホストされているOpenSourceGroupJapanによる非公式訳である。引用開始\\
+\begin{verse}
+a) 作品には、あなたが作品を改変したということと、改変に関連した日時を記述した告知を目立つように載せなければならない。
+b) 作品には、それが本許諾書と、下記第7項に従って追加された条件すべての下で公開されていることを記述した告知を目立つように載せなければな らない。この条件は、上記第4項における「告知をすべてそのまま保全」するための条項を改変する。
+c) 作品の全部分を、総体として、コピーを所有するに至った人全員に、本許諾書の下でライセンスしなければならない。そこで、本許諾書は、本許諾 書第7項に基づく適用可能な追加的条項のすべてとともに、作品全体に、すなわちその全部分に、それらがどのようにパッケージされているかに関わらず 適用されることになる。本許諾書は、これ以外のやり方には作品をライセンスする許可を与えないが、あなたが本許諾書以外で別途許可を得ていた場合 には、それによって得られた許可まで無効とするものではない。
+d) 改変された作品が対話的なユーザインターフェースを有する場合、それらのインターフェースは『適切な法的告知』を表示しなければならない。た だし、『プログラム』に元々『適切な法的告知』を表示しない対話的なインターフェースがある場合、あなたの作品で表示するようにする必要はない。
+\end{verse}
+ここで特徴的なのはコピーされ、改変されたwork(作品)もGPLでライセンスされることであるが、オープンソースして重要なのはそこではない。\\
+だれかが先行して何かをオープンソースとして作った場合、それをいかなる形でも利用でき、その成果をオープンにすれば誰かに利用してもらえるのだ。\\
+これは開発期間の短縮及びモチベーションの向上につながる。\\
+また、ソースコードを作品と呼んでいるのも、ProsumeやMake:的な感性に置ける、芸術としての技術的作品という側面を強く押し出しているとも言えよう。\\
+しかし、このGPLというライセンスすらも、1989年になって初版が策定されるのだ。
+Alvin Toffler氏すごい。
+
+オープンソースとソースコード文学に関しての議論だけ進めてもたくさんもの論文がかけよう。しかし、ここでは割愛させていただく。\\
+少なくとも、ここで述べたことが、"Prosumer"という「第三の波」を生み出す土壌になっていることは明らかである。\\
+\subsubsection{ラピット・プロトタイピング}
+rapid prototypingとは高速な試作である。企業単位でしか買えないような大仰な装置を使って試作品を時間をかけてデバッグして世に送り出してるようでは、個人では当然できない上に、大企業が圧倒的に有利で、また、設計時間も長くなってしまう。しかし、計算機科学の驚くべき進化によって、またはコンテンツ産業の貪欲な大規模化によって、たかだかウェブサイトを閲覧する程度のつもりで個人が購入したコンピュータが一昔前のスーパコンピュータの様な圧倒的な速度を誇っている。このことは、設計工程に関して、廉価なPCで、短期間でCADを使用して、アナログ回路、論理回路、コンピュータソフトウェア、機械、模型など多くのものをシミュレートし、設計できる様にした。\\
+このことは個人の休日の工作のできる幅を押し広げつづけている。
+\subsubsection{パーソナルファブリケーション}
+この単語は個人でのものづくりをさしている。これは、上で述べてきたことが一般化し、個人の製作能力を飛躍的に上昇させ、様々なことを個人にとって可能にしてきたという事の当然の帰結として、出てきた概念である。個人のファブリケーションの持つ可能性が無視でき無くなってきたとき、"Prosumer"の先駆者が自然に発生し、あとから「第三の波」がやってきたといって過言ではないだろう。\\
+当然の事ながらインタネットの高速化、リッチソフトウェア化、利用人口の増大は、その「波」を明らかに加速させている。\\
+今回の純粋な技術的なヒントの半分ほどはインタネットを介して入ってきてる。特に、半導体のデータシートを個人が入手できるというのは革命である。\\
+
+\part{内部仕様について}
+\section{実現方法 -ぐーちょきぱーでなにつくろう？-}
+以下に全体構成を示す。(中心となるチップ / メーカ /ベンダ)
+\begin{itemize}
+ \item カメラ(OV7670 / Omnivision / aitendo) \center{2980円}
+ \item マイクロプロセッサ(LPC2388 / NXP semiconductor / CQ出版)\center{1980円(本込み)}
+ \item CPLD (EPM570T100C5 / Altera / optimize)\center{1600円(未実装)}
+ \item SRAM (CY7C1041DV33 / Cypress / 秋月電子通商)\center{500円}
+\end{itemize}
+上記の構成の理由について述べる。
+
+\subsection{カメラ -目玉-}
+映像を電気信号に変える素子。
+\subsection{プロセッサ -大脳-}
+ワンチップ・コンピュータ。プログラムを実行でき、Flash EPROMがプログラム領域なので、いくらでも書き換えができる。
+
+\subsection{CPLD -脊髄脳髄その他-}
+プログラマブルなロジックIC群。プロセッサとおおきくちがうのは、"手順"をプログラムするのではなく、回路そのものを組み込むことである。
+動作のシミュレーションができる。クロックに同期しない動作が可能であるので、低速であっても、メモリ操作などができる。
+後述のHBEやLBEを素早く制御するのに、上記のプロセッサでは役不足である。
+
+\subsection{SRAM -海馬。中期記憶-}
+SDRAMはコマンドがある。RAMに一度カメラからのコンスタントな情報をプールするのはCPLDになるので、実質制御はCPLDになろう。すると、ロジックICでしか処理出来ない速度で、SRAM以上の複雑なコマンドを送るのは、初めてのRAM制御としては酷であると判断した。\\
+よってSRAMを使用する。\\
+SDRAMは価格が比較的安く、入手性も高いが、今回は簡単に実現できる事を優先させていただく。
+
+さらに、なぜこのチップを選択したかというと、実はカメラのデータアウトプットと深い関係がある。\\
+カメラのデータバス幅は8bitである。しかし、1pixelのデータは16bit、そう、1データ集合を2回に分けて送信してくるのだ!!\\
+
+そこで、16bit幅の普通のRAMで簡単に制御しようとすると、実際のカメラからのデータの2倍のデータ容量が必要となる。\\
+必要となるRAM容量=\\
+$アドレス長 \times 1アドレスに於けるデータ幅 = vetical \times horizonal\times 2 \times 8bit$\\
+
+16bit幅のRAMを同じ方法で(1回受信し8シフトして次回受信分と足すという大変な作業無しで)扱うときの必要とされるRAM容量=\\
+$アドレス長 \times 1アドレスに於けるデータ幅 = vetical \times horizonal\times 2 \times 16bit$\\
+となり、2倍のRAM容量が必要なのは自明だ。\\
+
+しかもこの方式では、プロセッサがRAMから値をとるという簡単な行為のために2cycleも浪費しなければならない。残念である上に、連結処理に(Greenが上位bitsと下位bitsに分かれているため)時間を割く必要がある。手間も割く。しかし、このSRAMのデータシートを読むと16bitのSRAMでありながら、下位bit、上位bitのゲートの開け閉めが任意に行えるため、上位bitに関する値だけ取り込みたい！といったあと、下位bitだけまた同じアドレスに取り込みたい!といったわがままが効くのだ。\\
+しかも、上位も下位も開けておけば16bitいっぺんに読み込み書き込み可能なのである。\\
+\large{It's fits into just my needs!!}
+引用開始。資料2*****
+\begin{verse}
+To write to the device, take Chip Enable ($\overline {CE}$) and Write Enable
+($\overline {WE}$) inputs LOW. If Byte Low Enable ($\overline {BLE}$) is LOW, then data
+from IO pins (IO{\small 0} through IO{\small 7}) is written into the location
+specified on the address pins (A{\small 0} through A{\small 15}). If Byte High
+Enable ($\overline {BHE}$) is LOW, then data from IO pins (IO{\small 8} through IO{\small 15})
+is written into the location specified on the address pins (A{\small 0}through A{\small 15}).\\
+To read from the device, take Chip Enable ($\overline{CE}$) and OutputEnable ($\overline{OE}$) LOW while forcing the Write Enable ($\overline{WE}$) HIGH. If Byte Low Enable ($\overline{BLE}$) is LOW, then data from the memory location specified by the address pins appear on IO{\small 0} to IO{\small 7}. If Byte High Enable ($\overline{BHE}$) is LOW, then data from memory appears on IO{\small 8} to IO{\small 15}. See the “Truth Table” on page 9 for a complete description of read and write modes.
+\\
+\end{verse}
+引用終了。
+また、文中に参照しろ！と書いてあるTruth Table(真理表)\\
+{\Large Truth Table}
+\begin{tabbing}
+qCE\=qWE\=qOE\=qBHE\=qBLE\=qqInputOutputqqqqqq\=qqqqqqMode\kill
+$\overline {CE}$\>$\overline {WE}$\>$\overline {OE}$\>$\overline {BHE}$\>$\overline {BLE}$\>Input/Output\>      Mode\\
+H\>X\>X\>X\>X\>     HighZ\>Deselect\\
+\>\>\>\>\>\>PowerDown\\
+L\>X\>X\>H\>H\>HighZ\>Output Disabled\\
+L\>H\>L\>L\>L\>Data Out (IO{\small0}-IO{\small15})\>Read\\
+L\>H\>L\>H\>L\>Data Out (IO{\small0}-IO{\small7});\>Read\\
+\>\>\>\>\>IO{\small8}-IO{\small15} in High Z\\
+L\>H\>L\>L\>H\>Data Out (IO{\small8}-IO{\small15});\>Read\\
+\>\>\>\>\>IO{\small0}-IO{\small7} in HighZ\\
+L\>H\>H\>L\>L\>HighZ\>Output Disabled\\
+L\>H\>H\>H\>L\>HighZ\>Output Disabled\\
+L\>H\>H\>L\>H\>HighZ\>Output Disabled\\
+L\>L\>X\>L\>L\>Data In(IO{\small0}-IO{\small15})\>Write\\
+L\>L\>X\>H\>L\>Data In(IO{\small0}-IO{\small7});\>Write\\
+\>\>\>\>\>IO{\small8}-IO{\small15} in High Z\\
+L\>L\>X\>L\>H\>Data In(IO{\small8}-IO{\small15});\>Write\\
+\>\>\>\>\>IO{\small0}-IO{\small7} in High Z\\
+\end{tabbing}
+\part{開発環境}
+この開発環境の整備が、ファストプロトタイピングや、とくにパーソナルファブリケーションの大きなネックとなる。
+これが改善されなければ、今後の組み込みにおける、オープンソース環境での開発において大きな損失を招くであろう。
+
+以下に、どのような開発環境の整備が簡易にでき、また、何が難しいか、不可能かを述べる。
+
+\section{オープンソースデスクトップ環境において}
+このサブセクション内で、一般に、ソフトウェアと言った場合、オープンソースであることとする。\\
+また、デスクトップ環境とは、いわゆるPCでの環境のことを指し、ここでは\textbf{ホスト}と同意義である。\\
+『ホスト』は組み込み開発の『ターゲット』に対する用語とし、組み込み開発の母艦というニュアンスを含む。\\
+プロプライエタリ(私企業や個人、政府が保有し、OSSでない)ソフトウェアの場合は配布企業とプロプライエタリであることを明示する。\\
+オープンソースデスクトップ環境(以降OSSDE)として、以下の3つのOSを対象とした。\\
+\begin{itemize}
+\item Debian GNU/Linux(Debian project)
+\item OpenSuSE (OpenSuSE project)
+\item OpenBSD (OpenBSD)
+\end{itemize}
+また、オープンソースではないデスクトップ環境(以降non-OSSDE)として、以下の2つのOSを対象とした。\\
+\begin{itemize}
+\item Windows 7 リリース候補版(マイクロソフト)
+\item Windows XP professional(マイクロソフト)
+\end{itemize}
+OSSDEとして使用したOSはいずれもUNIX互換プラットフォームであり、強力なコンソールを備える(その他にも十分に便利なX windows systemを備える)。
+対して、windowsでは、コマンドプロンプトの機能は貧弱であるといわざるを得ない。\\
+これはCygwin(後述)などといったソフトウェアを利用することにより補完されるものの、パッケージ管理などといった大きなOSSDE側のアドヴァンテージを解消することはできない。\\
+パッケージ管理システムとは、UNIX互換の環境などにおいて存在する機能で、OS(正確には開発/配布者)ごとに存在する。\\
+たとえばDebianの場合、dpkgというソフトウェアがパッケージを管理し、インストール、依存関係の確認、リムーブ、パージなど管理を行う。パッケージとは、ソフトウェアについて、作者による定義ファイルやバイナリファイル、場合によってはソースコードなどインストールに必要な情報が入った圧縮ファイルである。一般にパッケージ管理システムはこれだけの機能しかないわけではない。\\
+Debianではaptというソフトウェア群が、あるソフトウェアの導入に伴って、依存関係の洗い出しを行い、必要なソフトウェアを自動でインストールし、不要になれば自動的に削除する。\\
+これにより、さまざまな(開発が私企業でなく、個人が参加しているため\textbf{本当に}さまざまな)ライブラリが存在するにもかかわらず、使用者はライブラリを意識することなくただ目的のソフトウェアにありつけるし、開発者としても依存するライブラリとそのヴァージョンについて定義しておけば、利用者は必ずこのライブラリを持っているとみなせるので、自分が開発したいソフトウェアのみに専念することができる。\\
+今回の組み込みに対する開発では、ホスト側とっては一利用者に過ぎないことになるが、これらのOSSDEの特徴は、まさにprosumeという風潮に適したシステムだと言える。\\
+
+また、強力なコンソールを備えている事は、開発において、自動化したい部分をスクリプト化することで能率をあげることもでき、また、ウィンドウを利用してマウス操作でディレクトリの移動やソフトウェアの起動を行うよりも素早くて、なおかつ開発に関係の無いことに患わされることが無いことを意味する。\\
+これについてはさらに後述する。
+
+まず、開発環境の導入の最初の一歩はインストールである。開発環境のインストールについて、比較する。
+\subsection{ARMマイコンのコンパイラ}
+一般に、ARMマイコンにおいて、もっとも安定しているコンパイラはarm-none-eabiであるとされている。\\
+これはCodeSourcery社によって開発されているもので、GUI(グラフィカルユーザインタフェース:ウィンドウとアイコンによって提供される環境)を備えた製品と、それに対するサポートを販売しているが、コンソールで扱うツールキットに関しては無料で提供している。このツールキットは、フロントエンドがGNU toolchainであり、これは非常に有名かつ有用なツールキットであり、オープンソースソフトウェアである。\\
+また、ほかのARMコンパイラとして、以下のものと比較対象にした。自分のソースコードにもっとも馴染んだものがarm-none-eabiであり、大きな性能差を感じたわけではないことをここに記しておく。
+\begin{itemize}
+\item arm-elf-eabi ビルドに失敗。
+\item arm-eabi
+\item arm-elf
+\end{itemize}
+上2つは、Linux上でのみ確認できた。また、arm-elfについてはOpenBSDのみで試してみた。\\
+\subsection{AlteraCPLDの開発環境}
+Alteraの開発環境、Quartus IIはwindows,Linuxどちらでも動作する。過去のヴァージョンではSolarisで動作するものもあるようだ。\\
+逆に言えば、マイコンと違って、CPLDの開発環境は完全なブラックボックスであるので、windowsのみのサポートでは不満があったのだと思われる。\\
+Quartus IIにかぎらず、AlteraやXilinxなどの、PLDメーカがサポートしているLinuxディストリビューションは、Redhat系と言われるものの中でも、RedHatEnterpriseLinux(RHEL)とCentOS(RHELからサポートとロゴなどの著作権物を除いたOSSなOS)、およびOpenSuSEのみである。\\
+
+ところが、Debianで動作させることが一般に可能であり、使う上で、特に問題があるわけではない。唯一ライブラリの問題があるが、古いライブラリを持ってきて展開すれば使用できる。\\
+
+また、OpenSuSEでは、書き込み機であるUSB-Blasterの認識が不安定で、一般的な問題ではないようだが、私が使った上では、まったく使い物にならなかった。
+むしろ、サポート対象ではないはずのDebianでの使用の方が快適である。
+それには以下のようにする。
+	#echo /dev/usbfs      /proc/bus/usb   usbfs   devmode=0666    0       0 >> /etc/fstab
+\subsection{その他}
+\subsubsection{Make}
+UNIX系OSでのコマンドラインによる快適な操作と相まって、Makeというのはすばらしいソフトウェアである。\\
+Makeというのは、いくつかのソースファイルがあった場合に、差分のみコンパイルすることができて、高速にソフトウェアをビルドできる。
+また、オプションによって動作を変えることが出来るため、役に立つ。
+\subsubsection{git}
+gitというのはヴァージョン管理システムである。AppleのTimeCapsureなどは有名だが、同じように、一里塚過ぎたら(過ぎなくともかまわないが)Commitすることによって、あらたなヴァージョンとして登録される。もし、前のヴァージョンに戻したい場合も、またブランチ(枝分かれ)する場合も、破壊的なことを一切せずに要求をこなすことができる。\\
+これはOSSにとって非常に大きな意味を持つ。なぜならOSSでは、ある人が創っているソフトウェアを元に、別のソフトウェアを派生させる、ということが日常的に行われる。そのためにソースコードを公開しているといっても過言ではない。バグフィクスであれば元のソフトウェアに取り込まれるかもしれないし、別の方針をこれから歩んでいこうということもある。たとえば便利さやリリースの速さを優先したり、セキュリティを優先したりするためにブランチしたプロジェクトなど枚挙に暇が無い。\\
+
+他にも、たとえば操作ミスや思い直した事があって論文の身に何かあっても、落ち着いて過去のヴァージョンのファイルを取り出すことができる。
+\section{Windows環境において}
+\subsection{ARMの開発環境}
+\item IAR workspace(nonOSS:IAR systems)
+IAR systemsの製品であるが、ライブラリの名前が嫌で、しかも見た目がすきじゃなかった。使い辛い。\\
+使用可能な規模に制限がある。
+\subsection{AlteraCPLDの開発環境}
+Quartus IIをなんら問題なく使うことができるが、フォントが汚い。これはwindowsに起因する問題で修正ができる。\\
+\\
+
+
+このように、windowsで使う開発環境として問題になることはほとんどなく、素晴らしいように見えるが、gitを使うにも、ちゃんとしたコマンドラインを使うにも、不思議なほど手間がかかる。
+\subsection{gitとgithubについて}
+gitというのは、分散ヴァージョン管理システムである。つまり、そのリポジトリが存在する場所が1箇所に限らないということである。それではヴァージョン間で矛盾しないのか？それは、中央サーバにただ一つのマスタリポジトリを置くことによって解決される。\\
+つまり、gitにはサーバにリポジトリをアップ(以降pushとよぶ)する機能がついている。そこで、無料で利用できる、データの損失の心配の無いクラウドにpushできればこれほど安心なことはない。\\
+さて、その要求を満たすサービスがある。それはgithubという。\\
+ではどうやって使うのか。
+
+\part{考察}
+まず、音の要素についてかんがえていきたい。
+音は波動であるから、周期、波形、振幅によって定義される。
+\[
+f_{(x)}=\sum^{\infty}_{n=1} a_{n}sin_{(nx)}
+\]
+このとき、\{a{\small n}\}が波形を定義し、xが周期となる。(ただし、f{\small (0)}=0)
+
+\part{文献集}
+\section{データシート}
+\subsection{半導体-英語}
+資料2 LPC23xx User Manual (UM10211)\\
+http://ics.nxp.com/support/documents/microcontrollers/pdf
+/user.manual.lpc23xx.pdf  (メーカのサイト)\\
+
+資料3 CYC1041DV33.pdf\\
+http://www.cypress.com/?docID=18144　(メーカのサイト)
+\section{公式サイト}
+参考1PROSUME 2010\\ http://www.prosume.org/ (PROSUME公式サイト)\\
+参考2The GNU General Public License - GNU Project - Free Software Foundation (FSF) http://www.gnu.org/licenses/gpl.html (オープンソース哲学の総本山)\\
+参考3licenses/GNU_General_Public_License_version_3.0\\
+Open Source Group Japan Wiki - SourceForge.JP\\
+http://sourceforge.jp/projects/opensource/\\
+wiki/licenses/FGNU_General_Public_License_version_3.0
+\section{解説書など}
+資料4 改訂・入門Verilog HDL記述 | 著者 小林 優 | 発行所CQ出版株式会社\\
+資料5 Interface 2009年5月号	| 編集・出版 CQ出版 ISSN:0387-9569\\
+資料6 Interface 2009年6月号	| 編集・出版 CQ出版 ISSN:0387-9569\\
+ものづくり革命-パーソナル・ファブリケーションの夜明け- |　著 ニール・ガーシェンフェルド | 訳 糸川 洋 発行社 ソフトバンククリエイティブ ISBN-13: 978-4797333145
+\section{よむものリスト}
+需要と供給の関係の本具体的に例をあげる\\
+第三の波さがす
+\subsection{センサ}
+\subsection{規格}
+\end{document}
+
