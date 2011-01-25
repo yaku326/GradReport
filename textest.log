@@ -1,4 +1,4 @@
-This is pTeXk, Version 3.141592-p3.1.11 (euc) (Web2C 7.5.4) (format=platex 2011.1.25)  26 JAN 2011 00:41
+This is pTeXk, Version 3.141592-p3.1.11 (euc) (Web2C 7.5.4) (format=platex 2011.1.25)  26 JAN 2011 02:24
  %&-line parsing enabled.
 **textest.tex
 (./textest.tex
@@ -97,12 +97,22 @@ t (HO)
 Package hyperref Info: Option `bookmarks' set `true' on input line 2864.
 Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 2864
 .
+
+
+! Package keyval Error: b5j undefined.
+
+See the keyval package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2864 \ProcessKeyvalOptions{Hyp}
+                                 
+? 
 Package hyperref Info: Hyper figures OFF on input line 2975.
 Package hyperref Info: Link nesting OFF on input line 2980.
 Package hyperref Info: Hyper index ON on input line 2983.
 Package hyperref Info: Plain pages OFF on input line 2990.
 Package hyperref Info: Backreferencing OFF on input line 2995.
-
 Implicit mode ON; LaTeX internals redefined
 Package hyperref Info: Bookmarks ON on input line 3191.
 (/usr/share/texmf-texlive/tex/latex/ltxmisc/url.sty
@@ -222,9 +232,16 @@ File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
 )
 
 LaTeX Warning: Unused global option(s):
-    [morisawa].
+    [morisawa,12px].
 
-(./textest.aux)
+(./textest.aux
+
+LaTeX Warning: Label `fig:one' multiply defined.
+
+
+LaTeX Warning: Label `fig:one' multiply defined.
+
+)
 \openout1 = `textest.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
@@ -376,58 +393,72 @@ LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 (Font)              scaled to size 8.64899pt on input line 347.
  [17
 
-] [18] [19
-
 ]
+
+! Package keyval Error: 一部省略 undefined.
+
+See the keyval package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.360 ...ルのサイクルのときに立ち上がる,一部省略]
+                                                 
+? 
+
+Overfull \hbox (40.19179pt too wide) in paragraph at lines 361--362
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
 LaTeX Font Info:    Font shape `JT1/gt/bx/n' in size <9> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 430.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 365.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 430.
+(Font)              scaled to size 8.64899pt on input line 365.
 LaTeX Font Info:    Font shape `JY1/gt/bx/n' in size <9> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 430.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 365.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 430.
+(Font)              scaled to size 8.64899pt on input line 365.
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <9> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 430.
- [20]
-Overfull \hbox (62.87172pt too wide) in paragraph at lines 460--461
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 365.
+[18]
+LaTeX Font Info:    Font shape `JT1/gt/m/it' in size <9> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 414.
+LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
+(Font)              scaled to size 8.64899pt on input line 414.
+LaTeX Font Info:    Font shape `JY1/gt/m/it' in size <9> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 414.
+LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
+(Font)              scaled to size 8.64899pt on input line 414.
+File: fig2.eps Graphic file (type eps)
+ <fig2.eps>
+File: fig3.eps Graphic file (type eps)
+ <fig3.eps> [19] [20] [21
+
+] [22] [23
+
+] [24]
+Overfull \hbox (62.87172pt too wide) in paragraph at lines 589--590
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][] 
  []
 
-[21] [22] [23]
-Underfull \hbox (badness 1331) in paragraph at lines 596--599
+[25] [26] [27]
+Underfull \hbox (badness 1331) in paragraph at lines 723--726
 []\OT1/cmr/m/n/12 http://ics.nxp.com/support/documents/microcontrollers/pdf /us
 er.manual.lpc23xx.pdf
  []
 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.603 参考1PROSUME 2010\$\backslash
-                                   $http://www.prosume.org/ (PROSUME公式サイ...
+[28] [29] (./textest.aux)
 
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.605 参考3licenses/GNU_
-                        General_Public_License_version_3.0\\
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.609 \section
-              {解説書など}
-? 
-[24] [25] (./textest.aux) ) 
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 5641 strings out of 257674
- 81049 string characters out of 1191153
- 193850 words of memory out of 3000000
- 8742 multiletter control sequences out of 10000+50000
- 18210 words of font info for 82 fonts, out of 2000000 for 2000
+ 5731 strings out of 257674
+ 81974 string characters out of 1191153
+ 193879 words of memory out of 3000000
+ 8829 multiletter control sequences out of 10000+50000
+ 18378 words of font info for 83 fonts, out of 2000000 for 2000
  19 hyphenation exceptions out of 8191
- 38i,6n,49p,638b,1820s stack positions out of 5000i,500n,6000p,200000b,40000s
+ 38i,6n,49p,638b,1848s stack positions out of 5000i,500n,6000p,200000b,40000s
 
-Output written on textest.dvi (25 pages, 113792 bytes).
+Output written on textest.dvi (29 pages, 140116 bytes).

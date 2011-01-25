@@ -1,6 +1,6 @@
-\documentclass[morisawa]{jsarticle}
+\documentclass[morisawa,12px]{jsarticle}
 \usepackage[dvipdfm,bookmarks=true,bookmarksnumbered=true,%
-bookmarkstype=tocx,a4paper]{hyperref}
+bookmarkstype=tocx,b5j]{hyperref}
 \usepackage[dvipdfm]{graphicx}
 \usepackage{listings, jlisting}
 \renewcommand{\lstlistingname}{リスト}
@@ -352,23 +352,145 @@ module clkdivider (input clk, output xclk);
 	assign xclk = t_count[1];
 endmodule
 \end{lstlisting}
-今回は、2つのレジスタを設け、入力クロックの立ち上がりエッジに、t_count[0]を反転させる。すると、t_countが立ち上がるのは2入力クロックサイクルに1回となる。\\
-t_count[1]はt_count[0]が立ち上がりクロックになる時に反転するため、結果として4入力サイクルにつき1サイクルでblinkすることがわかる。\\
+今回は、2つのレジスタを設け、入力クロックの立ち上がりエッジに、t\_count[0]を反転させる。すると、t\_countが立ち上がるのは2入力クロックサイクルに1回となる。\\
+t\_count[1]はt\_count[0]が立ち上がりクロックになる時に反転するため、結果として4入力サイクルにつき1サイクルでblinkすることがわかる。\\
 よってこのモジュールは4:1分周器になっている。\\
 
+\section{ピクセル選択モジュール}
+\begin{lstlisting}[caption=特定のピクセルのサイクルのときに立ち上がる,一部省略]
+module TimingManager(input VSYNC, input HREF,input pclk,output reg Sig_En, output enC);
+reg [8:0] line = 0;
+reg [8:0] foo = 0;
+always @(posedge HREF or posedge VSYNC)begin
+  if(HREF == 1'b1)line <= line +1'b1;
+  else line = 8'h00;
+  end
+assign enC = (line==9'h30 ) ? 1'b1 : 1'b0;
+
+always @(posedge pclk)begin
+		if ( HREF&enC ) foo <= foo + 1'b1;
+		else foo <= 7'b0000000;
+		if(foo[0]&foo[8]&HREF)begin
+			Sig_En<=1'b1;
+			foo <= 7'b0000000;
+		end
+		else begin
+			Sig_En<=1'b0;
+		end
+	end
+endmodule
+
+\end{lstlisting}
+\section{ピクセルデータフェッチ,連結モジュール}
+\begin{lstlisting}[caption=データコミッタ]
+module Dtacutcmmit(
+	input SigEn,
+	input [7:0]pshdta,
+	output WrCmplt,
+	output reg [11:0]popdta
+	);
+	assign WrCmplt = ~SigEn;
+	reg [3:0]redpx;
+	always @(posedge SigEn)begin
+		redpx [3:0] <= pshdta[3:0];
+	end
+	always @(negedge SigEn)begin
+		popdta[11:0]<= { redpx[3:0], pshdta[7:0] };
+	end
+endmodule
+\end{lstlisting}
+\section{シミュレータの意義}
 つぎに、モジュールが書けたら、マイコンでは実機で動かすことが一般的だが、PLDではシミュレータにかけることが多い。\\
 理由としては、まずマイコンよりもさらに可観測性が低いため、予期せぬ動作をした場合にデバッグが非常に大きな仕事となってしまうということ、C言語でマイコンに対して書いたものとくらべ、人間にとって可読性が高いものではないため、まったく想定外のことを書いてしまっている可能性がより高いということ、シミュレーションを行う上では、マイコンの、特にペリフェラルでの動作と比べてVerilogの方が可視性があるということなどが挙げられるはずだ。\\
 
 シミュレータは今回、Modelsim-altera starter edition(nonOSS:MentorGraphics社)を用いた。\\
 
-\part{I2Cセットアップ}
+シミュレーションモデルもHDLを使って表記する。\\
+論文の構成上、他のモジュールより後に書いたが、すべてのモジュールを書き終えてから回路検証をするのではなく、一つのモジュールを書きながらテストモジュールを書いて逐一懸賞をしていくことが何よりも大切だと思われる。\\
+この方法であれば、検証対象モジュールとシミュレーションモデル、双方とも、バグを書いた時点でそうと分かる上、比較的見つけることが容易であり、最も効率がいいと思われる。\\
+
+また、ModelSimでのコマンドはtclであるため、セミコロンで連接することにより一気にビルドから波形を追加してシミュレーションまで終えてしまうことができる。\\
+\begin{lstlisting}[caption=一気にシミュレーションまで行う1行スクリプト]
+vsim work.TEST;add wave -r /*
+\end{lstlisting}
+
+\begin{figure}[tb]
+ \begin{center}
+ \caption{ソースコードを開いたModelSim Altera Starter Edition}
+  \includegraphics[width=0.7\hsize]{fig2.eps}
+ \end{center}
+ \label{fig:one}
+\end{figure}
+\begin{figure}[tb]
+ \begin{center}
+ \caption{シュミレーションを終え、タイミングチャートを表示するModelSim Altera Starter Edition}
+  \includegraphics[width=0.7\hsize]{fig3.eps}
+ \end{center}
+ \label{fig:one}
+\end{figure}
 \clearpage
-\part{関数値渡しの仕方}
+\section{シミュレーションモデル}
+\begin{lstlisting}[caption=一気にシミュレーションまで行う1行スクリプト]
+module TEST;
+reg VSYNC;
+reg HREF;
+//wire WEb;
+//wire BHEb;
+//wire BLEb;
+wire pclk;
+//wire Enasg;
+reg clk;
+wire xclk;
+reg [64:0]countpclk = 0;
+wire [7:0]pixdata = 8'hFF;
+//wire [7:0] line,foo;
+//wire CEb;
+//wire [17:0] adr;
+//wire pck;
+reg Serck = 0;
+wire Serot;
+assign pclk = ~xclk;
+wire [11:0]pixbus;
+//wire Serctl,Serck,Serot;
+wire TEST;
+ReShynth i1(clk,pclk,HREF,VSYNC,Serck,Serot,pixdata,xclk,pixbus,TEST);
+initial clk <= 1'b0;
+initial HREF <= 1'b0;
+initial VSYNC <= 1'b1;
+initial #9408 VSYNC <= 0;
+
+always begin
+#1000 Serck <= ~Serck;
+end
+always begin
+#1 clk <= ~clk;
+end
+always begin
+  #576 HREF <= 1;
+  #2560 HREF <= 0;
+end
+always begin
+  #1589952 VSYNC <= 1;
+  #9408 VSYNC <= 0;
+end
+always @(negedge pclk)
+  if(VSYNC) countpclk <= 0;
+  else
+  countpclk <= countpclk + 1;
+always @pixbus $display($time, "pix:%d countpclk is %d", pixbus,countpclk);
+
+endmodule
+\end{lstlisting}
+
+
+\clearpage
+
+\part{I2Cセットアップ}
+\part{関数値渡しの謎}
 ARMでの関数の値渡しに疑問を持ち研究を行った。\\
 FreeRTOS上でにあるプロセスのサブルーチンが孫ルーチンを呼ぶ部分をまず見てみることにする。\\
 子ルーチン:(思ったより長くなったので抜粋)\\
-\subsubsection{子ルーチン}
-\begin{lstlisting}
+\begin{lstlisting}[caption=子ルーチン]
 .LVL64:
 .loc 1 264 0
 mov ip, #0
@@ -381,8 +503,7 @@ str ip, [r4, #0]
 .loc 1 265 0
 bl i2csender
 \end{lstlisting}
-\subsubsection{孫ルーチン}
-\begin{lstlisting}
+\begin{lstlisting}[caption=孫ルーチン]
 i2csender:
 .LFB5:
 .loc 1 134 0
@@ -434,8 +555,7 @@ mov r1, r4
 bl printf
 \end{lstlisting}
 ここで、孫ルーチンのC言語での記述を見てみよう。
-\subsubsection{孫ルーチン:C言語}
-\begin{lstlisting}
+\begin{lstlisting}[caption=孫ルーチン:C言語]
 void i2csender(int Continue, unsigned int Data, int place){
 if(Continue==0){
 I22DAT = Data;
@@ -461,7 +581,7 @@ Data = Data >> 8;
 \end{lstlisting}
 呼び出し部:引数が3つある。		i2csender(0,0×42,8);
 0,0×42(0d66),8を投げている。もう一度子ルーチンを見る。
-\begin{lstlisting}
+\begin{lstlisting}[caption=子ルーチンさらに抜粋]
 .LVL64:
 .loc 1 264 0
 mov ip, #0
@@ -478,8 +598,7 @@ bl i2csender
 最初にあるstmfd sp!, {r3, r4, r5, r6, r7, lr}と最後にあるldmfd sp!, {r3, r4, r5, r6, r7, lr}をみる。つまり、スタックにr3〜r7とlrを積んで、作業スペースを確保しているのだろう。
 
 では次に、printf()のような文字列引数の場合、どうやって渡してるんだろうという疑問が沸く。レジスタ1こ文字列が収まりきるとは限らないからだ。
-\subsubsection{printf呼び出し:アセンブリ}
-\begin{lstlisting}
+\begin{lstlisting}[caption=printf呼び出し:アセンブリ]
 .LCFI1:
 .cfi_def_cfa_offset 24
 .loc 1 134 0
@@ -519,8 +638,7 @@ mov	r1, r4
 bl	printf
 \end{lstlisting}
 さて、L71+4が何をさすのだろうか。
-\begin{lstlisting}
-
+\begin{lstlisting}[caption=ラベルL71]
 .L71:
 .word -536346624
 .word .LC3
@@ -532,7 +650,7 @@ bl	printf
 
 ふむ。+4ということは、きっと.LC3だろう。(4byte = 32bit,まえのが.wordだから32bitでアラインされている)
 .LC3にはなにがはいっているのであろうか。
-\begin{lstlisting}
+\begin{lstlisting}[caption=ラベルLC3]
 .LC3:
 .ascii ”Data\%4x$\backslash$012$\backslash$000″
 .space 3
@@ -561,7 +679,7 @@ $\backslash$tにしてみる。\\
 printf(“Data\%4x::::$\backslash$n”,Data);\\
 と言う風に変えてみた。\\
 ところが、
-\begin{lstlisting}
+\begin{lstlisting}[caption=ラベルLC3]
 .LC3:
 .ascii “Data\%4x::::1200″
 .space 3
@@ -575,7 +693,7 @@ printf(“Data\%4x::::$\backslash$n”,Data);\\
 \end{lstlisting}
 
 命令も
-\begin{lstlisting}
+\begin{lstlisting}[caption=printf()呼び出し部]
 ldr r0, .L71+4
 mov r1, r4
 bl printf
@@ -583,7 +701,7 @@ bl printf
 変わらない。\\
 もしや、.L71+4には.LC3のアドレスがはいってるのか？\\
 arm-none-eabi-objdumpする
-\begin{lstlisting}
+\begin{lstlisting}[caption=objdumpで見たprintf()呼び出し部]
 3c: e59f009c ldr r0, [pc, #156] ; e0 <i2csender+0xe0>
 40: e1a01004 mov r1, r4
 44: ebfffffe bl 0 <printf>
@@ -609,12 +727,12 @@ http://ics.nxp.com/support/documents/microcontrollers/pdf
 資料3 CYC1041DV33.pdf\\
 http://www.cypress.com/?docID=18144　(メーカのサイト)
 \section{公式サイト}
-参考1PROSUME 2010\$\backslash$http://www.prosume.org/ (PROSUME公式サイト)\\
+参考1PROSUME 2010 http://www.prosume.org/ (PROSUME公式サイト)\\
 参考2The GNU General Public License - GNU Project - Free Software Foundation (FSF) http://www.gnu.org/licenses/gpl.html (オープンソース哲学の総本山)\\
-参考3licenses/GNU_General_Public_License_version_3.0\\
+参考3licenses/GNU\_General\_Public\_License\_version\_3.0\\
 Open Source Group Japan Wiki - SourceForge.JP\\
 http://sourceforge.jp/projects/opensource/\\
-wiki/licenses/FGNU_General_Public_License_version_3.0
+wiki/licenses/FGNU\_General\_Public\_License\_version\_3.0
 \section{解説書など}
 資料4 改訂・入門Verilog HDL記述 | 著者 小林 優 | 発行所CQ出版株式会社\\
 資料5 Interface 2009年5月号	| 編集・出版 CQ出版 ISSN:0387-9569\\
