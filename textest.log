@@ -1,4 +1,4 @@
-This is pTeXk, Version 3.141592-p3.1.11 (euc) (Web2C 7.5.4) (format=platex 2011.1.25)  25 JAN 2011 23:37
+This is pTeXk, Version 3.141592-p3.1.11 (euc) (Web2C 7.5.4) (format=platex 2011.1.25)  26 JAN 2011 00:41
  %&-line parsing enabled.
 **textest.tex
 (./textest.tex
@@ -333,58 +333,70 @@ LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 \tf@toc=\write4
 \openout4 = `textest.toc'.
 
- [3] [4] [5] [6] [7] [8]
+ [3] [4
+
+] [5] [6] [7] [8]
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
 (Font)              scaled to size 8.64899pt on input line 180.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
 (Font)              scaled to size 8.64899pt on input line 180.
- [9]
+ [9] [10]
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <12> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 218.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 219.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 11.53198pt on input line 218.
+(Font)              scaled to size 11.53198pt on input line 219.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <12> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 218.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 219.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 11.53198pt on input line 218.
+(Font)              scaled to size 11.53198pt on input line 219.
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 223.
- [10] [11]
-Overfull \hbox (71.77853pt too wide) in paragraph at lines 265--265
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 224.
+ [11
+
+] [12]
+Overfull \hbox (71.77853pt too wide) in paragraph at lines 266--266
 []\OT1/cmtt/m/n/12 #echo /dev/usbfs      /proc/bus/usb   usbfs   devmode=0666  
   0       0 >> /etc/fstab 
  []
 
-[12] [13]
+[13] [14]
 File: fig1.eps Graphic file (type eps)
- <fig1.eps> [14]
-Overfull \hbox (65.60353pt too wide) in paragraph at lines 333--333
+ <fig1.eps>
+Overfull \hbox (65.60353pt too wide) in paragraph at lines 334--334
 []\OT1/cmtt/m/n/12 Makepdf  textest.aux  textest.dvi  textest.log textest.out  
 textest.pdf  textest.tex[] 
  []
 
-[15]
+[15] [16]
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
+nput line 347.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 6.72699pt on input line 343.
+(Font)              scaled to size 8.64899pt on input line 347.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 6.72699pt on input line 343.
-LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 4.805pt on input line 344.
- [16
+(Font)              scaled to size 8.64899pt on input line 347.
+ [17
+
+] [18] [19
 
 ]
-LaTeX Font Info:    Font shape `JT1/gt/bx/n' in size <7> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 411.
+LaTeX Font Info:    Font shape `JT1/gt/bx/n' in size <9> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 430.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 6.72699pt on input line 411.
-LaTeX Font Info:    Font shape `JY1/gt/bx/n' in size <7> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 411.
+(Font)              scaled to size 8.64899pt on input line 430.
+LaTeX Font Info:    Font shape `JY1/gt/bx/n' in size <9> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 430.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 6.72699pt on input line 411.
-LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <7> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 411.
- [17] [18] [19]
-Underfull \hbox (badness 1331) in paragraph at lines 577--580
+(Font)              scaled to size 8.64899pt on input line 430.
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <9> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 430.
+ [20]
+Overfull \hbox (62.87172pt too wide) in paragraph at lines 460--461
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][] 
+ []
+
+[21] [22] [23]
+Underfull \hbox (badness 1331) in paragraph at lines 596--599
 []\OT1/cmr/m/n/12 http://ics.nxp.com/support/documents/microcontrollers/pdf /us
 er.manual.lpc23xx.pdf
  []
@@ -392,29 +404,30 @@ er.manual.lpc23xx.pdf
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.586 参考3licenses/GNU_
-                        General_Public_License_version_3.0\\
-? ^^[[A
-Type <return> to proceed, S to scroll future error messages,
-R to run without stopping, Q to run quietly,
-I to insert something, E to edit your file,
-1 or ... or 9 to ignore the next 1 to 9 tokens of input,
-H for help, X to quit.
+l.603 参考1PROSUME 2010\$\backslash
+                                   $http://www.prosume.org/ (PROSUME公式サイ...
+
 ? 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.590 \section
+l.605 参考3licenses/GNU_
+                        General_Public_License_version_3.0\\
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.609 \section
               {解説書など}
 ? 
-[20] [21] (./textest.aux) ) 
+[24] [25] (./textest.aux) ) 
 Here is how much of TeX's memory you used:
- 5608 strings out of 257674
- 80648 string characters out of 1191153
- 201848 words of memory out of 3000000
- 8708 multiletter control sequences out of 10000+50000
- 18567 words of font info for 84 fonts, out of 2000000 for 2000
+ 5641 strings out of 257674
+ 81049 string characters out of 1191153
+ 193850 words of memory out of 3000000
+ 8742 multiletter control sequences out of 10000+50000
+ 18210 words of font info for 82 fonts, out of 2000000 for 2000
  19 hyphenation exceptions out of 8191
- 38i,6n,49p,638b,1808s stack positions out of 5000i,500n,6000p,200000b,40000s
+ 38i,6n,49p,638b,1820s stack positions out of 5000i,500n,6000p,200000b,40000s
 
-Output written on textest.dvi (21 pages, 108112 bytes).
+Output written on textest.dvi (25 pages, 113792 bytes).

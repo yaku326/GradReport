@@ -5,16 +5,16 @@ bookmarkstype=tocx,a4paper]{hyperref}
 \usepackage{listings, jlisting}
 \renewcommand{\lstlistingname}{リスト}
 \lstset{language=C,%
-  basicstyle=\ttfamily\scriptsize,%
+  basicstyle=\ttfamily\small,%
   commentstyle=\textit,%
   classoffset=1,%
   keywordstyle=\bfseries,%
   frame=tRBl,%
-  framesep=5pt,%
+  framesep=10pt,%
   showstringspaces=false,%
   numbers=left,%
   stepnumber=1,%
-  numberstyle=\tiny,%
+  numberstyle=\footnotesize,%
   tabsize=2%
 }%
 
@@ -44,7 +44,7 @@ writtern with \pLaTeX2e
 \clearpage
 
 \tableofcontents
-
+\clearpage
 \part{哲学}
 \section{前口上 -お目汚し-}
 過去に様々な形において、音楽と映像の関連づけが行われてきた。\\
@@ -207,6 +207,7 @@ L\>L\>X\>H\>L\>Data In(IO{\small0}-IO{\small7});\>Write\\
 L\>L\>X\>L\>H\>Data In(IO{\small8}-IO{\small15});\>Write\\
 \>\>\>\>\>IO{\small0}-IO{\small7} in High Z\\
 \end{tabbing}
+\clearpage
 \part{開発環境}
 この開発環境の整備が、ファストプロトタイピングや、とくにパーソナルファブリケーションの大きなネックとなる。
 これが改善されなければ、今後の組み込みにおける、オープンソース環境での開発において大きな損失を招くであろう。
@@ -331,9 +332,30 @@ Total 11 (delta 2), reused 0 (delta 0)
 To git@github.com:iori-yja/Report.git
  * [new branch]      master -> master
 \end{verbatim}
+気がつくべきなのは、これは、既に公開され、オープンソースソフトウェアとなったということだ。\\
+ソフトウェアを創れるならば、OSSとして育てていくことはまったくコストでは無いということが分かっていただけたと思う。\\
 \clearpage
 \part{Verilogを書く}
+Verilogを書くのは、この論文がきっかけであった。\\
+であるから、問題が起きるとしたらここだろうなという気がしていたが、まさにそのような事態はおきてしまった。この場を借りて、辛抱強く待ってくださった本村先生に感謝の意をささげます。\\
+\section{モジュールの構成}
+このモジュールの全体像を示す。\\
+\section{clkdivider(分周器)}
+まず初めに、もっとも簡単なモジュールを作成する。\\
+今回、MAX IIの基板に搭載した水晶発信器が40MHzである。今回の用途ではカメラの動作周波数は動作定格内であれば遅い方がより信号バスがノイズに強くなるため、10MHzに分周してカメラのクロックソースに入力する。分周するメリットは、さらに、分周することによって、クロックのデューティ比を50\%に近くすることが可能である。\\
+つまり、水晶発信器が必ずしも理想的な出力をしているとは限らないが、少なくとも1サイクルの長さはほとんどかわっていない、とするとき、分周器のクロック出力がHになっている時間とLになっている時間は、クロック入力のデューティ比に関わらず、どちらも入力1サイクル分であるから、出力波形は高速動作をするプロセサのクロックソースとして適したものとなる。\\
+\begin{lstlisting}[caption=分周器]
+module clkdivider (input clk, output xclk);
+	reg [1:0] t_count = 0;
+	always@(posedge clk) t_count[0] <= ~t_count[0];
+	always@(posedge t_count[0]) t_count[1] <= ~t_count[1];
+	assign xclk = t_count[1];
+endmodule
+\end{lstlisting}
+今回は、2つのレジスタを設け、入力クロックの立ち上がりエッジに、t_count[0]を反転させる。すると、t_countが立ち上がるのは2入力クロックサイクルに1回となる。\\
+t_count[1]はt_count[0]が立ち上がりクロックになる時に反転するため、結果として4入力サイクルにつき1サイクルでblinkすることがわかる。\\
 \part{I2Cセットアップ}
+\clearpage
 \part{関数値渡しの仕方}
 ARMでの関数の値渡しに疑問を持ち研究を行った。\\
 FreeRTOS上でにあるプロセスのサブルーチンが孫ルーチンを呼ぶ部分をまず見てみることにする。\\
@@ -505,7 +527,7 @@ bl	printf
 .LC3にはなにがはいっているのであろうか。
 \begin{lstlisting}
 .LC3:
-.ascii ”Data\%4x\ 012\ 000″
+.ascii ”Data\%4x$\backslash$012$\backslash$000″
 .space 3
 \end{lstlisting}
 
@@ -514,10 +536,10 @@ bl	printf
 $https://dl.dropbox.com/u/15570814/051020DDI0100HJ_v6_1.pdf$
 しかし載ってない。\\
 あれ？とにかく、.asciiっていうアライン方法で、 “ASCIIencoded string“ってやってやれば、(多分アセンブラが)対応するバイナリに変換してLC3に置いているのだろう。\\
-ところで、\ 012\ 000ってなんだろう。
-とりあえず、\ nを\ tに変えてもっかいコンパイルする。\\
-.ascii “Data\%4x\ 011\ 000″
-どうやら\ nが\ 012で、\ tでは\ 011っぽい。
+ところで、$\backslash$012$\backslash$000ってなんだろう。
+とりあえず、$\backslash$nを$\backslash$tに変えてもっかいコンパイルする。\\
+.ascii “Data\%4x$\backslash$011$\backslash$000″
+どうやら$\backslash$nが$\backslash$012で、$\backslash$tでは$\backslash$011っぽい。
 しかし、なんのことかわからない。\\
 では、PCではどうなるんだろう。\\
 .string “Hello,World!”
@@ -525,11 +547,11 @@ $https://dl.dropbox.com/u/15570814/051020DDI0100HJ_v6_1.pdf$
 movl \$.LC0, \%edi\\
 call puts\\
 おい、そんな最適化いらないぞ！ということで....\\
-\ tにしてみる。\\
-.string “Hello,world!\ t”\\
-ほう。\ tとな。ふぅむ。\ 012\ 000にあたりそうなasciiコードも\ nになさそうだし、PCじゃふつうに\ tって渡すし。\\
+$\backslash$tにしてみる。\\
+.string “Hello,world!$\backslash$t”\\
+ほう。$\backslash$tとな。ふぅむ。$\backslash$012$\backslash$000にあたりそうなasciiコードも$\backslash$nになさそうだし、PCじゃふつうに$\backslash$tって渡すし。\\
 とにかく、これでは8byteなため、r0にわたしてprintfにリンク付き分岐するみたい。\\
-printf(“Data\%4x::::\ n”,Data);\\
+printf(“Data\%4x::::$\backslash$n”,Data);\\
 と言う風に変えてみた。\\
 ところが、
 \begin{lstlisting}
@@ -580,7 +602,7 @@ http://ics.nxp.com/support/documents/microcontrollers/pdf
 資料3 CYC1041DV33.pdf\\
 http://www.cypress.com/?docID=18144　(メーカのサイト)
 \section{公式サイト}
-参考1PROSUME 2010\\ http://www.prosume.org/ (PROSUME公式サイト)\\
+参考1PROSUME 2010\$\backslash$http://www.prosume.org/ (PROSUME公式サイト)\\
 参考2The GNU General Public License - GNU Project - Free Software Foundation (FSF) http://www.gnu.org/licenses/gpl.html (オープンソース哲学の総本山)\\
 参考3licenses/GNU_General_Public_License_version_3.0\\
 Open Source Group Japan Wiki - SourceForge.JP\\
