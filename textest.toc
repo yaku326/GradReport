@@ -31,7 +31,7 @@
 \contentsline {subsubsection}{\numberline {6.0.2}孫ルーチン}{16}{subsubsection.6.0.2}
 \contentsline {subsubsection}{\numberline {6.0.3}孫ルーチン:C言語}{17}{subsubsection.6.0.3}
 \contentsline {subsubsection}{\numberline {6.0.4}printf呼び出し:アセンブリ}{18}{subsubsection.6.0.4}
-\contentsline {part}{第VIII部\hspace {1zw}考察}{19}{part.8}
+\contentsline {part}{第VIII部\hspace {1zw}考察}{20}{part.8}
 \contentsline {part}{第IX部\hspace {1zw}文献集}{20}{part.9}
 \contentsline {section}{\numberline {7}データシート}{20}{section.7}
 \contentsline {subsection}{\numberline {7.1}半導体-英語}{20}{subsection.7.1}

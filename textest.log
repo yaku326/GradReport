@@ -1,4 +1,4 @@
-This is pTeXk, Version 3.141592-p3.1.11 (euc) (Web2C 7.5.4) (format=platex 2011.1.25)  25 JAN 2011 23:19
+This is pTeXk, Version 3.141592-p3.1.11 (euc) (Web2C 7.5.4) (format=platex 2011.1.25)  25 JAN 2011 23:37
  %&-line parsing enabled.
 **textest.tex
 (./textest.tex
@@ -383,162 +383,8 @@ LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 (Font)              scaled to size 6.72699pt on input line 411.
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <7> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 411.
- [17]
-Overfull \hbox (202.90556pt too wide) in paragraph at lines 471--472
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
-
- []
-
-
-Overfull \hbox (970.4729pt too wide) in paragraph at lines 475--476
-[][][][][][][][][][] 
- []
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.515 ...l.dropbox.com/u/15570814/051020DDI0100HJ_
-                                                  v6_1.pdf
-? 
-! Undefined control sequence.
-l.518 ところで、\0
-                  12\000ってなんだろう。
-? q
-OK, entering \batchmode...
-! Undefined control sequence.
-l.518 ところで、\012\0
-                      00ってなんだろう。
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.520 .ascii “Data\%4x\0
-                         11\000″
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.520 .ascii “Data\%4x\011\0
-                             00″
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.521 どうやら\\nが\0
-                     12で、\\tでは\011っぽい。
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.521 どうやら\\nが\012で、\\tでは\0
-                                    11っぽい。
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.524 .string \“
-                 Hello,World!\”
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.524 .string \“Hello,World!\”
-                                
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-! Undefined control sequence.
-\lstlisting ->\def \lstenv@name 
-                                {lstlisting}\begingroup \lst@setcatcodes \ca...
-l.528 \end{lstlisting}
-                      
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Package Listings Error: Extra \endlstlisting.
-
-See the Listings package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.528 \end{lstlisting}
-                      
-I'm ignoring this, since I wasn't doing a \def {lstlisting}\begingroup \catcode
- `\spacefactor 3000 11\relax \catcode `\==12\relax \catcode \active =\active \l
-stlisting@.
-
-
-! LaTeX Error: \begin{document} ended by \end{lstlisting}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.528 \end{lstlisting}
-                      
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.528 \end{lstlisting}
-                      
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Extra \endgroup.
-<recently read> \endgroup 
-                          
-l.528 \end{lstlisting}
-                      
-Things are pretty mixed up, but I think the worst is over.
-
-
-Overfull \hbox (98.41516pt too wide) in paragraph at lines 513--534
-\JY1/mc/m/n/12 無い 。 ということで 、 デ ータシ ートを開く 。 \OT1/cmr/m/n/12 
-https://dl.dropbox.com/u/15570814/051020DDI0100HJ$[]6[]\OML/cmm/m/it/12 :pdf \J
-Y1/mc/m/n/12 と
- []
-
-
-Overfull \hbox (31.83978pt too wide) in paragraph at lines 513--534
-\JY1/mc/m/n/12 おもったら載ってない。 あれ？とにかく、\OML/cmm/m/it/12 :ascii \
-JY1/mc/m/n/12 っていうアライン方法で、 “\OML/cmm/m/it/12 ASCIIencodedstring \J
-Y1/mc/m/n/12 “
- []
-
- [18] [19]
-Underfull \hbox (badness 1331) in paragraph at lines 579--582
+ [17] [18] [19]
+Underfull \hbox (badness 1331) in paragraph at lines 577--580
 []\OT1/cmr/m/n/12 http://ics.nxp.com/support/documents/microcontrollers/pdf /us
 er.manual.lpc23xx.pdf
  []
@@ -546,27 +392,29 @@ er.manual.lpc23xx.pdf
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.588 参考3licenses/GNU_
+l.586 参考3licenses/GNU_
                         General_Public_License_version_3.0\\
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
+? ^^[[A
+Type <return> to proceed, S to scroll future error messages,
+R to run without stopping, Q to run quietly,
+I to insert something, E to edit your file,
+1 or ... or 9 to ignore the next 1 to 9 tokens of input,
+H for help, X to quit.
+? 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.592 \section
+l.590 \section
               {解説書など}
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
- [20] [21] (./textest.aux) ) 
+? 
+[20] [21] (./textest.aux) ) 
 Here is how much of TeX's memory you used:
- 5614 strings out of 257674
- 81460 string characters out of 1191153
+ 5608 strings out of 257674
+ 80648 string characters out of 1191153
  201848 words of memory out of 3000000
- 8714 multiletter control sequences out of 10000+50000
+ 8708 multiletter control sequences out of 10000+50000
  18567 words of font info for 84 fonts, out of 2000000 for 2000
  19 hyphenation exceptions out of 8191
- 38i,6n,49p,648b,1808s stack positions out of 5000i,500n,6000p,200000b,40000s
+ 38i,6n,49p,638b,1808s stack positions out of 5000i,500n,6000p,200000b,40000s
 
-Output written on textest.dvi (21 pages, 109144 bytes).
+Output written on textest.dvi (21 pages, 108112 bytes).
