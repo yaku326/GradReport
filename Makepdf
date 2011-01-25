@@ -1,1 +1,1 @@
-platex textest.tex;dvipdfm textest.dvi;acroread textest.pdf
+platex textest.tex;dvipdfm textest.dvi;acroread textest.pdf&

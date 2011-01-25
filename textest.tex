@@ -1,6 +1,22 @@
 \documentclass[morisawa]{jsarticle}
 \usepackage[dvipdfm,bookmarks=true,bookmarksnumbered=true,%
 bookmarkstype=tocx,a4paper]{hyperref}
+\usepackage[dvipdfm]{graphicx}
+\usepackage{listings, jlisting}
+\renewcommand{\lstlistingname}{¥ê¥¹¥È}
+\lstset{language=C,%
+  basicstyle=\ttfamily\scriptsize,%
+  commentstyle=\textit,%
+  classoffset=1,%
+  keywordstyle=\bfseries,%
+  frame=tRBl,%
+  framesep=5pt,%
+  showstringspaces=false,%
+  numbers=left,%
+  stepnumber=1,%
+  numberstyle=\tiny,%
+  tabsize=2%
+}%
 
 \begin{document}
 
@@ -25,6 +41,8 @@ writtern with \pLaTeX2e
 \item ¥Ñ¥é¥á¡¼¥¿¤ò¸µ¤Ë¥¹¥Ô¡¼¥«¤«¤é²»¤¬ÌÄ¤ë¡£
 \end{itemize}
 ¤ÈÄê¤á¤ë¡£
+\clearpage
+
 \tableofcontents
 
 \part{Å¯³Ø}
@@ -244,7 +262,7 @@ Quartus II¤Ë¤«¤®¤é¤º¡¢Altera¤äXilinx¤Ê¤É¤Î¡¢PLD¥á¡¼¥«¤¬¥µ¥Ý¡¼¥È¤·¤Æ¤¤¤ëLinux¥Ç¥£
 ¤Þ¤¿¡¢OpenSuSE¤Ç¤Ï¡¢½ñ¤­¹þ¤ßµ¡¤Ç¤¢¤ëUSB-Blaster¤ÎÇ§¼±¤¬ÉÔ°ÂÄê¤Ç¡¢°ìÈÌÅª¤ÊÌäÂê¤Ç¤Ï¤Ê¤¤¤è¤¦¤À¤¬¡¢»ä¤¬»È¤Ã¤¿¾å¤Ç¤Ï¡¢¤Þ¤Ã¤¿¤¯»È¤¤Êª¤Ë¤Ê¤é¤Ê¤«¤Ã¤¿¡£
 ¤à¤·¤í¡¢¥µ¥Ý¡¼¥ÈÂÐ¾Ý¤Ç¤Ï¤Ê¤¤¤Ï¤º¤ÎDebian¤Ç¤Î»ÈÍÑ¤ÎÊý¤¬²÷Å¬¤Ç¤¢¤ë¡£
 ¤½¤ì¤Ë¤Ï°Ê²¼¤Î¤è¤¦¤Ë¤¹¤ë¡£
-	#echo /dev/usbfs      /proc/bus/usb   usbfs   devmode=0666    0       0 >> /etc/fstab
+\begin{verbatim}	#echo /dev/usbfs      /proc/bus/usb   usbfs   devmode=0666    0       0 >> /etc/fstab\end{verbatim}
 \subsection{¤½¤ÎÂ¾}
 \subsubsection{Make}
 UNIX·ÏOS¤Ç¤Î¥³¥Þ¥ó¥É¥é¥¤¥ó¤Ë¤è¤ë²÷Å¬¤ÊÁàºî¤ÈÁê¤Þ¤Ã¤Æ¡¢Make¤È¤¤¤¦¤Î¤Ï¤¹¤Ð¤é¤·¤¤¥½¥Õ¥È¥¦¥§¥¢¤Ç¤¢¤ë¡£\\
@@ -257,7 +275,9 @@ git¤È¤¤¤¦¤Î¤Ï¥ô¥¡¡¼¥¸¥ç¥ó´ÉÍý¥·¥¹¥Æ¥à¤Ç¤¢¤ë¡£Apple¤ÎTimeCapsure¤Ê¤É¤ÏÍ­Ì¾¤À¤¬¡¢Æ
 Â¾¤Ë¤â¡¢¤¿¤È¤¨¤ÐÁàºî¥ß¥¹¤ä»×¤¤Ä¾¤·¤¿»ö¤¬¤¢¤Ã¤ÆÏÀÊ¸¤Î¿È¤Ë²¿¤«¤¢¤Ã¤Æ¤â¡¢Íî¤ÁÃå¤¤¤Æ²áµî¤Î¥ô¥¡¡¼¥¸¥ç¥ó¤Î¥Õ¥¡¥¤¥ë¤ò¼è¤ê½Ð¤¹¤³¤È¤¬¤Ç¤­¤ë¡£
 \section{Windows´Ä¶­¤Ë¤ª¤¤¤Æ}
 \subsection{ARM¤Î³«È¯´Ä¶­}
+\begin{itemize}
 \item IAR workspace(nonOSS:IAR systems)
+\end{itemize}
 IAR systems¤ÎÀ½ÉÊ¤Ç¤¢¤ë¤¬¡¢¥é¥¤¥Ö¥é¥ê¤ÎÌ¾Á°¤¬·ù¤Ç¡¢¤·¤«¤â¸«¤¿ÌÜ¤¬¤¹¤­¤¸¤ã¤Ê¤«¤Ã¤¿¡£»È¤¤¿É¤¤¡£\\
 »ÈÍÑ²ÄÇ½¤Êµ¬ÌÏ¤ËÀ©¸Â¤¬¤¢¤ë¡£
 \subsection{AlteraCPLD¤Î³«È¯´Ä¶­}
@@ -266,12 +286,285 @@ Quartus II¤ò¤Ê¤ó¤éÌäÂê¤Ê¤¯»È¤¦¤³¤È¤¬¤Ç¤­¤ë¤¬¡¢¥Õ¥©¥ó¥È¤¬±ø¤¤¡£¤³¤ì¤Ïwindows¤Ëµ¯°
 
 
 ¤³¤Î¤è¤¦¤Ë¡¢windows¤Ç»È¤¦³«È¯´Ä¶­¤È¤·¤ÆÌäÂê¤Ë¤Ê¤ë¤³¤È¤Ï¤Û¤È¤ó¤É¤Ê¤¯¡¢ÁÇÀ²¤é¤·¤¤¤è¤¦¤Ë¸«¤¨¤ë¤¬¡¢git¤ò»È¤¦¤Ë¤â¡¢¤Á¤ã¤ó¤È¤·¤¿¥³¥Þ¥ó¥É¥é¥¤¥ó¤ò»È¤¦¤Ë¤â¡¢ÉÔ»×µÄ¤Ê¤Û¤É¼ê´Ö¤¬¤«¤«¤ë¡£
-\subsection{git¤Ègithub¤Ë¤Ä¤¤¤Æ}
+\section{git¤Ègithub¤Ë¤Ä¤¤¤Æ}
 git¤È¤¤¤¦¤Î¤Ï¡¢Ê¬»¶¥ô¥¡¡¼¥¸¥ç¥ó´ÉÍý¥·¥¹¥Æ¥à¤Ç¤¢¤ë¡£¤Ä¤Þ¤ê¡¢¤½¤Î¥ê¥Ý¥¸¥È¥ê¤¬Â¸ºß¤¹¤ë¾ì½ê¤¬1²Õ½ê¤Ë¸Â¤é¤Ê¤¤¤È¤¤¤¦¤³¤È¤Ç¤¢¤ë¡£¤½¤ì¤Ç¤Ï¥ô¥¡¡¼¥¸¥ç¥ó´Ö¤ÇÌ·½â¤·¤Ê¤¤¤Î¤«¡©¤½¤ì¤Ï¡¢Ãæ±û¥µ¡¼¥Ð¤Ë¤¿¤À°ì¤Ä¤Î¥Þ¥¹¥¿¥ê¥Ý¥¸¥È¥ê¤òÃÖ¤¯¤³¤È¤Ë¤è¤Ã¤Æ²ò·è¤µ¤ì¤ë¡£\\
 ¤Ä¤Þ¤ê¡¢git¤Ë¤Ï¥µ¡¼¥Ð¤Ë¥ê¥Ý¥¸¥È¥ê¤ò¥¢¥Ã¥×(°Ê¹ßpush¤È¤è¤Ö)¤¹¤ëµ¡Ç½¤¬¤Ä¤¤¤Æ¤¤¤ë¡£¤½¤³¤Ç¡¢ÌµÎÁ¤ÇÍøÍÑ¤Ç¤­¤ë¡¢¥Ç¡¼¥¿¤ÎÂ»¼º¤Î¿´ÇÛ¤ÎÌµ¤¤¥¯¥é¥¦¥É¤Ëpush¤Ç¤­¤ì¤Ð¤³¤ì¤Û¤É°Â¿´¤Ê¤³¤È¤Ï¤Ê¤¤¡£\\
 ¤µ¤Æ¡¢¤½¤ÎÍ×µá¤òËþ¤¿¤¹¥µ¡¼¥Ó¥¹¤¬¤¢¤ë¡£¤½¤ì¤Ïgithub¤È¤¤¤¦¡£\\
-¤Ç¤Ï¤É¤¦¤ä¤Ã¤Æ»È¤¦¤Î¤«¡£
+¤Ç¤Ï¤É¤¦¤ä¤Ã¤Æ»È¤¦¤Î¤«¤È¤¤¤¦¤È¡¢rsa°Å¹æ¸°¤òÍÑ°Õ¤·¤¿¸å¡¢¥µ¥¤¥È¤Ë¥¢¥¯¥»¥¹¤·¡¢¥ê¥Ý¥¸¥È¥êºîÀ®¤ò¥ê¥¯¥¨¥¹¥È¤¹¤ë¡£\\
 
+\begin{figure}[h]
+ \begin{center}
+  \includegraphics[scale=0.7,bb=10 20 600 400,clip]{fig1.eps}
+ \end{center}
+ \label{fig:one}
+\end{figure}
+¤½¤Î¸å¡¢°Ê²¼¤Î¤è¤¦¤Ë¥³¥Þ¥ó¥É¤ò¼Â¹Ô¤¹¤ë¡£
+\begin{verbatim}
+Debian% cd ÏÀÊ¸ 
+Debian% gedit textest.tex&
+[1] 16628
+Debian% ls      
+Makepdf  textest.aux  textest.dvi  textest.log	textest.out  textest.pdf  textest.tex
+textest.tex~  textest.toc
+Debian% git init
+Initialized empty Git repository in /home/ioriveur/ÏÀÊ¸/.git/
+Debian% git add ./   
+Debian% git commit -a
+[master (root-commit) 10c4ed0] First Commit
+ 8 files changed, 950 insertions(+), 0 deletions(-)
+ create mode 100755 Makepdf
+ create mode 100644 textest.aux
+ create mode 100644 textest.dvi
+ create mode 100644 textest.log
+ create mode 100644 textest.out
+ create mode 100644 textest.pdf
+ create mode 100644 textest.tex
+ create mode 100644 textest.tex~
+ create mode 100644 textest.toc
+Debian% git remote add origin git@github.com:iori-yja/Report.git
+Debian% git push origin master                                  
+Counting objects: 11, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (10/10), done.
+Writing objects: 100% (11/11), 110.86 KiB, done.
+Total 11 (delta 2), reused 0 (delta 0)
+To git@github.com:iori-yja/Report.git
+ * [new branch]      master -> master
+\end{verbatim}
+\clearpage
+\part{Verilog¤ò½ñ¤¯}
+\part{I2C¥»¥Ã¥È¥¢¥Ã¥×}
+\part{´Ø¿ôÃÍÅÏ¤·¤Î»ÅÊý}
+ARM¤Ç¤Î´Ø¿ô¤ÎÃÍÅÏ¤·¤Ëµ¿Ìä¤ò»ý¤Á¸¦µæ¤ò¹Ô¤Ã¤¿¡£\\
+FreeRTOS¾å¤Ç¤Ë¤¢¤ë¥×¥í¥»¥¹¤Î¥µ¥Ö¥ë¡¼¥Á¥ó¤¬Â¹¥ë¡¼¥Á¥ó¤ò¸Æ¤ÖÉôÊ¬¤ò¤Þ¤º¸«¤Æ¤ß¤ë¤³¤È¤Ë¤¹¤ë¡£\\
+»Ò¥ë¡¼¥Á¥ó:(»×¤Ã¤¿¤è¤êÄ¹¤¯¤Ê¤Ã¤¿¤Î¤ÇÈ´¿è)\\
+\subsubsection{»Ò¥ë¡¼¥Á¥ó}
+
+\begin{lstlisting}
+.LVL64:
+.loc 1 264 0
+mov ip, #0
+.loc 1 265 0
+mov r0, ip
+mov r1, #66
+mov r2, #8
+.loc 1 264 0
+str ip, [r4, #0]
+.loc 1 265 0
+bl i2csender
+\end{lstlisting}
+\subsubsection{Â¹¥ë¡¼¥Á¥ó}
+\begin{lstlisting}
+i2csender:
+.LFB5:
+.loc 1 134 0
+.cfi_startproc
+@ Function supports interworking.
+@ args = 0, pretend = 0, frame = 0
+@ frame_needed = 0, uses_anonymous_args = 0
+.LVL22:
+.loc 1 136 0
+cmp r0, #0
+.loc 1 134 0
+stmfd sp!, {r3, r4, r5, r6, r7, lr}
+.LCFI1:
+.cfi_def_cfa_offset 24
+.loc 1 134 0
+mov r4, r1
+.cfi_offset 14, -4
+.cfi_offset 7, -8
+.cfi_offset 6, -12
+.cfi_offset 5, -16
+.cfi_offset 4, -20
+.cfi_offset 3, -24
+mov r6, r2
+.loc 1 136 0
+beq .L58
+.loc 1 148 0 discriminator 1
+cmp r2, #0
+.loc 1 149 0 discriminator 1
+ldrne r5, .L71
+.loc 1 150 0 discriminator 1
+movne r7, #40
+.loc 1 148 0 discriminator 1
+beq .L57
+.LVL23:
+.L68:
+.loc 1 149 0
+and r1, r4, #255
+str r1, [r5, #8]
+.loc 1 150 0
+str r7, [r5, #24]
+.L63:
+.loc 1 151 0 discriminator 1
+ldr r3, [r5, #4]
+cmp r3, #40
+bne .L63
+.loc 1 152 0
+ldr r0, .L71+4
+mov r1, r4
+bl printf
+\end{lstlisting}
+¤³¤³¤Ç¡¢Â¹¥ë¡¼¥Á¥ó¤ÎC¸À¸ì¤Ç¤Îµ­½Ò¤ò¸«¤Æ¤ß¤è¤¦¡£
+\subsubsection{Â¹¥ë¡¼¥Á¥ó:C¸À¸ì}
+\begin{lstlisting}
+void i2csender(int Continue, unsigned int Data, int place){
+if(Continue==0){
+I22DAT = Data;
+I22CONSET |= 0¡ß04;
+I22CONCLR  = 0¡ß08;
+printf(¡Èrequesting\%x¡É,Data);
+while(I22STAT!=0¡ß18 && I22STAT!=0¡ß20)printf(¡È.¡É);
+if(I22STAT==0¡ß20){
+printf(¡ÈNo such device\%4x\n¡É,Data);
+i2cErr = 0¡ß22;
+return;
+}
+}else {
+for(;place != 0;place-=8){
+I22DAT = (Data & 0xFF);
+I22CONCLR  = 0¡ß28;
+while(I22STAT!=0¡ß28);
+printf(¡ÈData\%4x\n¡É,Data);
+Data = Data >> 8;
+}
+}
+}
+\end{lstlisting}
+¸Æ¤Ó½Ð¤·Éô:°ú¿ô¤¬3¤Ä¤¢¤ë¡£		i2csender(0,0¡ß42,8);
+0,0¡ß42(0d66),8¤òÅê¤²¤Æ¤¤¤ë¡£¤â¤¦°ìÅÙ»Ò¥ë¡¼¥Á¥ó¤ò¸«¤ë¡£
+\begin{lstlisting}
+.LVL64:
+.loc 1 264 0
+mov ip, #0
+.loc 1 265 0
+mov r0, ip @°ú¿ô1¤Ä¤á¡¢¤Ê¤ó¤Ç¤¦¤¨¤Îmov ip, #0¤ò¤Ø¤ë¤Î¤«ÉÔÌÀ²á¤®¤ë¡¢mov r0, #0¤Ç¤Ï¤À¤á¤Ê¤Î¤«
+mov r1, #66 @°ú¿ô2¤Ä¤á
+mov r2, #8 @°ú¿ô3¤Ä¤á
+.loc 1 264 0
+str ip, [r4, #0]
+.loc 1 265 0
+bl i2csender
+\end{lstlisting}
+¤È¤¤¤¦¤³¤È¤Ç¤É¤¦¤ä¤éARM¤Ç¤Ï3¤Ä¤Î°ú¿ô¤òÅÏ¤¹¤È¤­¤Ër0¡Ár2¤ËÃÖ¤¯¤È¤¤¤¦¤³¤È¤¬Ê¬¤«¤Ã¤¿¡£ËÜÅö¤À¤í¤¦¤«¡£
+ºÇ½é¤Ë¤¢¤ëstmfd sp!, {r3, r4, r5, r6, r7, lr}¤ÈºÇ¸å¤Ë¤¢¤ëldmfd sp!, {r3, r4, r5, r6, r7, lr}¤ò¤ß¤ë¡£¤Ä¤Þ¤ê¡¢¥¹¥¿¥Ã¥¯¤Ër3¡Ár7¤Èlr¤òÀÑ¤ó¤Ç¡¢ºî¶È¥¹¥Ú¡¼¥¹¤ò³ÎÊÝ¤·¤Æ¤¤¤ë¤Î¤À¤í¤¦¡£
+
+¤Ç¤Ï¼¡¤Ë¡¢printf()¤Î¤è¤¦¤ÊÊ¸»úÎó°ú¿ô¤Î¾ì¹ç¡¢¤É¤¦¤ä¤Ã¤ÆÅÏ¤·¤Æ¤ë¤ó¤À¤í¤¦¤È¤¤¤¦µ¿Ìä¤¬Ê¨¤¯¡£¥ì¥¸¥¹¥¿1¤³Ê¸»úÎó¤¬¼ý¤Þ¤ê¤­¤ë¤È¤Ï¸Â¤é¤Ê¤¤¤«¤é¤À¡£
+\subsubsection{printf¸Æ¤Ó½Ð¤·:¥¢¥»¥ó¥Ö¥ê}
+\begin{lstlisting}
+.LCFI1:
+.cfi_def_cfa_offset 24
+.loc 1 134 0
+mov r4, r1
+.cfi_offset 14, -4
+.cfi_offset 7, -8
+.cfi_offset 6, -12
+.cfi_offset 5, -16
+.cfi_offset 4, -20
+.cfi_offset 3, -24
+mov r6, r2¡¡@Âè3°ú¿ô¤òr6¤ËÂàÈò(r2¤¬0¤À¤È0¥Õ¥é¥°¤¬Î©¤Ä¤ó¤¸¤ã¤Í¡©)
+.loc 1 136 0
+beq .L58 @0¥Õ¥é¥°Î©¤Ã¤Æ¤¿¤éÊ¬´ô
+.loc 1 148 0 discriminator 1
+cmp r2, #0 @Âè3°ú¿ô¤Ï0¤«¡©
+.loc 1 149 0 discriminator 1
+ldrne r5, .L71¡¡@0¤òÂè3°ú¿ô¤Ë¤·¤¿³Ð¤¨¤Ï¤Ê¤¤¤Î¤Çr5¤Ë.word	-536346624¤ò¤¤¤ì¤ë¡£¤Ê¤ó¤À¤³¤ì¡©¤¤¤Ã¤Ñ¤¤¤«¤ó¤¬¤¨¤¿·ë²Ì¡¢I22¡Á¤Î¥Ù¡¼¥¹¥¢¥É¥ì¥¹¤À¤È¤ï¤«¤Ã¤¿
+.loc 1 150 0 discriminator 1
+movne	r7, #40 @0¤òÂè3°ú¿ô¤Ë¤·¤Æ¤Ê¤¤¤Î¤Ç¡¢r7¤Ë40¤òÆþ¤ì¤ë¡£
+.loc 1 148 0 discriminator 1
+beq	.L57 @0¤òÂè3°ú¿ô¤Ë¤·¤Æ¤¿¤éL57¤Ë¤È¤Ö¡Ä¡Ä¤¢¤ì¡©¤â¤Ã¤È¾å¤Ë¤¢¤ë¤Ù¤­¤¸¤ã¤Í¡©¤·¤¿¤éÂè3°ú¿ô¤¬0¤À¤Ã¤¿¤È¤­2Ì¿Îá¥µ¥¤¥¯¥ëÁá¤¯¤¹¤à¤·¡¢0¤¸¤ã¤Ê¤«¤Ã¤¿¤é1Ì¿Îá¥µ¥¤¥¯¥ë¤Î¥í¥¹¤ÇºÑ¤à¡£¤³¤Î¾ì¹ç¡¢¤³¤³¤Î¥ë¡¼¥×¤Ï1²ó¤·¤«²ó¤é¤Ê¤¤¤³¤È¤ÎÊý¤¬Â¿¤¤¤Î¤Ç¡¢¤½¤Ã¤Á¤ÎÊý¤¬Â®¤¤¡£¥ë¡¼¥×²ó¿ô¤¬¥½¡¼¥¹¤«¤éÊ¬¤«¤ë¤Î¤Ç¡¢¤â¤¦¤Á¤ç¤Ã¤ÈÆ¬¤¬¤è¤±¤ì¤ÐºÇÅ¬²½ÂÐ¾Ý¤À¤í¤¦
+.LVL23:
+.L68:
+.loc 1 149 0
+and	r1, r4, #255
+str	r1, [r5, #8] @I22DAT¤Ë¤¤¤ì¤Þ¤¹
+.loc 1 150 0
+str	r7, [r5, #24] @I22CONCLR¤Ë0¡ß28¤ò¤¤¤ì¤ë
+.L63:
+.loc 1 151 0 discriminator 1
+ldr	r3, [r5, #4] @I22STAT¤ò¥í¡¼¥É
+cmp	r3, #40 @¤½¤ì¤Ã¤Æ0¡ß28¡©
+bne	.L63 @°ã¤¦´Ö¥ë¡¼¥×, 3Ì¿Îá¤«¤Ê¡©(¼Â¤Ï.loc¤¬¤è¤¦¤ï¤«¤Ã¤Æ¤Ê¤¤)
+.loc 1 152 0
+ldr	r0, .L71+4 ¤³¤³¤¬ÌäÂê¤Îprintf()¤Ë¤¿¤¤¤¹¤ë°ú¿ôÅÏ¤·
+mov	r1, r4
+bl	printf
+\end{lstlisting}
+¤µ¤Æ¡¢L71+4¤¬²¿¤ò¤µ¤¹¤Î¤À¤í¤¦¤«¡£
+\begin{lstlisting}
+
+.L71:
+.word -536346624
+.word .LC3
+.word .LC1
+.word .LC2
+.word i2cErr
+.cfi_endproc
+\end{lstlisting}
+
+¤Õ¤à¡£+4¤È¤¤¤¦¤³¤È¤Ï¡¢¤­¤Ã¤È.LC3¤À¤í¤¦¡£(4byte = 32bit,¤Þ¤¨¤Î¤¬.word¤À¤«¤é32bit¤Ç¥¢¥é¥¤¥ó¤µ¤ì¤Æ¤¤¤ë)
+.LC3¤Ë¤Ï¤Ê¤Ë¤¬¤Ï¤¤¤Ã¤Æ¤¤¤ë¤Î¤Ç¤¢¤í¤¦¤«¡£
+\begin{lstlisting}
+.LC3:
+.ascii ¡ÉData\%4x\ 012\ 000¡í
+.space 3
+\end{lstlisting}
+
+¤³¤ì¤ò¸«¤ë¤È¤É¤¦¤ä¤é.ascii¤È¤¤¤¦¥¢¥é¥¤¥óÊýË¡¤¬¤¢¤ë¤é¤·¤¤¤¬¡¢¤½¤ó¤Ê¤â¤Î¤Ï¸«¤¿¤³¤È¤¬Ìµ¤¤¡£
+¤È¤¤¤¦¤³¤È¤Ç¡¢¥Ç¡¼¥¿¥·¡¼¥È¤ò³«¤¯¡£
+https://dl.dropbox.com/u/15570814/051020DDI0100HJ_v6_1.pdf
+¤È¤ª¤â¤Ã¤¿¤éºÜ¤Ã¤Æ¤Ê¤¤¡£
+¤¢¤ì¡©¤È¤Ë¤«¤¯¡¢.ascii¤Ã¤Æ¤¤¤¦¥¢¥é¥¤¥óÊýË¡¤Ç¡¢ ¡ÈASCIIencoded string¡È¤Ã¤Æ¤ä¤Ã¤Æ¤ä¤ì¤Ð¡¢(Â¿Ê¬¥¢¥»¥ó¥Ö¥é¤¬)ÂÐ±þ¤¹¤ë¥Ð¥¤¥Ê¥ê¤ËÊÑ´¹¤·¤ÆLC3¤ËÃÖ¤¤¤Æ¤¤¤ë¤Î¤À¤í¤¦¡£
+¤È¤³¤í¤Ç¡¢\ 012\ 000¤Ã¤Æ¤Ê¤ó¤À¤í¤¦¡£
+¤È¤ê¤¢¤¨¤º¡¢\ n¤ò\ t¤ËÊÑ¤¨¤Æ¤â¤Ã¤«¤¤¥³¥ó¥Ñ¥¤¥ë¤¹¤ë¡£
+.ascii ¡ÈData\%4x\ 011\ 000¡í
+¤É¤¦¤ä¤é\ n¤¬\ 012¤Ç¡¢\ t¤Ç¤Ï\ 011¤Ã¤Ý¤¤¡£
+¤·¤«¤·¡¢¤Ê¤ó¤Î¤³¤È¤«¤ï¤«¤é¤Ê¤¤¡£
+¤Ç¤Ï¡¢PC¤Ç¤Ï¤É¤¦¤Ê¤ë¤ó¤À¤í¤¦¡£
+.string \¡ÈHello,World!\¡É
+¤¢¤ì¡©
+movl \$.LC0, \%edi\\
+call puts\\
+\end{lstlisting}
+¤ª¤¤¡¢¤½¤ó¤ÊºÇÅ¬²½¤¤¤é¤Ê¤¤¡ª
+\\t¤Ë¤·¤Æ¤ß¤¿¡£
+.string ¡ÈHello,world!\\t¡É
+¤Û¤¦¡£\\t¤È¤Ê¡£¤Õ¤¥¤à¡£\ 012\ 000¤Ë¤¢¤¿¤ê¤½¤¦¤Êascii¥³¡¼¥É¤â\\n¤Ë¤Ê¤µ¤½¤¦¤À¤·¡¢PC¤¸¤ã¤Õ¤Ä¤¦¤Ë\\t¤Ã¤ÆÅÏ¤¹¤·¡£
+¤È¤Ë¤«¤¯¡¢¤³¤ì¤Ç¤Ï8byte¤Ê¤¿¤á¡¢r0¤Ë¤ï¤¿¤·¤Æprintf¤Ë¥ê¥ó¥¯ÉÕ¤­Ê¬´ô¤¹¤ë¤ß¤¿¤¤¡£
+\begin{lstlisting}
+printf(¡ÈData\%4x::::\n¡É,Data);
+\end{lstlisting}
+¤È¸À¤¦É÷¤ËÊÑ¤¨¤Æ¤ß¤¿¡£
+¤È¤³¤í¤¬¡¢
+\begin{lstlisting}
+.LC3:
+.ascii ¡ÈData\%4x::::1200¡í
+.space 3
+.L71:
+.word -536346624
+.word .LC3
+.word .LC1
+.word .LC2
+.word i2cErr
+.cfi_endproc
+\end{lstlisting}
+
+Ì¿Îá¤â
+ldr r0, .L71+4
+mov r1, r4
+bl printf
+ÊÑ¤ï¤é¤ó¡Ä¡Ä
+¤â¤·¤ä¡¢.L71+4¤Ë¤Ï.LC3¤Î¥¢¥É¥ì¥¹¤¬¤Ï¤¤¤Ã¤Æ¤ë¤Î¤«¡©
+arm-none-eabi-objdump¤¹¤ë
+\begin{lstlisting}
+3c: e59f009c ldr r0, [pc, #156] ; e0 <i2csender+0xe0>
+40: e1a01004 mov r1, r4
+44: ebfffffe bl 0 <printf>
+e0: 0000003c .word 0x0000003c
+\end{lstlisting}
+¤¢¤ì¡©3c¤Ã¤Æ¤À¤ì¡©0x3c¤òr0¤Ë¥í¡¼¥É¤·¤Æ¤ë¤ó¤À¤è¤Í¡Ä..¡©
+0x3cÈÖÃÏ¤Ë¤Ê¤Ë¤¬Æþ¤ë¤«¤Ã¤Æ¥ê¥ó¥¯¤·¤Æ¤Ê¤¤¤ó¤À¤«¤é¤ï¤«¤ó¤Í¤¨¤À¤í¤È¤ª¤â¤¦¤ó¤À¤±¤É¡£
+¤ª¼ê¾å¤²¡£
 \part{¹Í»¡}
 ¤Þ¤º¡¢²»¤ÎÍ×ÁÇ¤Ë¤Ä¤¤¤Æ¤«¤ó¤¬¤¨¤Æ¤¤¤­¤¿¤¤¡£
 ²»¤ÏÇÈÆ°¤Ç¤¢¤ë¤«¤é¡¢¼þ´ü¡¢ÇÈ·Á¡¢¿¶Éý¤Ë¤è¤Ã¤ÆÄêµÁ¤µ¤ì¤ë¡£
