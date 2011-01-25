@@ -1,6 +1,6 @@
 \documentclass[morisawa,12px]{jsarticle}
 \usepackage[dvipdfm,bookmarks=true,bookmarksnumbered=true,%
-bookmarkstype=tocx,b5j]{hyperref}
+bookmarkstype=tocx,a4j]{hyperref}
 \usepackage[dvipdfm]{graphicx}
 \usepackage{listings, jlisting}
 \renewcommand{\lstlistingname}{リスト}
@@ -379,10 +379,15 @@ endmodule
 今回は、2つのレジスタを設け、入力クロックの立ち上がりエッジに、t\_count[0]を反転させる。すると、t\_countが立ち上がるのは2入力クロックサイクルに1回となる。\\
 t\_count[1]はt\_count[0]が立ち上がりクロックになる時に反転するため、結果として4入力サイクルにつき1サイクルでblinkすることがわかる。\\
 よってこのモジュールは4:1分周器になっている。\\
-
-\section{ピクセル選択モジュール}
+\section{データ抽出レイヤ}
+\subsection{ピクセル選択モジュール}
 \begin{lstlisting}[caption=特定のピクセルのサイクルのときに立ち上がる、一部省略]
-module TimingManager(input VSYNC, input HREF,input pclk,output reg Sig_En, output enC);
+module TimingManager(
+	input VSYNC, 
+	input HREF,
+	input pclk,
+	output reg Sig_En,
+	output enC);
 reg [8:0] line = 0;
 reg [8:0] foo = 0;
 always @(posedge HREF or posedge VSYNC)begin
@@ -416,7 +421,7 @@ CMOSカメラOV7670モジュールの外に出ている制御信号は\begin{itemize}
 その後、VSYNCが立ち下がり、実データが送出される条件が一つ揃うようになる。\\
 次に、17フレーム分の時間、制御信号のバスに変化は無い。その後、HREFが上がると、ようやく実データが送出され始める。1行がおわると、一度HREFが立ち下がり、144px分やすむ。\\
 その間、データシートによると、実データはキューに入れられて待っているらしい。\\
-\begin{figure}[htb]
+\begin{figure}[tb]
  \begin{center}
  \caption{OV7670のデータシートによるタイミングチャート}
   \includegraphics[width=\hsize]{tmchart.eps}
@@ -424,7 +429,7 @@ CMOSカメラOV7670モジュールの外に出ている制御信号は\begin{itemize}
  \end{figure}
  \\
 まず、このソースの目につくのは、pclk立ち上がりエッジで起動する\\
-\begin{lstlisting}[ピクセルごとのカウンタ]
+\begin{lstlisting}[caption=ピクセルごとのカウンタ]
 always @(posedge pclk)begin
 		if ( HREF&enC ) foo <= foo + 1'b1;
 		else foo <= 7'b0000000;
@@ -447,8 +452,13 @@ always @(posedge HREF or posedge VSYNC)begin
   end
 assign enC = (line==9'h30 ) ? 1'b1 : 1'b0;
 \end{lstlisting}
-でアサインされているワイヤがenCであり、line(行数)の値によってドライブされる。つまり、特定の行の時、
-\section{ピクセルデータフェッチ,連結モジュール}
+でアサインされているワイヤがenCであり、line(行数)の値によってドライブされる。つまり、特定の行の時のみピクセルカウンタが起動される様になっているわけだ。\\
+実を言うと、この設計にたどり着くまで、もっと別の設計でやろうとしていた。最初は一つのalwaysでやっていたが、implicit latchを生成しますよ！っていうワーニングや、always@文で呼び起こされたのに何も値を変えないことがあります、といったワーニングが出ていて、調べても何の事だかよく分かっていなかった。\\
+もし、この設計を思いついていなかったら、ずーっと気持ち悪いままだったが、これによってワーニングが消えたどころか、使用するロジックエレメントの数もグッと減ったため、きっと裏でなにかあって、always@文が何のレジスタの値も変えない可能性があると、無駄なラッチを生成することがある様だ。\\
+ということがわかったが、具体的なバッドノウハウもリゾルブノウハウもほとんど出回っていないという状態であるため、今後のワーニングメッセージの改善や、教本、ノウハウ集として有用なブログなどの登場を期待する必要があると感じた。\\
+このためには、半導体ベンダ側の努力のみならず、企業のような、ノウハウが閉鎖的にこもりがちな顧客だけ、という状態から脱して、それこそ手芸やバレエのごとく、幅広い一般人がFPGAやCPLDなどを使うようになる必要も、当然あるだろう。どれくらい未来になるか分からないが、ITがもっと陳腐化すればいずれ来る未来であると思う。\\
+\clearpage
+\subsection{ピクセルデータフェッチ,連結モジュール}
 \begin{lstlisting}[caption=データコミッタ]
 module Dtacutcmmit(
 	input SigEn,
@@ -465,6 +475,43 @@ module Dtacutcmmit(
 		popdta[11:0]<= { redpx[3:0], pshdta[7:0] };
 	end
 endmodule
+\end{lstlisting}
+このモジュールは、SigEnの両エッジで働く。
+これもだいぶ悩んだ末に落ち着いた形であって、SigEnと言うのはピクセル選択モジュールであるTimingManagerのものと同じである。
+これは、上で述べた変更によってpclkの立ち上がりエッジでのみ動作するようになったため、Sig\_Enのエッジ動作時には、ピクセルデータが流れているpshdtaは必ず保証されている。
+これは上のタイミングチャートを見てほしい。pclk立ち下がりエッジのときにデータ値が変化し、逆に立ち上がりエッジの前約15ms以上と後8msが保証されている。(ただし24MHz動作時、今回はさらに2.4倍遅い)\\
+\clearpage
+\section{データ転送レイヤ}
+\begin{lstlisting}
+module transmittr (
+	input Srialclk,
+	input Wrtcmplt,
+	input [11:0]data,
+	output SrialData
+);
+reg [11:0]Datareg;
+reg Endflg;
+wire Endtoken;
+assign Endtoken = Endflg & ~Srialclk;
+assign SrialData = Endtoken ? ~Datareg[0] : Datareg[0];
+reg  [3:0]ShftCount = 0;
+	always@( posedge Srialclk )begin
+			Datareg[11:0] <= { 1'b0, Datareg[11:1] };
+			ShftCount <= ShftCount + 4'h1;
+			if ( ShftCount == 4'hB )begin
+				Endflg <= 1'b1;
+				if( Wrtcmplt )begin
+					ShftCount <= 0;
+					end
+				end
+			else if ( ShftCount == 4'h0 )begin
+				Endflg <= 0;
+				Datareg[11:0] <= data[11:0];
+				end
+			end
+
+endmodule
+
 \end{lstlisting}
 \section{シミュレーション}
 \subsection{シミュレータの意義}
@@ -591,7 +638,126 @@ end
 
 \part{I2Cセットアップ}
 \part{SCCBでのOV7670コンフィギュレーション}
-
+http://www.cs.fsu.edu/~baker/devices/lxr/http/source/linux/drivers/media/video/ov7670.c
+ここに、OV7670用のlinuxドライバがあるが、非常に不思議な事に、データシートにはalways "0"などとかかれた場所やreserved領域に書き込んだりしている。
+ともかく、これをどれほど信用すべきなのかんがえあぐねているところに、\href{http://www.hmwr-lsi.co.jp/fpga/fpga_9.htm}{FPGAで遊んでみる}さんが既に試していた。\\
+\begin{lstlisting}[caption=ov7670\_set\_up.ttl]
+; OV7670<81>@set up macro
+;
+; delay set
+pause_ms =0
+; delay for debug
+;pause_ms =2000
+;
+; ADR=0x12 WDATA=0x04
+sendln  'W1204'
+sendln
+mpause pause_ms
+;
+; ADR=0x40 WDATA=0xd0
+sendln  'W40D0'
+sendln
+mpause pause_ms
+;
+; ADR=0x8c WDATA=0x02
+sendln  'W8C02'
+sendln
+mpause pause_ms
+sendln  'W703a'
+sendln
+mpause pause_ms
+sendln  'W7135'
+sendln
+mpause pause_ms
+sendln  'W7211'
+sendln
+mpause pause_ms
+sendln  'W73f0'
+sendln
+mpause pause_ms
+sendln  'Wa202'
+sendln
+mpause pause_ms
+sendln  'W1500'
+sendln
+mpause pause_ms
+sendln  'W7A20'
+	:
+	:
+	:
+	:
+\end{lstlisting}
+これはTeratermかなんかのスクリプトで、このままでは使えないので、vimで整形し、そのままSCCBレジスタに書き込む関数にした。\\
+\begin{lstlisting}
+	SCCBByteWrite(0x1204); 
+	vTaskDelay(2 / portTICK_RATE_MS);
+	SCCBByteWrite(0x40D0); 
+	vTaskDelay(2 / portTICK_RATE_MS);
+	SCCBByteWrite(0x8C02); 
+	vTaskDelay(2 / portTICK_RATE_MS);
+	SCCBByteWrite(0x703a); 
+	vTaskDelay(2 / portTICK_RATE_MS);
+	SCCBByteWrite(0x7211); 
+	vTaskDelay(2 / portTICK_RATE_MS);
+	SCCBByteWrite(0x40D0); 
+	vTaskDelay(2/portTICK_RATE_MS);
+	SCCBByteWrite(0x8C02); 
+		:
+		:
+		:
+		:
+		:
+\end{lstlisting}
+あんまりひどいので、
+\begin{lstlisting}[caption=i2c.cのvi2cタスクの冒頭]
+	printf("Setup begin[>  ");
+	fflush(stdout);
+	for(regpointer=0;regpointer!=129;){
+		if(SCCBByteWrite(OV7670[regpointer])==-1)continue;
+		regpointer++;
+		switch (regpointer%4){
+			case 0:
+			Loopy='|';
+			break;
+			case 1:
+			Loopy='/';
+			break;
+			case 2:
+			Loopy='-';
+			break;
+			case 3:
+			Loopy='\\';
+			break;
+			}
+		printf("\b\b\b=>%c",Loopy);
+		fflush(stdout);
+		vTaskDelay(10 / portTICK_RATE_MS);
+		}
+	printf("\rData transmition End!\n");
+	fflush(stdout);
+\end{lstlisting}
+とし、
+\begin{lstlisting}[caption=OV7670userconfig.hの抜粋]
+const int OV7670[]={
+0x1204,
+0x40D0,
+0x8C02,
+0x703a,
+0x7211,
+    :
+    :
+    :
+    :
+\end{lstlisting}
+というヘッダファイルを設けた。これにより、ループを回して書き込むようになったというのと、設定ファイルを別ファイル扱いにできたので、修正が容易になった。\\
+\begin{lstlisting}
+Hello, world!1:0
+203PDIRRegister Reset
+Setup begin
+[======================================>      \
+\end{lstlisting}
+現在はこの様なメッセージとなり、簡潔でわかりやすくなっている。\\
+バグが存在する間は冗長な出力が好ましいが、安定して動かせるようになったら静かな方が好ましい。\\
 \part{関数値渡しの謎}
 ARMでの関数の値渡しに疑問を持ち研究を行った。\\
 FreeRTOS上でにあるプロセスのサブルーチンが孫ルーチンを呼ぶ部分をまず見てみることにする。\\

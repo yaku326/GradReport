@@ -33,3 +33,4 @@ run 1600000
 #               150037pix:4094 countpclk is                17579
 #              1589952pix:4095 countpclk is               197568
 #              1599360pix:4094 countpclk is                    0
+add wave -r /*
