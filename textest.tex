@@ -650,7 +650,8 @@ end
 \section{$SCCB$と$I^2C$の違い}
 $SCCB$というのは、$I^2C$というシリアル通信のスーパセットで、実質$I^2C$と同じ方法で通信が出来るとされている。ただし、実際にやってみるといくつか違いがあった。\\
 まず、$I^2C$接続のEEEPROMでの実験をしめす。
-
+\subsection{EEPROM}
+今回使用したのは、\href{http://akizukidenshi.com/download/24LC256.pdf}{microchip社製24LC256}である。
 \section{OV7670用のレジスタセットアップデータの整理}
 http://www.cs.fsu.edu/~baker/devices/lxr/http/source/linux/drivers/media/video/ov7670.c
 ここに、OV7670用のlinuxドライバがあるが、非常に不思議な事に、データシートにはalways "0"などとかかれた場所やreserved領域に書き込んだりしている。
