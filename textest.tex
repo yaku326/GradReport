@@ -1007,8 +1007,148 @@ assign SrialData = Endtoken ? ~Datareg[0] : Datareg[0];
 	}
 \end{lstlisting}
 実はこのモジュールは完全にうまく動いているとは言えない。\\
-既に提出しなければいけないため、一度現状を報告しておく。
+既に提出しなければいけないため、そのように現状を報告しておく。\\
+動いた時には、既に述べたブログ等で紹介するであろうから、もし良かったらみてみてほしい。
+\begin{figure}[htb]
+ \begin{center}
+ \caption{オシロスコープのプローブ}
+  \includegraphics[scale=0.25,bb=92 20 2500 1400,clip]{DSCN2019.JPG}
+ \end{center}
+ \end{figure}
 \clearpage
+\part{SSGドライバの製作と研究}
+まず、前提として、FIO4ポートにパラレルバスをつないだものとする。\\
+また、YMZ294のデータシートはネット上で手に入れることは出来ない。\\
+\section{SSGというのは}
+YMZ294というのは、MSXのSOUNDコマンドと同一のレジスタ操作で発声できる。この音源をPSGという。ヤマハはこれを政治的な理由によりSSGと呼ぶがほとんど同じものだ。\\
+PSGのレジスタについては、AY-3-8910が元となっている。\\
+わたしはH-1 MSXマシンの手引書を読んで学習したが、手に入らない場合は姉妹品\href{http://www.alldatasheet.jp/datasheet-pdf/pdf/82065/YAMAHA/YMZ284.html}{YMZ284のデータシート}をみるとよいとおもわれる。違いは、284は294と比べ、不要だった2つの端子が削られている。これによって、動作クロックが4MHzにしぼられる。\\
+逆に言えば、ほかには特に違いが無い。\\
+\section{ハードウェア層での結線省略など}
+294は、18pinで、ピン順序は /WR(write enable) /CS A0(address mode) VDD(5V) SoundOut GND ΦM 4/8(clk select) /IC(reset) /TESTで、のこりはD[7:0]となっている。\\
+
+秋月で買うといかつい水晶発振器がついてくる。これは4MHzであり、4/8はHiレベルに設定することで2分周して2MHzを生成し、これがLSI内のfscとして扱われる。\\
+このことは秋月のデータシートに明示しておらず、誤解を生みやすいので注意すること。\\
+
+また、/TEST, 4/8, /ICは内部に60-260-600kΩというあまり精度の良くないプルアップ抵抗が入っており、結線しなくてもデフォルトとしてプルアップされ、使えるようになっている。\\
+さらに、その他のピンに於けるHiレベルが2.2Vからであるので、2.8Vや3.3Vで動作するマイコンやFPGAからも容易にアクセスできる。\\
+これは大きな利点である。\\
+
+/CSは、普通プルアップしっ放しでもとりあえずつかえるチップ(ex.SRAM)が多いように思うが、この場合、一回アクセスするごとに上げ下げせねばならないようで、読み込むわけでもないのに/WRも上げ下げせねばならない。ところが、/CSと/WRはショートしても問題無いようだ。\\
+サンプルプログラムも同時に同じアクセスを行っているではないか。これらは隣のピンであり、実際にくっつけて使用しても問題ない。\\
+
+\section{ソフトウェア層}
+A0がLowで/WR(=/CS)がlowのときにD[7:0]をフェッチし、その後A0がLowのままで、/WRがHiレベルになるとレジスタ選択を行う。\\
+
+その後A0が上がり、/WRが落ちるとD[7:0]を同じくフェッチし、/WRが上がることでそのレジスタにデータを書く。\\
+#/WRすら操作せずにうごかしたいとおもったが、それはできなかった。\\
+
+情けないことに、この後僕はとんでもなくしょうもないことに2日間も悩むことになった。\\
+それはビットオーダである。こういう単純なミスをなくすためにも、データシートの熟読は欠かせない。\\
+最終的にこうした。
+\begin{lstlisting}
+assign { /WR, A0, D[7:0] } = GPIO4[9:0]; ///////-A
+\end{lstlisting}
+\begin{lstlisting}
+wire [9:0]temp;
+
+assign temp = { D[7:0], /WR, A0 };///////-B状態だったため、なにも考えずに
+
+assign GPIO4[9:0] = temp;としてしまったわけだが、良く考えると大間違え。
+\end{lstlisting}
+気持ち悪いが現状
+
+assign temp = { GPIO4[7:0], GPIO4[9], GPIO4[8] }; ///////-Cとなっている。
+
+ユニバーサル基板に載せる段階ではAよりB,Cの方が現状に近く綺麗に引き回せるのだ;-) */
+
+そして、
+
+void ymzwrite0(int frec,int adr){
+int highbyte;
+FIO4PIN=0×00;
+FIO4PIN=adr;
+FIO4PIN=0×200+adr;
+FIO4PIN=0×100+(frec&0xFF);
+FIO4PIN=0×300+(frec&0xFF);
+FIO4PIN=adr+1;
+FIO4PIN=0×201+adr;
+highbyte=(frec>>8)&0xFF;
+FIO4PIN=0×100+highbyte;
+FIO4PIN=0×300+(frec>>8);
+}
+void ymzwrite1(int value,int adr){
+FIO4PIN=0×00;
+FIO4PIN=adr;
+FIO4PIN=(0×200+adr);
+FIO4PIN=(0×100+value);
+FIO4PIN=(0×300+value);
+}
+という函数でI/Oアクセスをすることにした。ところで、これ以降ネタである。
+この函数、Delayをはさんでいない。しかしCPUclkは72MHzである。
+
+IOはCPUバスに直接つながっているため、CPU速度で動く。
+
+＼あれ？タイミングチャートに何て書いてある？あれ？タイミングチャートに何て書いてある？／
+
+ライトパルスオフ時間 tWOFF 40ns<
+
+あれ？こういうときはアセンブリを読めば良いんだよ
+
+.global ymzwrite1
+.type   ymzwrite1, %function
+ymzwrite1:
+@ Function supports interworking.
+@ args = 0, pretend = 0, frame = 0
+@ frame_needed = 0, uses_anonymous_args = 0
+@ link register save eliminated.
+mvn     r3, #-1073741824@0x-40000000
+sub     r3, r3, #12288@r3=0x-40003000
+mov     r2, #0
+str     r2, [r3, #-3947]@ 0 -400030F6B (FIO4PIN=0×00に対応
+str     r1, [r3, #-3947]@FIO4PIN=adr; 1clkでアクセス
+add     r1, r1, #512
+str     r1, [r3, #-3947]@2clk分でtCSW<30ns<2clk分=28nsあれ？
+add     r2, r0, #256
+str     r2, [r3, #-3947]@余談だけどr2つかわずに済むよね
+@またもや2clkでFIO4PIN=(0×100+value);
+@はい先生！こんどこそtWOFF を満たしてないと思うんですが！
+add     r0, r0, #768
+str     r0, [r3, #-3947]
+bx      lr
+.size   ymzwrite1, .-ymzwrite1
+…..。
+
+データシートが知ってる定格中最速のYMZ294より1.4倍も高速にうごかせました。
+\section{単独バイトライト}
+\begin{lstlisting}
+#include "LPC23xx.h"
+void ymzwrite1(int value,int adr){
+                FIO4PIN=0x00;
+                FIO4PIN=adr;
+                FIO4PIN=(0x200+adr);
+                FIO4PIN=(0x100+value);
+                FIO4PIN=(0x300+value);
+}
+\end{lstlisting}
+
+\section{2バイトライト}
+\begin{lstlisting}
+void ymzwrite0(int frec,int adr){
+int highbyte;
+                FIO4PIN=0x00;
+                FIO4PIN=adr;
+                FIO4PIN=0x200+adr;
+                FIO4PIN=0x100+(frec&0xFF);
+                FIO4PIN=0x300+(frec&0xFF);
+                FIO4PIN=adr+1;
+                FIO4PIN=0x201+adr;
+                highbyte=(frec>>8)&0xFF;
+                FIO4PIN=0x100+highbyte;
+                FIO4PIN=0x300+(frec>>8);
+
+}
+\end{lstlisting}
 \part{ソースコードを読む技術}
 \section{関数値渡しの謎}
 ARMでの関数の値渡しに疑問を持ち研究を行った。\\
