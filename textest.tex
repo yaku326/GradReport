@@ -1,7 +1,7 @@
 \documentclass[12px]{jsarticle}
 \usepackage[dvipdfm,bookmarks=true,bookmarksnumbered=true,%
 bookmarkstype=tocx,a4paper]{hyperref}
-\usepackage[dvipdfm,draft]{graphicx}
+\usepackage[dvipdfm]{graphicx}
 %\usepackage[morisawa}
 \usepackage{listings, jlisting}
 \renewcommand{\lstlistingname}{リスト}
@@ -22,33 +22,46 @@ bookmarkstype=tocx,a4paper]{hyperref}
 \begin{document}
 
 \title{Visual Synthesizer := \huge{$Sonitus \over Lucis \times Colorum$}\\
-\Large{Lucis et Colorum Sonitus}\\
 }
 \author{Iori yoneji}
 \maketitle
 \begin{flushright}
-writtern with \pLaTeX2e
+writtern with \pLaTeX
 \end{flushright}
-\part{アブストラクト}
+\section{アブストラクト}
 この論文は、\begin{itemize}
 \item 実際に自分がオープンソフトウェア/ハードウェア、オープンノウハウについての公開を通して、これらの活動への、読者の参加容易性の向上
 \end{itemize}
 を図るとともに、
 \begin{itemize}
-\item オープンソフトウェア/ハードウェア、オープンノウハウによる恩恵の民間での享受可能性
-\item ソースコードを実際に読み、書くことによって、ソフトウエアとハードウェアの製作について実例を挙げ、現状の開発環境の問題点と実地でのプロセス
+\item オープンソフトウェア/ハードウェア、オープンノウハウによる恩恵の享受可能性
 \item パーソナルファブリケーションとオープンソースをとりまく社会とビジネスモデルの現状と今後の予測
 \item 本研究で開発したハードウェア、およびソフトウェアの新規性、および課題
+\item ソースコードを実際に読み、書くことによる、ソフトウエアとハードウェアの製作についての現状の開発環境の問題点と実地でのプロセスの実例
 \end{itemize}
 を明らかにし、
-以上のことから、{\large 90億総ソースコード・リテラシィ}の時代になる事を主張することを目的とする。\\
+以上のことから、{\large 90億総ソースコード・リテラシィ}の時代になる事を主張している。\\
+\section{キーワード}
+電気電子,コンピュータ科学,ARM,組み込み,PLD,CPLD,C言語,Verilog,ハードウェア,ソフトウェア,開発,ものづくり,オープンソース,ヴァージョン管理,ソースコードリテラシィ,SNS
+\section{お品書き}
 今回の製作対象の、外から見た仕様について\begin{itemize}
 \item 学生が買える、廉価なカメラモジュールで、室内等の明るさや色などを元にパラメータを作成する。
 \item パラメータを元にスピーカから音が鳴る。
 \end{itemize}
-と定める。
 \clearpage
-
+\section{コンタクト}
+もっとも確実に行えるのはここだろう:ioriveur@ioriveurlabs.dnsalias.org\\
+もしかしたらこちらの方が早く応答出きるかもしれない:\href{https://github.com/iori-yja}{ioriveur@github}\\
+この著者のブログはこちら:\href{http://iorivr.b.sourceforge.jp}{否定的なものは怠惰の中では繁殖する}\\
+\section{ライセンス}
+\begin{figure}[h]
+ \begin{center}
+\caption{クリエイティブ・コモンズ・ライセンス}
+\includegraphics[width=0.2\hsize]{by-nd.eps}
+ \end{center}
+\end{figure}
+This Artwork by Iori Yoneji is licensed under a \href{http://creativecommons.org/licenses/by-nd/2.1/jp}{Creative Commons 表示 - 改変禁止 2.1 日本 License}.\\
+\clearpage
 \tableofcontents
 \begin{figure}[htb]
  \begin{center}
@@ -993,8 +1006,8 @@ vTaskDelay( 1 / portTICK_RATE_MS );
 		}
 	}
 \end{lstlisting}
-
-\part{関数値渡しの謎}
+\part{ソースコードを読む技術}
+\section{関数値渡しの謎}
 ARMでの関数の値渡しに疑問を持ち研究を行った。\\
 FreeRTOS上でにあるプロセスのサブルーチンが孫ルーチンを呼ぶ部分をまず見てみることにする。\\
 子ルーチン:(思ったより長くなったので抜粋)\\
@@ -1216,6 +1229,12 @@ arm-none-eabi-objdumpする
 e0: 0000003c .word 0x0000003c
 \end{lstlisting}
 あれ？3cってだれ？0x3cをr0にロードしているのにもかかわらず、0x3cをなにがはいるかは未知であるはず。\\
+
+この疑問は一度置いておくこととして、
+この問題は\href{infocenter.arm.com/help/topic/com.arm.doc.ihi0042d/IHI0042D_aapcs.pdf}{Procedure Call Standard for the ARM Architecture}で答え合わせが出来る様だ。
+\section{FreeRTOSのvTaskDelay()を追う}
+\subsection{vTaskDelay()の使い方}
+\subsection{portTICK\_RATE\_MSとは何か}
 \begin{figure}[htb]
  \begin{center}
  \caption{ターゲットのマイコンボード}
