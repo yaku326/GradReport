@@ -232,7 +232,7 @@ SRAMを使用することに関して以下のデメリットがあった:\begin{itemize}
 \item ピン数が多いために、ユニバーサル基板上に配置し、ピンを通じてコードで配線をすると、安定性が著しく低下する
 \item データ入出力層がSRAMに対してマイコン及びCPLDにつながることとなり、短絡防止の保護回路を別に必要とする
 \end{itemize}
-また
+また、後述する通り、作成に伴ってSRAMを必要としなくても(信号データを一度RAM展開しなくても)データ抽出ができるようになったため、いらなくなった。
 \begin{figure}[htb]
  \begin{center}
  \caption{うつくしいもの}
@@ -248,7 +248,7 @@ SRAMを使用することに関して以下のデメリットがあった:\begin{itemize}
 
 \section{オープンソースデスクトップ環境において}
 このサブセクション内で、一般に、ソフトウェアと言った場合、オープンソースであることとする。\\
-また、デスクトップ環境とは、いわゆるPCでの環境のことを指し、ここでは\textbf{ホスト}と同意義である。\\
+また、デスクトップ環境とは、いわゆるPCでの環境のことを指し、ここでは\textbf{ホスト}と同意義とする。\\
 『ホスト』は組み込み開発の『ターゲット』に対する用語とし、組み込み開発の母艦というニュアンスを含む。\\
 プロプライエタリ(私企業や個人、政府が保有し、OSSでない)ソフトウェアの場合は配布企業とプロプライエタリであることを明示する。\\
 オープンソースデスクトップ環境(以降OSSDE)として、以下の3つのOSを対象とした。\\
@@ -377,6 +377,13 @@ Verilogを書くのは、この論文がきっかけであった。\\
 であるから、問題が起きるとしたらここだろうなという気がしていたが、まさにそのような事態はおきてしまった。この場を借りて、辛抱強く待ってくださった本村先生に感謝の意をささげます。\\
 \section{モジュールの構成}
 このモジュールの全体像を示す。\\
+\begin{figure}[htb]
+ \begin{center}
+ \caption{モジュールの全体図:拡大できます}
+  \includegraphics[scale=1,bb=60 850 600 0,clip]{print.pdf}
+ \end{center}
+ \end{figure}
+\clearpage
 \section{clkdivider(分周器)}
 まず初めに、もっとも簡単なモジュールを作成する。\\
 今回、MAX IIの基板に搭載した水晶発信器が40MHzである。今回の用途ではカメラの動作周波数は動作定格内であれば遅い方がより信号バスがノイズに強くなるため、10MHzに分周してカメラのクロックソースに入力する。分周するメリットは、さらに、分周することによって、クロックのデューティ比を50\%に近くすることが可能である。\\
@@ -646,12 +653,118 @@ end
 \clearpage
 
 \part{I2Cセットアップ関数の開発}
+$I^2C$ドライバが必要だったため、作成した。割り込みを使わない$I^2C$で必要となる動作が、2番ポートにおいてすべてカヴァーされているため、ライブラリとして公開する。\\
+ただ、このコードを書いたのがずっと昔で、今回だましだまし使っていたので、とても汚いコードとなっている。\\
+そんな汚いコードを公開するのか？という疑問もあるが、そもそもなにもないよりマシであるという考え方もある。
+\section{データ送出関数}
+\begin{lstlisting}
+void i2csender(int Continue, unsigned int Data, int Keta){
+//int i2cStatus;
+			if(Continue==0){
+				I22DAT = Data;
+				I22CONSET |= 0x04;
+				I22CONCLR  = 0x08;
+				while(I22STAT!=0x18 && I22STAT!=0x20);
+	FIO2PIN1 = 0x2;
+				if(I22STAT==0x20){
+					printf("No such device%4x\n",Data);
+					i2cErr = 0x22;
+					return;
+					}
+			}else {
+				for(;Keta != 0;Keta-=8){
+					I22DAT = (Data & 0xFF);
+					I22CONCLR  = 0x28;
+				while(I22STAT!=0x28);
+					Data = Data >> 8;
+				}
+		}
+	}
+\end{lstlisting}
+\subsection{動作}
+この関数の動作は、ライトサイクルとして最初であった場合には、まず割り込みをクリアし、マスタモードに入らないようにセットアップし、また、"データ"としてアドレスを送出させるところから始まる。その後、デバイスから返答があるか、どこからも返答が無いと分かるまで待ち、終了処理を行う。\\
+ライトサイクルとして最初では無かった場合は、int値を、下8bitずつ送出する。\\
+\subsection{問題点}
+これをFreeRTOS上で動作させると、初回呼び出し時の3回に2回、しかも周期的にOS全体を落とすという大きな問題を抱えている。
+\section{シーケンシャルデータ受信関数}
+\begin{lstlisting}
+int i2creader(int size, int Adr, int registernumber){
+char Loopy;
+upper:
+				I22DAT = (Adr + 1);
+				I22CONSET |= 0x04;
+				I22CONCLR  = 0x08;
+				printf("Status is %x\n",I22STAT);
+				while(I22STAT!=0x40 && I22STAT!=0x48)printf(".");
+				if(I22STAT==0x48){
+					printf("no acknowlege(%x)\n",I22STAT);
+					i2crestart(2);
+					goto upper;
+					}
+				while(registernumber!=(size+1)){
+					I22CONSET |= 0x04;
+					I22CONCLR  = 0x28;
+					while(I22STAT != 0x50 );
+					vTaskDelay(10 / portTICK_RATE_MS);
+					printf("Adress%x,\tData%x",regisiternumber++,I22DAT);
+				}
+				printf("done.....");
+				fflush(stdout);
+				I22CONCLR = 0x0C;
+}
+\end{lstlisting}
+これは、SCCBレジスタに対して、シーケンシャルリードを0番地から最大値である0xcaまでを一期に読み取る関数である。あまり美しいコードにはなっていない。
+\subsection{バイトリード}
+サイズを1にすれば、バイトリードとなる。本質的に、シーケンシャルリードとバイトリードに違いは無いのだ。
+\section{OV7670全リード関数}
+OV7670のSCCBレジスタをリードする関数である。
+\begin{lstlisting}
+void SCCBread(int subadr, int size, int NumByte){
+	i2cstart(2);
+//	vTaskDelay(300 / portTICK_RATE_MS);
+	i2cErr = 0;			//i want to read!b So, start.
+	i2csender(0,0x42,8);	//Hey, ?
+	if(i2cErr==0x22){
+		printf("fatal");
+		i2cstop(2);
+		return;
+	}
+	i2csender(1,subadr,8);
+//	printf("Adress read request at%4x OK\n\n", subadr);	//0x03byte? 
+	i2crestart(2);
+	i2creader(size,0x42,NumByte);
+	i2cstop(2);
+	printf("Debu331g\n");
+}
+\end{lstlisting}
+一つ目のコメントアウトは、安全性のために最初いれておいたものだが、無くても動くらしいと分かったためコメントアウトした。
+i2cstart($int port$)関数はそのままなのでここでは割愛する。\\
+二つ目のコメントアウトは、はずすと冗長な出力となる。\\
+これをみるとわかるとおり、リクエストの送信とデータの受信を一括して行う。
+\section{OV7670バイトライト関数}
+\begin{lstlisting}
+int SCCBwrite(int subadr, int size, int Data ){
+	i2cstart(2);
+	i2cErr = 0;
+	i2csender(0,0x42,8);	//Hey, ?
+	if(i2cErr==0x22){
+		printf("fatal");
+		i2cstop(2);
+		return -1;
+	}
+	i2csender(1,subadr,8);	//3byte? 
+	i2csender(1,Data,size);
+	i2cstop(2);
+	return 0;
+}
+\end{lstlisting}
 \part{SCCBでのOV7670コンフィギュレーション}
-\section{$SCCB$と$I^2C$の違い}
+\section{OV7670の注意点}
 $SCCB$というのは、$I^2C$というシリアル通信のスーパセットで、実質$I^2C$と同じ方法で通信が出来るとされている。ただし、実際にやってみるといくつか違いがあった。\\
 まず、$I^2C$接続のEEEPROMでの実験をしめす。
-\subsection{EEPROM}
-今回使用したのは、\href{http://akizukidenshi.com/download/24LC256.pdf}{microchip社製24LC256}である。
+今回使用したのは、\href{http://akizukidenshi.com/download/24LC256.pdf}{microchip社製24LC256}である。\\
+これに、バイトライト、バイトリード、シーケンシャルリード、シーケンシャルライトを試したが、バイトライトの後にwaitをはさむ必要が無く、シーケンシャルライトも問題なく行えた。\\これに対して、OV7670では、書き込みの後にwaitを必要としていてなおかつ、データシートには記述が無いものの、実験によるとシーケンシャルライトは出来ないようだ。このことから、完全な$I^2C$メモリインタフェースを積んでいるというよりは、あくまで$I^2C$インタフェースをつかった通信が出来ますよ、という程度に考えておくべきだ。\\
+また、ただのRAMのつもりでヴェリファイプログラムを書くべきではない。理由は後述する。
 \section{OV7670用のレジスタセットアップデータの整理}
 http://www.cs.fsu.edu/~baker/devices/lxr/http/source/linux/drivers/media/video/ov7670.c
 ここに、OV7670用のlinuxドライバがあるが、非常に不思議な事に、データシートにはalways "0"などとかかれた場所やreserved領域に書き込んだりしている。
@@ -775,6 +888,13 @@ Setup begin
 いままでのメッセージはデバッグを目的とした冗長な出力がなされていたため、上の様なメッセージととした。
 簡潔であり、また十分な情報量である。\\
 ひとつのノウハウとしては、バグが存在する間は冗長な出力が好ましいが、安定して動かせるようになったら静かな方が好ましい。\\
+また、ヴェリファイは今回行っていない。なぜなら、制御用レジスタにまざって、動的に変化するレジスタ、例えばアイリス値などがあり、また、述べた通り不思議な事だが、なぜかそのようなレジスタにも値を書き込むようになっている。このようなレジスタがすべて分かれば良いものの、ReservedやAlways zeroとかかれたレジスタにも値を書き込んでいるため、これらがまた、動的に変化するレジスタであったらデバッグの難度が非常に高いと言わざるを得ず、また、すでに十分に動いていると言う現状から、個人では把握できないものとして考えるべきと言える。\\
+\\
+メーカはデータシートなど、デバイスを使用するに当たってどうしても必要な情報は大口顧客などにのみ提供するのではなく、万人が使えるものにするよう努めるべきである。
+\part{独自シリアル転送プロトコル}
+\section{トランスミッタ}
+\section{レシーバ}
+
 \part{関数値渡しの謎}
 ARMでの関数の値渡しに疑問を持ち研究を行った。\\
 FreeRTOS上でにあるプロセスのサブルーチンが孫ルーチンを呼ぶ部分をまず見てみることにする。\\
@@ -1004,6 +1124,19 @@ e0: 0000003c .word 0x0000003c
  \end{center}
  \end{figure}
 \clearpage
+\part{ノウハウの共有}
+\section{ブログ}
+\section{SNS}
+\section{フォーラム}
+\section{メーリングリスト}
+\part{この論文に使われている技術}
+\section{ヴァージョン管理}
+\section{TeX}
+\part{社会に於けるオープンソースの立場}
+\section{ビジネスモデル}
+\section{ホスティングサービス}
+\section{近年のクオリティの向上、幅広い層の参画}
+\part{90億総ソースコード・リテラシィの時代へ}
 \part{文献集}
 \section{データシート}
 \subsection{半導体-英語}

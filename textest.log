@@ -1,4 +1,4 @@
-This is pTeXk, Version 3.141592-p3.1.11 (euc) (Web2C 7.5.4) (format=platex 2011.1.25)  26 JAN 2011 21:08
+This is pTeXk, Version 3.141592-p3.1.11 (euc) (Web2C 7.5.4) (format=platex 2011.1.25)  27 JAN 2011 18:58
  %&-line parsing enabled.
 **textest.tex
 (./textest.tex
@@ -329,7 +329,7 @@ LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 (Font)              scaled to size 9.60999pt on input line 3.
  [2
 
-])
+] [3])
 \tf@toc=\write4
 \openout4 = `textest.toc'.
 
@@ -343,18 +343,18 @@ Overfull \hbox (151.16077pt too wide) in paragraph at lines 56--57
  [] 
  []
 
-[3] [4] [5
+[4] [5] [6
 
-] [6] [7]
+] [7] [8]
 File: DSCN2012.JPG Graphic file (type eps)
  <DSCN2012.JPG>
 Overfull \hbox (151.16077pt too wide) in paragraph at lines 150--151
  [] 
  []
 
-[8] [9] [10
+[9] [10] [11
 
-] [11]
+] [12]
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 231.
 File: DSCN2006.JPG Graphic file (type eps)
@@ -363,7 +363,7 @@ Overfull \hbox (151.16077pt too wide) in paragraph at lines 239--240
  [] 
  []
 
-[12] [13]
+[13] [14]
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <12> not available
 (Font)              Font shape `JT1/gt/m/n' tried instead on input line 251.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
@@ -372,15 +372,15 @@ LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <12> not available
 (Font)              Font shape `JY1/gt/m/n' tried instead on input line 251.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 (Font)              scaled to size 11.53198pt on input line 251.
- [14
+ [15
 
-] [15]
+] [16]
 Overfull \hbox (71.77853pt too wide) in paragraph at lines 298--298
 []\OT1/cmtt/m/n/12 #echo /dev/usbfs      /proc/bus/usb   usbfs   devmode=0666  
   0       0 >> /etc/fstab 
  []
 
-[16] [17]
+[17] [18]
 File: fig1.eps Graphic file (type eps)
  <fig1.eps>
 Overfull \hbox (65.60353pt too wide) in paragraph at lines 365--365
@@ -388,111 +388,123 @@ Overfull \hbox (65.60353pt too wide) in paragraph at lines 365--365
 textest.pdf  textest.tex[] 
  []
 
-[18]
+[19]
 File: DSCN1987.JPG Graphic file (type eps)
  <DSCN1987.JPG>
 Overfull \hbox (151.16077pt too wide) in paragraph at lines 371--372
  [] 
  []
 
-[19] [20]
+[20] [21]
+File: print.pdf Graphic file (type eps)
+ <print.pdf>
+Overfull \hbox (88.92828pt too wide) in paragraph at lines 383--384
+ [] 
+ []
+
+[22
+
+]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 384.
+nput line 391.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 384.
+(Font)              scaled to size 8.64899pt on input line 391.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 384.
- [21
+(Font)              scaled to size 8.64899pt on input line 391.
+ [23
 
 ]
 LaTeX Font Info:    Font shape `JT1/gt/bx/n' in size <9> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 407.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 414.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 407.
+(Font)              scaled to size 8.64899pt on input line 414.
 LaTeX Font Info:    Font shape `JY1/gt/bx/n' in size <9> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 407.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 414.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 407.
+(Font)              scaled to size 8.64899pt on input line 414.
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <9> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 407.
- [22]
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 414.
 File: tmchart.eps Graphic file (type eps)
- <tmchart.eps> [23] [24] [25
+ <tmchart.eps> [24] [25] [26] [27
 
-] [26
+] [28
 
 ]
 LaTeX Font Info:    Font shape `JT1/gt/m/it' in size <9> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 541.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 548.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 541.
+(Font)              scaled to size 8.64899pt on input line 548.
 LaTeX Font Info:    Font shape `JY1/gt/m/it' in size <9> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 541.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 548.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 541.
+(Font)              scaled to size 8.64899pt on input line 548.
 File: fig2.eps Graphic file (type eps)
  <fig2.eps>
 File: fig3.eps Graphic file (type eps)
- <fig3.eps>
-[27] [28] [29
+ <fig3.eps> [29]
+[30] [31
 
 ]
 File: DSCN2010.JPG Graphic file (type eps)
  <DSCN2010.JPG>
-Overfull \hbox (151.16077pt too wide) in paragraph at lines 643--644
+Overfull \hbox (151.16077pt too wide) in paragraph at lines 650--651
  [] 
  []
 
 
-Overfull \hbox (37.46596pt too wide) in paragraph at lines 638--646
+Overfull \hbox (37.46596pt too wide) in paragraph at lines 645--653
 []\OT1/cmr/m/n/12 http://aitendo2.sakura.ne.jp/aitendo[]data/product[]img2/prod
 uct[]img/camera/CAMERA30W-
  []
 
-[30] [31]
-Overfull \hbox (28.32103pt too wide) in paragraph at lines 655--658
+[32] [33] [34
+
+] [35] [36]
+Overfull \hbox (28.32103pt too wide) in paragraph at lines 769--772
 []\OT1/cmr/m/n/12 http://www.cs.fsu.edu/ bak-er/de-vices/lxr/http/-source/lin-u
 x/-driver-s/-me-di-a/video/ov7670.c
  []
 
-[32
-
-] [33] [34] [35] [36]
-Overfull \hbox (62.87172pt too wide) in paragraph at lines 877--878
+[37] [38] [39] [40] [41] [42]
+Overfull \hbox (62.87172pt too wide) in paragraph at lines 998--999
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][] 
  []
 
-[37] [38] [39]
+[43] [44] [45]
 File: DSCN2011.JPG Graphic file (type eps)
  <DSCN2011.JPG>
-Overfull \hbox (151.16077pt too wide) in paragraph at lines 1002--1003
+Overfull \hbox (151.16077pt too wide) in paragraph at lines 1123--1124
  [] 
  []
 
-[40] [41]
-Underfull \hbox (badness 1331) in paragraph at lines 1009--1012
+[46] [47]
+Underfull \hbox (badness 1331) in paragraph at lines 1143--1146
 []\OT1/cmr/m/n/12 http://ics.nxp.com/support/documents/microcontrollers/pdf /us
 er.manual.lpc23xx.pdf
  []
 
-[42
+[48
 
 ]
+Overfull \vbox (70.32735pt too high) has occurred while \output is active []
+
+
+[49]
 File: DSCN2014.JPG Graphic file (type eps)
  <DSCN2014.JPG>
-Overfull \hbox (151.16077pt too wide) in paragraph at lines 1040--1041
+Overfull \hbox (151.16077pt too wide) in paragraph at lines 1174--1175
  [] 
  []
 
-[43] (./textest.aux) ) 
+[50] [51] (./textest.aux) ) 
 Here is how much of TeX's memory you used:
- 5837 strings out of 257674
- 83107 string characters out of 1191153
+ 5892 strings out of 257674
+ 83689 string characters out of 1191153
  194838 words of memory out of 3000000
- 8926 multiletter control sequences out of 10000+50000
+ 8979 multiletter control sequences out of 10000+50000
  18378 words of font info for 83 fonts, out of 2000000 for 2000
  19 hyphenation exceptions out of 8191
- 38i,6n,49p,638b,1846s stack positions out of 5000i,500n,6000p,200000b,40000s
+ 38i,6n,49p,638b,1848s stack positions out of 5000i,500n,6000p,200000b,40000s
 
-Output written on textest.dvi (43 pages, 199236 bytes).
+Output written on textest.dvi (51 pages, 233964 bytes).
