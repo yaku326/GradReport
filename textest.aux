@@ -18,7 +18,7 @@
 \@writefile{toc}{\contentsline {section}{\numberline {3}お品書き}{1}{section.3}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}コンタクト}{2}{section.4}}
 \@writefile{toc}{\contentsline {section}{\numberline {5}ライセンス}{2}{section.5}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces \href  {http://creativecommons.org/licenses/by-nd/2.1/jp}{クリエイティブ・コモンズ・ライセンス}}}{2}{figure.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces クリエイティブ・コモンズ・ライセンス}}{2}{figure.1}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces OV7670とMAX II}}{6}{figure.2}}
 \@writefile{toc}{\contentsline {part}{第I部\hspace  {1zw}哲学}{7}{part.1}}
 \@writefile{toc}{\contentsline {section}{\numberline {6}前口上 -お目汚し-}{7}{section.6}}
@@ -37,7 +37,7 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {8.4}SRAM -海馬。中期記憶-}{13}{subsection.8.4}}
 \@writefile{toc}{\contentsline {section}{\numberline {9}現在の仕様}{15}{section.9}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {9.1}SRAMの破棄}{15}{subsection.9.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces うつくしいもの}}{16}{figure.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces 左が使用を中止したSRAM,右は後述する$I^2C$のテスト用EEEPROM(24LC256)と発振回路}}{16}{figure.4}}
 \@writefile{toc}{\contentsline {part}{第III部\hspace  {1zw}開発環境}{17}{part.3}}
 \@writefile{toc}{\contentsline {section}{\numberline {10}オープンソースデスクトップ環境において}{17}{section.10}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {10.1}ARMマイコンのコンパイラ}{18}{subsection.10.1}}
@@ -63,69 +63,72 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces OV7670のデータシートによるタイミングチャート}}{27}{figure.7}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {15.2}ピクセルデータフェッチ,連結モジュール}{29}{subsection.15.2}}
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {5}データコミッタ}{29}{lstlisting.5}}
-\@writefile{toc}{\contentsline {section}{\numberline {16}データ転送レイヤ}{30}{section.16}}
+\@writefile{toc}{\contentsline {section}{\numberline {16}データ転送モジュール}{30}{section.16}}
 \@writefile{toc}{\contentsline {section}{\numberline {17}シミュレーション}{30}{section.17}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {17.1}シミュレータの意義}{30}{subsection.17.1}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {6}一気にシミュレーションまで行う1行スクリプト}{31}{lstlisting.6}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {6}一気にシミュレーションまで行う1行スクリプト}{30}{lstlisting.6}}
 \@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces ソースコードを開いたModelSim Altera Starter Edition}}{31}{figure.8}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces シュミレーションを終え、タイミングチャートを表示するModelSim Altera Starter Edition}}{32}{figure.9}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {17.2}シミュレーションモデル}{33}{subsection.17.2}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {7}回路検証のためのモジュール.実回路には組み込まれない}{33}{lstlisting.7}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces CPLDボードの裏側の水晶発振子とそのデータシート}}{35}{figure.10}}
-\@writefile{toc}{\contentsline {part}{第V部\hspace  {1zw}I2Cセットアップ関数の開発}{36}{part.5}}
-\@writefile{toc}{\contentsline {section}{\numberline {18}データ送出関数}{36}{section.18}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {18.1}動作}{36}{subsection.18.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {18.2}問題点}{37}{subsection.18.2}}
-\@writefile{toc}{\contentsline {section}{\numberline {19}シーケンシャルデータ受信関数}{37}{section.19}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {19.1}バイトリード}{37}{subsection.19.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {20}OV7670全リード関数}{38}{section.20}}
-\@writefile{toc}{\contentsline {section}{\numberline {21}OV7670バイトライト関数}{38}{section.21}}
-\@writefile{toc}{\contentsline {part}{第VI部\hspace  {1zw}SCCBでのOV7670コンフィギュレーション}{39}{part.6}}
-\@writefile{toc}{\contentsline {section}{\numberline {22}OV7670の注意点}{39}{section.22}}
-\@writefile{toc}{\contentsline {section}{\numberline {23}OV7670用のレジスタセットアップデータの整理}{39}{section.23}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {8}ov7670\_set\_up.ttl}{39}{lstlisting.8}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {9}i2c.cのvi2cタスクの冒頭}{41}{lstlisting.9}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {10}OV7670userconfig.hの抜粋}{41}{lstlisting.10}}
-\@writefile{toc}{\contentsline {part}{第VII部\hspace  {1zw}独自シリアル転送プロトコル}{42}{part.7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces シュミレーションを終え、タイミングチャートを表示するModelSim Altera Starter Edition}}{31}{figure.9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {17.2}シミュレーションモデル}{32}{subsection.17.2}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {7}回路検証のためのモジュール.実回路には組み込まれない}{32}{lstlisting.7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces CPLDボードの裏側の水晶発振子とそのデータシート}}{34}{figure.10}}
+\@writefile{toc}{\contentsline {part}{第V部\hspace  {1zw}I2Cセットアップ関数の開発}{35}{part.5}}
+\@writefile{toc}{\contentsline {section}{\numberline {18}データ送出関数}{35}{section.18}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {18.1}動作}{35}{subsection.18.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {18.2}問題点}{36}{subsection.18.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {19}シーケンシャルデータ受信関数}{36}{section.19}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {19.1}バイトリード}{36}{subsection.19.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {20}OV7670全リード関数}{37}{section.20}}
+\@writefile{toc}{\contentsline {section}{\numberline {21}OV7670バイトライト関数}{37}{section.21}}
+\@writefile{toc}{\contentsline {part}{第VI部\hspace  {1zw}SCCBでのOV7670コンフィギュレーション}{38}{part.6}}
+\@writefile{toc}{\contentsline {section}{\numberline {22}OV7670の注意点}{38}{section.22}}
+\@writefile{toc}{\contentsline {section}{\numberline {23}OV7670用のレジスタセットアップデータの整理}{38}{section.23}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {8}ov7670\_set\_up.ttl}{38}{lstlisting.8}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {9}i2c.cのvi2cタスクの冒頭}{40}{lstlisting.9}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {10}OV7670userconfig.hの抜粋}{40}{lstlisting.10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces カメラ$\rightleftharpoons  $CPLDで動いている様子}}{42}{figure.11}}
+\@writefile{toc}{\contentsline {part}{第VII部\hspace  {1zw}独自シリアル転送プロトコル}{43}{part.7}}
 \@writefile{toc}{\contentsline {section}{\numberline {24}トランスミッタ}{43}{section.24}}
-\@writefile{toc}{\contentsline {section}{\numberline {25}レシーバ}{43}{section.25}}
-\@writefile{toc}{\contentsline {part}{第VIII部\hspace  {1zw}ソースコードを読む技術}{44}{part.8}}
-\@writefile{toc}{\contentsline {section}{\numberline {26}関数値渡しの謎}{44}{section.26}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {11}子ルーチン}{44}{lstlisting.11}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {12}孫ルーチン}{45}{lstlisting.12}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {13}孫ルーチン:C言語}{46}{lstlisting.13}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {14}子ルーチンさらに抜粋}{46}{lstlisting.14}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {15}printf呼び出し:アセンブリ}{47}{lstlisting.15}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {16}ラベルL71}{48}{lstlisting.16}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {17}ラベルLC3}{48}{lstlisting.17}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {18}ラベルLC3}{49}{lstlisting.18}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {19}printf()呼び出し部}{49}{lstlisting.19}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {20}objdumpで見たprintf()呼び出し部}{49}{lstlisting.20}}
-\@writefile{toc}{\contentsline {section}{\numberline {27}FreeRTOSのvTaskDelay()を追う}{50}{section.27}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {27.1}vTaskDelay()の使い方}{50}{subsection.27.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {27.2}portTICK\_RATE\_MSとは何か}{50}{subsection.27.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces ターゲットのマイコンボード}}{50}{figure.11}}
-\@writefile{toc}{\contentsline {part}{第IX部\hspace  {1zw}ノウハウの共有}{51}{part.9}}
-\@writefile{toc}{\contentsline {section}{\numberline {28}ブログ}{52}{section.28}}
-\@writefile{toc}{\contentsline {section}{\numberline {29}SNS}{52}{section.29}}
-\@writefile{toc}{\contentsline {section}{\numberline {30}フォーラム}{52}{section.30}}
-\@writefile{toc}{\contentsline {section}{\numberline {31}メーリングリスト}{52}{section.31}}
-\@writefile{toc}{\contentsline {part}{第X部\hspace  {1zw}この論文に使われている技術}{52}{part.10}}
-\@writefile{toc}{\contentsline {section}{\numberline {32}ヴァージョン管理}{52}{section.32}}
-\@writefile{toc}{\contentsline {section}{\numberline {33}TeX}{52}{section.33}}
-\@writefile{toc}{\contentsline {part}{第XI部\hspace  {1zw}社会に於けるオープンソースの立場}{52}{part.11}}
-\@writefile{toc}{\contentsline {section}{\numberline {34}ビジネスモデル}{52}{section.34}}
-\@writefile{toc}{\contentsline {section}{\numberline {35}ホスティングサービス}{52}{section.35}}
-\@writefile{toc}{\contentsline {section}{\numberline {36}近年のクオリティの向上、幅広い層の参画}{52}{section.36}}
-\@writefile{toc}{\contentsline {part}{第XII部\hspace  {1zw}90億総ソースコード・リテラシィの時代へ}{52}{part.12}}
-\@writefile{toc}{\contentsline {part}{第XIII部\hspace  {1zw}文献集}{52}{part.13}}
-\@writefile{toc}{\contentsline {section}{\numberline {37}データシート}{52}{section.37}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {37.1}半導体-英語}{52}{subsection.37.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {38}お世話になった個人のサイト(必ずしもサイトのデータというわけではなく直接お話を伺った場合を含む、敬称略)}{53}{section.38}}
-\@writefile{toc}{\contentsline {section}{\numberline {39}公式サイト}{53}{section.39}}
-\@writefile{toc}{\contentsline {section}{\numberline {40}解説書など}{53}{section.40}}
-\@writefile{toc}{\contentsline {section}{\numberline {41}よむものリスト}{53}{section.41}}
-\@writefile{toc}{\contentsline {section}{\numberline {42}メモ}{54}{section.42}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {42.1}センサ}{55}{subsection.42.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {42.2}規格}{55}{subsection.42.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces 飲み干されたRedBullはRedNullである}}{55}{figure.12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {24.1}何が起きているか}{44}{subsection.24.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {25}レシーバ}{44}{section.25}}
+\@writefile{toc}{\contentsline {part}{第VIII部\hspace  {1zw}ソースコードを読む技術}{46}{part.8}}
+\@writefile{toc}{\contentsline {section}{\numberline {26}関数値渡しの謎}{46}{section.26}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {11}子ルーチン}{46}{lstlisting.11}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {12}孫ルーチン}{46}{lstlisting.12}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {13}孫ルーチン:C言語}{47}{lstlisting.13}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {14}子ルーチンさらに抜粋}{48}{lstlisting.14}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {15}printf呼び出し:アセンブリ}{48}{lstlisting.15}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {16}ラベルL71}{49}{lstlisting.16}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {17}ラベルLC3}{49}{lstlisting.17}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {18}ラベルLC3}{50}{lstlisting.18}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {19}printf()呼び出し部}{50}{lstlisting.19}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {20}objdumpで見たprintf()呼び出し部}{51}{lstlisting.20}}
+\@writefile{toc}{\contentsline {section}{\numberline {27}FreeRTOSのvTaskDelay()を追う}{51}{section.27}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {27.1}vTaskDelay()の使い方}{51}{subsection.27.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {27.2}portTICK\_RATE\_MSとは何か}{51}{subsection.27.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces ターゲットのマイコンボード}}{52}{figure.12}}
+\@writefile{toc}{\contentsline {part}{第IX部\hspace  {1zw}ノウハウの共有}{53}{part.9}}
+\@writefile{toc}{\contentsline {section}{\numberline {28}ブログ}{54}{section.28}}
+\@writefile{toc}{\contentsline {section}{\numberline {29}SNS}{54}{section.29}}
+\@writefile{toc}{\contentsline {section}{\numberline {30}フォーラム}{54}{section.30}}
+\@writefile{toc}{\contentsline {section}{\numberline {31}メーリングリスト}{54}{section.31}}
+\@writefile{toc}{\contentsline {part}{第X部\hspace  {1zw}この論文に使われている技術}{54}{part.10}}
+\@writefile{toc}{\contentsline {section}{\numberline {32}ヴァージョン管理}{54}{section.32}}
+\@writefile{toc}{\contentsline {section}{\numberline {33}TeX}{54}{section.33}}
+\@writefile{toc}{\contentsline {part}{第XI部\hspace  {1zw}社会に於けるオープンソースの立場}{54}{part.11}}
+\@writefile{toc}{\contentsline {section}{\numberline {34}ビジネスモデル}{54}{section.34}}
+\@writefile{toc}{\contentsline {section}{\numberline {35}ホスティングサービス}{54}{section.35}}
+\@writefile{toc}{\contentsline {section}{\numberline {36}近年のクオリティの向上、幅広い層の参画}{54}{section.36}}
+\@writefile{toc}{\contentsline {section}{\numberline {37}Arduino}{54}{section.37}}
+\@writefile{toc}{\contentsline {part}{第XII部\hspace  {1zw}90億総ソースコード・リテラシィの時代へ}{54}{part.12}}
+\@writefile{toc}{\contentsline {part}{第XIII部\hspace  {1zw}文献集}{54}{part.13}}
+\@writefile{toc}{\contentsline {section}{\numberline {38}データシート}{54}{section.38}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {38.1}半導体-英語}{54}{subsection.38.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {39}お世話になった個人のサイト(必ずしもサイトのデータというわけではなく直接お話を伺った場合を含む、敬称略)}{55}{section.39}}
+\@writefile{toc}{\contentsline {section}{\numberline {40}公式サイト}{55}{section.40}}
+\@writefile{toc}{\contentsline {section}{\numberline {41}解説書など}{55}{section.41}}
+\@writefile{toc}{\contentsline {section}{\numberline {42}よむものリスト}{55}{section.42}}
+\@writefile{toc}{\contentsline {section}{\numberline {43}メモ}{56}{section.43}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {43.1}センサ}{57}{subsection.43.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {43.2}規格}{57}{subsection.43.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces 飲み干されたRedBullはRedNullである}}{57}{figure.13}}

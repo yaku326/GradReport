@@ -223,7 +223,7 @@ SDRAMはコマンドがある。RAMに一度カメラからのコンスタントな情報をプールするのはCP
 SDRAMは価格が比較的安く、入手性も高いが、今回は簡単に実現できる事を優先させていただく。
 
 さらに、なぜこのチップを選択したかというと、実はカメラのデータアウトプットと深い関係がある。\\
-カメラのデータバス幅は8bitである。しかし、1pixelのデータは16bit、そう、1データ集合を2回に分けて送信してくるのだ!!\\
+カメラのデータバス幅は8bitである。しかし、1pixelのデータは16bit、1データ集合を2回に分けて送信してくるのである。\\
 
 そこで、16bit幅の普通のRAMで簡単に制御しようとすると、実際のカメラからのデータの2倍のデータ容量が必要となる。\\
 必要となるRAM容量=\\
@@ -280,8 +280,8 @@ SRAMを使用することに関して以下のデメリットがあった:\begin{itemize}
 また、後述する通り、作成に伴ってSRAMを必要としなくても(信号データを一度RAM展開しなくても)データ抽出ができるようになったため、いらなくなった。
 \begin{figure}[htb]
  \begin{center}
- \caption{うつくしいもの}
-  \includegraphics[scale=0.25,bb=92 20 2500 1400,clip]{DSCN2006.JPG}
+ \caption{左が使用を中止したSRAM,右は後述する$I^2C$のテスト用EEEPROM(24LC256)と発振回路}
+  \includegraphics[scale=0.25,bb=92 20 2500 1400,clip]{DSCN2016.JPG}
  \end{center}
  \end{figure}
 \clearpage
@@ -538,43 +538,15 @@ module Dtacutcmmit(
 	end
 endmodule
 \end{lstlisting}
-このモジュールは、SigEnの両エッジで働く。
-これもだいぶ悩んだ末に落ち着いた形であって、SigEnと言うのはピクセル選択モジュールであるTimingManagerのものと同じである。
+このモジュールは、SigEnの両エッジで働く。\\
+そもそも、カメラのデータが2クロックサイクルに渡って分割して送信されるため、特定の瞬間のバスデータをフェッチすれば良いと言う訳ではないため、少々複雑になる見込みであった。
+ところが現状、大分シンプルにまとまっている。\\
+SigEnと言うのはピクセル選択モジュールであるTimingManagerのものと同じである。\\
 これは、上で述べた変更によってpclkの立ち上がりエッジでのみ動作するようになったため、Sig\_Enのエッジ動作時には、ピクセルデータが流れているpshdtaは必ず保証されている。
 これは上のタイミングチャートを見てほしい。pclk立ち下がりエッジのときにデータ値が変化し、逆に立ち上がりエッジの前約15ms以上と後8msが保証されている。(ただし24MHz動作時、今回はさらに2.4倍遅い)\\
 \clearpage
-\section{データ転送レイヤ}
-\begin{lstlisting}
-module transmittr (
-	input Srialclk,
-	input Wrtcmplt,
-	input [11:0]data,
-	output SrialData
-);
-reg [11:0]Datareg;
-reg Endflg;
-wire Endtoken;
-assign Endtoken = Endflg & ~Srialclk;
-assign SrialData = Endtoken ? ~Datareg[0] : Datareg[0];
-reg  [3:0]ShftCount = 0;
-	always@( posedge Srialclk )begin
-			Datareg[11:0] <= { 1'b0, Datareg[11:1] };
-			ShftCount <= ShftCount + 4'h1;
-			if ( ShftCount == 4'hB )begin
-				Endflg <= 1'b1;
-				if( Wrtcmplt )begin
-					ShftCount <= 0;
-					end
-				end
-			else if ( ShftCount == 4'h0 )begin
-				Endflg <= 0;
-				Datareg[11:0] <= data[11:0];
-				end
-			end
-
-endmodule
-
-\end{lstlisting}
+\section{データ転送モジュール}
+これについては、独自シリアル転送プロトコルの項で後述する。
 \section{シミュレーション}
 \subsection{シミュレータの意義}
 つぎに、モジュールが書けたら、マイコンでは実機で動かすことが一般的だが、PLDではシミュレータにかけることが多い。\\
@@ -934,6 +906,13 @@ Setup begin
 また、ヴェリファイは今回行っていない。なぜなら、制御用レジスタにまざって、動的に変化するレジスタ、例えばアイリス値などがあり、また、述べた通り不思議な事だが、なぜかそのようなレジスタにも値を書き込むようになっている。このようなレジスタがすべて分かれば良いものの、ReservedやAlways zeroとかかれたレジスタにも値を書き込んでいるため、これらがまた、動的に変化するレジスタであったらデバッグの難度が非常に高いと言わざるを得ず、また、すでに十分に動いていると言う現状から、個人では把握できないものとして考えるべきと言える。\\
 \\
 メーカはデータシートなど、デバイスを使用するに当たってどうしても必要な情報は大口顧客などにのみ提供するのではなく、万人が使えるものにするよう努めるべきである。
+\begin{figure}[htb]
+ \begin{center}
+ \caption{カメラ$\rightleftharpoons$CPLDで動いている様子}
+  \includegraphics[scale=0.25,bb=92 20 2500 1400,clip]{DSCN2009.JPG}
+ \end{center}
+ \end{figure}
+ \clearpage
 \part{独自シリアル転送プロトコル}
 必要なロジックエレメンツの数を最小限にとどめるため、できるだけシンプルなシリアル送信プロトコルが必要だったが、探してもなかなか出てこなかったため作ることとした。\\
 目標は
@@ -974,7 +953,27 @@ reg  [3:0]ShftCount = 0;
 
 endmodule
 \end{lstlisting}
+\subsection{何が起きているか}
+まず、カメラ制御層から特定のピクセルが検出された瞬間を考えてみよう。\\
+その時はまだ、上位バイトのみがバスに流れているため、その時フェッチするのではなく、わかりやすさのため、フェッチモジュールで、12bitすべてのデータを用意し終えた後に立ち上がるWrtcmpltを用意して、それを接続して制御する。\\
+また、たくさんリクエストして、同じデータが重複して送信されても問題が無いため、キュー構造を取る必要が無く、よって制御信号もサイクル終了トークン以外必要なかった。\\
 
+サイクル終了トークンとは、12bitのデータのどこが切れ目か分かるような合図の事とする。
+これを、データ末尾に制御用コンディションを載せることで表現した。\\
+
+Endtokenは
+\begin{lstlisting}
+assign Endtoken = Endflg & ~Srialclk;
+assign SrialData = Endtoken ? ~Datareg[0] : Datareg[0];
+\end{lstlisting}
+この様に用いられている。
+シリアルクロックがLでEndflg(カウンタが11を指しているときに発行される)がHのときに成立する。\\
+そして、これがHのときに、シリアル出力が反転する。シリアルクロックがたち下がるときにかならず変化し、また、他のコンディションでは立ち下がりエッジでの変化は行われないので、確実に検出される。
+\subsection{公開とREADME}
+別の切り口で後述するが、もしこの様な独自プロトコルなどを作成した場合はREADME(規模と場合によってはデータシートやチュートリアルマニュアルまで)を作成することは不可欠である。\\
+なぜなら、まだそれが人気になる前であれば、そのプロトコルに熟知している人は{\large 全世界であなたしかいない}からだ。\\
+もし、他の人が、自分が新しく公開したものを使おうとしても、それがいくら素晴らしいものであっても、使い方がわからなければ、せっかく頑張って創って公開した自分の成果物が人に使ってもらえる機会を失してしまうことになる。使ってみてそれがそもそもつまらないものだ、と思われる以前に、ぱっと見でどんなものか分からなければ、気に留めてすらもらえないかもしれない。それは悲しいことだ。\\
+だからちゃんとREADMEをつくって、なおかつブログで紹介するといい。しばらくマイブームと言うか熱が覚めてしまうまで、連載ができるし、体裁を整えたサイトも非常に有意だが、体裁や整合性にばかり気を使ってしまって、開発者の意欲を削ぐような事があっては良くない、と思う。\\
 \section{レシーバ}
 \begin{lstlisting}
 void getISSI( void )
@@ -989,7 +988,8 @@ vTaskDelay( 1 / portTICK_RATE_MS );
 	while(1){
 		il++;
 		FIO2SET = 2;
-		prv=(FIO2PIN&6)>>2;
+		prv=(FIO2PIN&6)>>2;assign Endtoken = Endflg & ~Srialclk;
+assign SrialData = Endtoken ? ~Datareg[0] : Datareg[0];
 		printf("up\t%x\n",prv);
 		bitshift = (bitshift<<1)+prv;
 		vTaskDelay(1 / portTICK_RATE_MS);
@@ -1006,6 +1006,9 @@ vTaskDelay( 1 / portTICK_RATE_MS );
 		}
 	}
 \end{lstlisting}
+実はこのモジュールは完全にうまく動いているとは言えない。\\
+既に提出しなければいけないため、一度現状を報告しておく。
+\clearpage
 \part{ソースコードを読む技術}
 \section{関数値渡しの謎}
 ARMでの関数の値渡しに疑問を持ち研究を行った。\\
@@ -1254,6 +1257,7 @@ e0: 0000003c .word 0x0000003c
 \section{ビジネスモデル}
 \section{ホスティングサービス}
 \section{近年のクオリティの向上、幅広い層の参画}
+\section{Arduino}
 \part{90億総ソースコード・リテラシィの時代へ}
 \part{文献集}
 \section{データシート}

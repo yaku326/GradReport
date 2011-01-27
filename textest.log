@@ -1,4 +1,4 @@
-This is pTeXk, Version 3.141592-p3.1.11 (euc) (Web2C 7.5.4) (format=platex 2011.1.25)  27 JAN 2011 23:23
+This is pTeXk, Version 3.141592-p3.1.11 (euc) (Web2C 7.5.4) (format=platex 2011.1.25)  28 JAN 2011 00:58
  %&-line parsing enabled.
 **textest.tex
 (./textest.tex
@@ -362,8 +362,10 @@ Overfull \hbox (151.16077pt too wide) in paragraph at lines 195--196
 ] [14]
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 276.
-File: DSCN2006.JPG Graphic file (type eps)
- <DSCN2006.JPG>
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 283.
+File: DSCN2016.JPG Graphic file (type eps)
+ <DSCN2016.JPG>
 Overfull \hbox (151.16077pt too wide) in paragraph at lines 284--285
  [] 
  []
@@ -426,82 +428,93 @@ LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <9> not available
 File: tmchart.eps Graphic file (type eps)
  <tmchart.eps> [26] [27] [28] [29
 
-] [30
-
 ]
 LaTeX Font Info:    Font shape `JT1/gt/m/it' in size <9> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 591.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 563.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 591.
+(Font)              scaled to size 8.64899pt on input line 563.
 LaTeX Font Info:    Font shape `JY1/gt/m/it' in size <9> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 591.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 563.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 591.
+(Font)              scaled to size 8.64899pt on input line 563.
 File: fig2.eps Graphic file (type eps)
  <fig2.eps>
 File: fig3.eps Graphic file (type eps)
- <fig3.eps> [31]
-[32] [33
+ <fig3.eps> [30
+
+] [31]
+[32
 
 ]
 File: DSCN2010.JPG Graphic file (type eps)
  <DSCN2010.JPG>
-Overfull \hbox (151.16077pt too wide) in paragraph at lines 693--694
+Overfull \hbox (151.16077pt too wide) in paragraph at lines 665--666
  [] 
  []
 
 
-Overfull \hbox (37.46596pt too wide) in paragraph at lines 688--696
+Overfull \hbox (37.46596pt too wide) in paragraph at lines 660--668
 []\OT1/cmr/m/n/12 http://aitendo2.sakura.ne.jp/aitendo[]data/product[]img2/prod
 uct[]img/camera/CAMERA30W-
  []
 
-[34] [35] [36
+[33] [34] [35
 
-] [37] [38]
-Overfull \hbox (28.32103pt too wide) in paragraph at lines 812--815
+] [36] [37]
+Overfull \hbox (28.32103pt too wide) in paragraph at lines 784--787
 []\OT1/cmr/m/n/12 http://www.cs.fsu.edu/ bak-er/de-vices/lxr/http/-source/lin-u
 x/-driver-s/-me-di-a/video/ov7670.c
  []
 
-[39] [40] [41] [42] [43] [44] [45] [46] [47] [48]
-File: DSCN2011.JPG Graphic file (type eps)
- <DSCN2011.JPG>
-Overfull \hbox (151.16077pt too wide) in paragraph at lines 1241--1242
+[38] [39] [40]
+File: DSCN2009.JPG Graphic file (type eps)
+ <DSCN2009.JPG>
+Overfull \hbox (151.16077pt too wide) in paragraph at lines 912--913
  [] 
  []
 
-[49] [50]
-Underfull \hbox (badness 1331) in paragraph at lines 1261--1264
+[41] [42] [43
+
+] [44] [45] [46
+
+] [47] [48] [49] [50]
+File: DSCN2011.JPG Graphic file (type eps)
+ <DSCN2011.JPG>
+Overfull \hbox (151.16077pt too wide) in paragraph at lines 1238--1239
+ [] 
+ []
+
+[51] [52]
+Underfull \hbox (badness 1331) in paragraph at lines 1259--1262
 []\OT1/cmr/m/n/12 http://ics.nxp.com/support/documents/microcontrollers/pdf /us
 er.manual.lpc23xx.pdf
  []
 
-[51
+[53
 
 ]
-Overfull \vbox (70.32735pt too high) has occurred while \output is active []
+Overfull \vbox (99.32735pt too high) has occurred while \output is active []
 
 
-[52] [53] [54
+[54] [55] [56
 
 ]
 File: DSCN2014.JPG Graphic file (type eps)
  <DSCN2014.JPG>
-Overfull \hbox (151.16077pt too wide) in paragraph at lines 1298--1299
+Overfull \hbox (151.16077pt too wide) in paragraph at lines 1296--1297
  [] 
  []
 
-[55
+[57
 
 ] (./textest.aux) ) 
 Here is how much of TeX's memory you used:
- 5912 strings out of 257674
- 83883 string characters out of 1191153
- 194838 words of memory out of 3000000
- 8998 multiletter control sequences out of 10000+50000
- 18378 words of font info for 83 fonts, out of 2000000 for 2000
+ 5919 strings out of 257674
+ 83959 string characters out of 1191153
+ 193838 words of memory out of 3000000
+ 9002 multiletter control sequences out of 10000+50000
+ 18991 words of font info for 85 fonts, out of 2000000 for 2000
  19 hyphenation exceptions out of 8191
- 38i,6n,49p,638b,1846s stack positions out of 5000i,500n,6000p,200000b,40000s
+ 38i,13n,49p,638b,1848s stack positions out of 5000i,500n,6000p,200000b,40000s
 
-Output written on textest.dvi (55 pages, 256272 bytes).
+Output written on textest.dvi (57 pages, 255760 bytes).
