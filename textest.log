@@ -1,4 +1,4 @@
-This is pTeXk, Version 3.141592-p3.1.11 (euc) (Web2C 7.5.4) (format=platex 2011.1.25)  28 JAN 2011 21:17
+This is pTeXk, Version 3.141592-p3.1.11 (euc) (Web2C 7.5.4) (format=platex 2011.1.25)  29 JAN 2011 05:27
  %&-line parsing enabled.
 **textest.tex
 (./textest.tex
@@ -558,61 +558,68 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 Ви9ѕП
 [54
 
-] [55] [56] [57] [58]
+] [55] [56] [57] [58] [59] [60] [61]
 File: DSCN2011.JPG Graphic file (type eps)
  <DSCN2011.JPG>
-Overfull \hbox (150.65889pt too wide) in paragraph at lines 1379--1380
+Overfull \hbox (150.65889pt too wide) in paragraph at lines 1483--1484
  [] 
  []
 
-[59] [60] [61
+[62] [63
 
 
 ]
 Ви10ѕП
-[62
+[64
 
 ]
 Ви11ѕП
-[63
+[65
 
-] [64] [65]
+] [66]
+File: DSCN1986.JPG Graphic file (type eps)
+ <DSCN1986.JPG>
+Overfull \hbox (150.65889pt too wide) in paragraph at lines 1536--1537
+ [] 
+ []
+
+[67] [68]
 Ви12ѕП
-[66
+[69
 
-]
+] [70]
 Ви13ѕП
-[67
+[71
 
 ]
 Ви14ѕП
 
-Underfull \hbox (badness 1331) in paragraph at lines 1443--1446
+Underfull \hbox (badness 1331) in paragraph at lines 1579--1582
 []\OT1/cmr/m/n/12 http://ics.nxp.com/support/documents/microcontrollers/pdf /us
 er.manual.lpc23xx.pdf
  []
 
-[68
+[72
 
-] [69] [70
+] [73] [74
 
 ]
 File: DSCN2014.JPG Graphic file (type eps)
  <DSCN2014.JPG>
-Overfull \hbox (150.65889pt too wide) in paragraph at lines 1480--1481
+Overfull \hbox (150.65889pt too wide) in paragraph at lines 1616--1617
  [] 
  []
 
-[71
+[75
 
 ] (./textest.aux) ) 
 Here is how much of TeX's memory you used:
- 6009 strings out of 257674
- 85026 string characters out of 1191153
- 195461 words of memory out of 3000000
- 9088 multiletter control sequences out of 10000+50000
+ 6073 strings out of 257674
+ 85965 string characters out of 1191153
+ 198461 words of memory out of 3000000
+ 9151 multiletter control sequences out of 10000+50000
  20158 words of font info for 91 fonts, out of 2000000 for 2000
  19 hyphenation exceptions out of 8191
  38i,13n,49p,638b,1848s stack positions out of 5000i,500n,6000p,200000b,40000s
 
-Output written on textest.dvi (72 pages, 299712 bytes).
+Output written on textest.dvi (76 pages, 326108 bytes).
