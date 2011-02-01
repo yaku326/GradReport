@@ -1,4 +1,4 @@
-This is pTeXk, Version 3.141592-p3.1.11 (euc) (Web2C 7.5.4) (format=platex 2011.1.25)  29 JAN 2011 05:44
+This is pTeXk, Version 3.141592-p3.1.11 (euc) (Web2C 7.5.4) (format=platex 2011.1.25)  31 JAN 2011 17:07
  %&-line parsing enabled.
 **textest.tex
 (./textest.tex
@@ -321,8 +321,8 @@ LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
 (Font)              scaled to size 8.64899pt on input line 58.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
 (Font)              scaled to size 8.64899pt on input line 58.
-File: by-nd.eps Graphic file (type eps)
- <by-nd.eps> [2
+File: by-sa.eps Graphic file (type eps)
+ <by-sa.eps> [2
 
 ]
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
@@ -345,7 +345,7 @@ LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
  [3
 
 
-] [4])
+])
 \tf@toc=\write4
 \openout4 = `textest.toc'.
 
@@ -355,7 +355,7 @@ Overfull \hbox (100.47139pt too wide) in paragraph at lines 68--69
  [] 
  []
 
-[5]
+[4] [5]
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
 (Font)              scaled to size 19.9311pt on input line 72.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
@@ -383,23 +383,23 @@ Overfull \hbox (150.65889pt too wide) in paragraph at lines 195--196
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 276.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 283.
+(Font)              <9> on input line 286.
 File: DSCN2016.JPG Graphic file (type eps)
  <DSCN2016.JPG>
-Overfull \hbox (150.65889pt too wide) in paragraph at lines 284--285
+Overfull \hbox (150.65889pt too wide) in paragraph at lines 287--288
  [] 
  []
 
 [15] [16]
 Âè3¾Ï
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <12> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 296.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 299.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 11.53198pt on input line 296.
+(Font)              scaled to size 11.53198pt on input line 299.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <12> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 296.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 299.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 11.53198pt on input line 296.
+(Font)              scaled to size 11.53198pt on input line 299.
 [17
 
 
@@ -410,7 +410,7 @@ File: fig1.eps Graphic file (type eps)
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Overfull \hbox (65.60353pt too wide) in paragraph at lines 415--415
+Overfull \hbox (65.60353pt too wide) in paragraph at lines 418--418
 []\OT1/cmtt/m/n/12 Makepdf  textest.aux  textest.dvi  textest.log textest.out  
 textest.pdf  textest.tex[] 
  []
@@ -418,7 +418,7 @@ textest.pdf  textest.tex[]
 [21]
 File: DSCN1987.JPG Graphic file (type eps)
  <DSCN1987.JPG>
-Overfull \hbox (150.65889pt too wide) in paragraph at lines 421--422
+Overfull \hbox (150.65889pt too wide) in paragraph at lines 424--425
  [] 
  []
 
@@ -429,7 +429,7 @@ Overfull \hbox (150.65889pt too wide) in paragraph at lines 421--422
 Âè4¾Ï
 File: print.pdf Graphic file (type eps)
 <print.pdf>
-Overfull \hbox (88.92828pt too wide) in paragraph at lines 432--433
+Overfull \hbox (88.92828pt too wide) in paragraph at lines 435--436
  [] 
  []
 
@@ -437,53 +437,64 @@ Overfull \hbox (88.92828pt too wide) in paragraph at lines 432--433
 
 ]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 440.
+nput line 443.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 440.
+(Font)              scaled to size 8.64899pt on input line 443.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 440.
- [26
+(Font)              scaled to size 8.64899pt on input line 443.
+
+
+! Package keyval Error: °ìÉô¾ÊÎ¬ undefined.
+
+See the keyval package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.456 ...¥ë¤Î¥µ¥¤¥¯¥ë¤Î¤È¤­¤ËÎ©¤Á¾å¤¬¤ë, °ìÉô¾ÊÎ¬]
+                                                  
+? 
+[26
 
 ]
 LaTeX Font Info:    Font shape `JT1/gt/bx/n' in size <9> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 463.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 466.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 463.
+(Font)              scaled to size 8.64899pt on input line 466.
 LaTeX Font Info:    Font shape `JY1/gt/bx/n' in size <9> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 463.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 466.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 463.
+(Font)              scaled to size 8.64899pt on input line 466.
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <9> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 463.
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 466.
 File: tmchart.eps Graphic file (type eps)
  <tmchart.eps> [27] [28] [29] [30
 
 ]
 LaTeX Font Info:    Font shape `JT1/gt/m/it' in size <9> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 569.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 572.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 569.
+(Font)              scaled to size 8.64899pt on input line 572.
 LaTeX Font Info:    Font shape `JY1/gt/m/it' in size <9> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 569.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 572.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 569.
+(Font)              scaled to size 8.64899pt on input line 572.
 File: fig2.eps Graphic file (type eps)
  <fig2.eps>
 File: fig3.eps Graphic file (type eps)
  <fig3.eps> [31
 
-] [32]
-[33
+] [32] [33
 
 ]
 File: DSCN2010.JPG Graphic file (type eps)
- <DSCN2010.JPG>
-Overfull \hbox (150.65889pt too wide) in paragraph at lines 671--672
+
+<DSCN2010.JPG>
+Overfull \hbox (150.65889pt too wide) in paragraph at lines 674--675
  [] 
  []
 
 
-Overfull \hbox (37.46596pt too wide) in paragraph at lines 666--674
+Overfull \hbox (37.46596pt too wide) in paragraph at lines 669--677
 []\OT1/cmr/m/n/12 http://aitendo2.sakura.ne.jp/aitendo[]data/product[]img2/prod
 uct[]img/camera/CAMERA30W-
  []
@@ -496,7 +507,7 @@ uct[]img/camera/CAMERA30W-
 ] [37] [38] [39]
 Âè6¾Ï
 
-Overfull \hbox (28.32103pt too wide) in paragraph at lines 790--793
+Overfull \hbox (28.32103pt too wide) in paragraph at lines 795--798
 []\OT1/cmr/m/n/12 http://www.cs.fsu.edu/ bak-er/de-vices/lxr/http/-source/lin-u
 x/-driver-s/-me-di-a/video/ov7670.c
  []
@@ -506,7 +517,7 @@ x/-driver-s/-me-di-a/video/ov7670.c
 ] [41] [42]
 File: DSCN2009.JPG Graphic file (type eps)
  <DSCN2009.JPG>
-Overfull \hbox (150.65889pt too wide) in paragraph at lines 918--919
+Overfull \hbox (150.65889pt too wide) in paragraph at lines 923--924
  [] 
  []
 
@@ -518,7 +529,7 @@ Overfull \hbox (150.65889pt too wide) in paragraph at lines 918--919
 ] [46]
 File: DSCN2019.JPG Graphic file (type eps)
  <DSCN2019.JPG>
-Overfull \hbox (150.65889pt too wide) in paragraph at lines 1021--1022
+Overfull \hbox (150.65889pt too wide) in paragraph at lines 1026--1027
  [] 
  []
 
@@ -530,96 +541,95 @@ Overfull \hbox (150.65889pt too wide) in paragraph at lines 1021--1022
 ]
 File: DSCN2023.JPG Graphic file (type eps)
  <DSCN2023.JPG>
-Overfull \hbox (63.24254pt too wide) in paragraph at lines 1070--1071
+Overfull \hbox (63.24254pt too wide) in paragraph at lines 1075--1076
  [] 
  []
 
 File: DSCN2024.JPG Graphic file (type eps)
 <DSCN2024.JPG>
-Overfull \hbox (63.24254pt too wide) in paragraph at lines 1076--1077
+Overfull \hbox (63.24254pt too wide) in paragraph at lines 1081--1082
  [] 
  []
 
 
-Overfull \hbox (15.33331pt too wide) in paragraph at lines 1066--1080
+Overfull \hbox (15.33331pt too wide) in paragraph at lines 1071--1085
 [][] 
  []
 
 File: DSCN2025.JPG Graphic file (type eps)
 <DSCN2025.JPG>
-Overfull \hbox (150.65889pt too wide) in paragraph at lines 1086--1087
+Overfull \hbox (150.65889pt too wide) in paragraph at lines 1091--1092
  [] 
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[50] [51] [52] [53]
-Âè9¾Ï
-[54
-
-] [55] [56] [57] [58] [59] [60] [61]
-File: DSCN2011.JPG Graphic file (type eps)
- <DSCN2011.JPG>
-Overfull \hbox (150.65889pt too wide) in paragraph at lines 1485--1486
+[50] [51] [52]
+File: DSCN2037.JPG Graphic file (type eps)
+ <DSCN2037.JPG>
+Overfull \hbox (150.65889pt too wide) in paragraph at lines 1157--1158
  [] 
  []
 
-[62] [63
+[53] [54]
+Âè9¾Ï
+[55
+
+] [56] [57] [58] [59] [60] [61]
+File: DSCN2011.JPG Graphic file (type eps)
+ <DSCN2011.JPG>
+Overfull \hbox (150.65889pt too wide) in paragraph at lines 1492--1493
+ [] 
+ []
+
+[62] [63] [64
 
 
 ]
 Âè10¾Ï
-[64
-
-]
-Âè11¾Ï
-[65
-
-] [66]
-File: DSCN1986.JPG Graphic file (type eps)
- <DSCN1986.JPG>
-Overfull \hbox (150.65889pt too wide) in paragraph at lines 1541--1542
+File: DSCN2036.JPG Graphic file (type eps)
+<DSCN2036.JPG>
+Overfull \hbox (150.65889pt too wide) in paragraph at lines 1524--1525
  [] 
  []
 
-[67] [68]
-Âè12¾Ï
-[69
+[65
 
-] [70]
-Âè13¾Ï
-[71
+] [66] [67]
+Âè11¾Ï
+[68
 
-]
-Âè14¾Ï
-
-Underfull \hbox (badness 1331) in paragraph at lines 1590--1593
-[]\OT1/cmr/m/n/12 http://ics.nxp.com/support/documents/microcontrollers/pdf /us
-er.manual.lpc23xx.pdf
+] [69]
+File: DSCN1986.JPG Graphic file (type eps)
+ <DSCN1986.JPG>
+Overfull \hbox (150.65889pt too wide) in paragraph at lines 1572--1573
+ [] 
  []
 
+[70] [71]
+Âè12¾Ï
 [72
 
-] [73] [74
+] [73]
+Âè13¾Ï
+[74
 
 ]
 File: DSCN2014.JPG Graphic file (type eps)
  <DSCN2014.JPG>
-Overfull \hbox (150.65889pt too wide) in paragraph at lines 1627--1628
+Overfull \hbox (150.65889pt too wide) in paragraph at lines 1634--1635
  [] 
  []
 
-[75
-
-] (./textest.aux) ) 
+[75] (./textest.aux) ) 
 Here is how much of TeX's memory you used:
- 6073 strings out of 257674
- 85965 string characters out of 1191153
- 198461 words of memory out of 3000000
- 9151 multiletter control sequences out of 10000+50000
+ 6083 strings out of 257674
+ 86019 string characters out of 1191153
+ 198488 words of memory out of 3000000
+ 9159 multiletter control sequences out of 10000+50000
  20158 words of font info for 91 fonts, out of 2000000 for 2000
  19 hyphenation exceptions out of 8191
  38i,13n,49p,638b,1848s stack positions out of 5000i,500n,6000p,200000b,40000s
 
-Output written on textest.dvi (76 pages, 327048 bytes).
+Output written on textest.dvi (76 pages, 327816 bytes).

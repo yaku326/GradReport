@@ -1,13 +1,13 @@
 \contentsline {section}{\numberline {0.1}アブストラクト}{1}{section.0.1}
 \contentsline {section}{\numberline {0.2}キーワード}{1}{section.0.2}
 \contentsline {section}{\numberline {0.3}お品書き}{1}{section.0.3}
-\contentsline {section}{\numberline {0.4}コンタクト}{2}{section.0.4}
+\contentsline {section}{\numberline {0.4}コンタクトなど}{2}{section.0.4}
 \contentsline {section}{\numberline {0.5}ライセンス}{2}{section.0.5}
 \contentsline {part}{第I部\hspace {1zw}導入}{6}{part.1}
 \contentsline {chapter}{\numberline {第1章}哲学}{7}{chapter.1}
 \contentsline {section}{\numberline {1.1}前口上 -お目汚し-}{7}{section.1.1}
 \contentsline {section}{\numberline {1.2}実用性 -音楽的要素がなくても-}{8}{section.1.2}
-\contentsline {subsection}{\numberline {1.2.1}こういった、直接の役に立たない物作りの土壌}{8}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.1}こういった, 直接の役に立たない物作りの土壌}{8}{subsection.1.2.1}
 \contentsline {subsection}{\numberline {1.2.2}キーワードとしての オープンソース ラピット・プロトタイピング パーソナル・ファブリケーション}{9}{subsection.1.2.2}
 \contentsline {subsubsection}{オープンソースとは一体何か}{9}{section*.2}
 \contentsline {subsubsection}{ラピット・プロトタイピング}{11}{section*.3}
@@ -17,9 +17,10 @@
 \contentsline {subsection}{\numberline {2.1.1}カメラ -目玉-}{13}{subsection.2.1.1}
 \contentsline {subsection}{\numberline {2.1.2}プロセッサ -大脳-}{13}{subsection.2.1.2}
 \contentsline {subsection}{\numberline {2.1.3}CPLD -脊髄脳髄その他-}{13}{subsection.2.1.3}
-\contentsline {subsection}{\numberline {2.1.4}SRAM -海馬。中期記憶-}{13}{subsection.2.1.4}
+\contentsline {subsection}{\numberline {2.1.4}SRAM -海馬. 中期記憶-}{13}{subsection.2.1.4}
 \contentsline {section}{\numberline {2.2}現在の仕様}{15}{section.2.2}
 \contentsline {subsection}{\numberline {2.2.1}SRAMの破棄}{15}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}音源デヴァイス}{15}{subsection.2.2.2}
 \contentsline {chapter}{\numberline {第3章}開発環境}{17}{chapter.3}
 \contentsline {section}{\numberline {3.1}オープンソースデスクトップ環境において}{17}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}ARMマイコンのコンパイラ}{18}{subsection.3.1.1}
@@ -66,41 +67,25 @@
 \contentsline {subsection}{\numberline {8.3.1}SOUND文と同じ機能}{50}{subsection.8.3.1}
 \contentsline {subsection}{\numberline {8.3.2}更なる改善を求めて}{51}{subsection.8.3.2}
 \contentsline {section}{\numberline {8.4}制御速度に関する実験}{52}{section.8.4}
-\contentsline {chapter}{\numberline {第9章}ソースコードを読む技術}{54}{chapter.9}
-\contentsline {section}{\numberline {9.1}関数値渡しの謎}{54}{section.9.1}
-\contentsline {section}{\numberline {9.2}返り値の研究}{59}{section.9.2}
-\contentsline {section}{\numberline {9.3}FreeRTOSのvTaskDelay()を追う}{62}{section.9.3}
-\contentsline {subsection}{\numberline {9.3.1}vTaskDelay()の使い方}{62}{subsection.9.3.1}
-\contentsline {subsection}{\numberline {9.3.2}portTICK\_RATE\_MSとは何か}{62}{subsection.9.3.2}
-\contentsline {part}{第III部\hspace {1zw}社会}{63}{part.3}
-\contentsline {chapter}{\numberline {第10章}この論文に使われている技術}{64}{chapter.10}
-\contentsline {section}{\numberline {10.1}ヴァージョン管理}{64}{section.10.1}
-\contentsline {section}{\numberline {10.2}TeX}{64}{section.10.2}
-\contentsline {chapter}{\numberline {第11章}ノウハウの共有}{65}{chapter.11}
-\contentsline {section}{\numberline {11.1}ブログ}{65}{section.11.1}
-\contentsline {section}{\numberline {11.2}SNS}{66}{section.11.2}
-\contentsline {subsection}{\numberline {11.2.1}背中を見る視点}{66}{subsection.11.2.1}
-\contentsline {subsection}{\numberline {11.2.2}人に教えるということ}{66}{subsection.11.2.2}
-\contentsline {section}{\numberline {11.3}フォーラム}{67}{section.11.3}
-\contentsline {section}{\numberline {11.4}man}{67}{section.11.4}
-\contentsline {chapter}{\numberline {第12章}社会に於けるオープンソースの立場}{69}{chapter.12}
-\contentsline {section}{\numberline {12.1}ビジネスモデル}{69}{section.12.1}
-\contentsline {section}{\numberline {12.2}ホスティングサービス}{69}{section.12.2}
-\contentsline {section}{\numberline {12.3}Arduino}{70}{section.12.3}
-\contentsline {section}{\numberline {12.4}幅広い層の参画}{70}{section.12.4}
-\contentsline {chapter}{\numberline {第13章}90億総ソースコード・リテラシィの時代へ}{71}{chapter.13}
-\contentsline {section}{\numberline {13.1}PC価格の低下}{71}{section.13.1}
-\contentsline {section}{\numberline {13.2}発展途上国への普及}{71}{section.13.2}
-\contentsline {section}{\numberline {13.3}ソフトウェア開発の敷居}{71}{section.13.3}
-\contentsline {section}{\numberline {13.4}ツールの成熟、コミュニティの発達}{71}{section.13.4}
-\contentsline {section}{\numberline {13.5}最近の中学生まじ新人類}{71}{section.13.5}
-\contentsline {chapter}{\numberline {第14章}文献集}{72}{chapter.14}
-\contentsline {section}{\numberline {14.1}データシート}{72}{section.14.1}
-\contentsline {subsection}{\numberline {14.1.1}半導体-英語}{72}{subsection.14.1.1}
-\contentsline {section}{\numberline {14.2}お世話になった個人のサイト(必ずしもサイトのデータというわけではなく直接お話を伺った場合を含む、敬称略)}{72}{section.14.2}
-\contentsline {section}{\numberline {14.3}公式サイト}{72}{section.14.3}
-\contentsline {section}{\numberline {14.4}解説書など}{73}{section.14.4}
-\contentsline {section}{\numberline {14.5}よむものリスト}{73}{section.14.5}
-\contentsline {section}{\numberline {14.6}メモ}{74}{section.14.6}
-\contentsline {subsection}{\numberline {14.6.1}センサ}{75}{subsection.14.6.1}
-\contentsline {subsection}{\numberline {14.6.2}規格}{75}{subsection.14.6.2}
+\contentsline {chapter}{\numberline {第9章}ソースコードを読む技術}{55}{chapter.9}
+\contentsline {section}{\numberline {9.1}関数値渡しの謎}{55}{section.9.1}
+\contentsline {section}{\numberline {9.2}返り値の研究}{60}{section.9.2}
+\contentsline {part}{第III部\hspace {1zw}社会}{64}{part.3}
+\contentsline {chapter}{\numberline {第10章}この論文に使われている技術}{65}{chapter.10}
+\contentsline {section}{\numberline {10.1}ヴァージョン管理}{65}{section.10.1}
+\contentsline {section}{\numberline {10.2}p\LaTeX }{66}{section.10.2}
+\contentsline {chapter}{\numberline {第11章}ノウハウの共有}{68}{chapter.11}
+\contentsline {section}{\numberline {11.1}ブログ}{68}{section.11.1}
+\contentsline {section}{\numberline {11.2}SNS}{69}{section.11.2}
+\contentsline {subsection}{\numberline {11.2.1}背中を見る視点}{69}{subsection.11.2.1}
+\contentsline {subsection}{\numberline {11.2.2}人に教えるということ}{69}{subsection.11.2.2}
+\contentsline {section}{\numberline {11.3}フォーラム}{70}{section.11.3}
+\contentsline {section}{\numberline {11.4}man}{70}{section.11.4}
+\contentsline {chapter}{\numberline {第12章}社会に於けるオープンソースの立場}{72}{chapter.12}
+\contentsline {section}{\numberline {12.1}ビジネスモデル}{72}{section.12.1}
+\contentsline {section}{\numberline {12.2}ホスティングサービス}{72}{section.12.2}
+\contentsline {section}{\numberline {12.3}Arduino}{73}{section.12.3}
+\contentsline {section}{\numberline {12.4}幅広い層の参画}{73}{section.12.4}
+\contentsline {chapter}{\numberline {第13章}90億総ソースコード・リテラシィの時代へ}{74}{chapter.13}
+\contentsline {section}{\numberline {13.1}PC価格の低下}{74}{section.13.1}
+\contentsline {section}{\numberline {13.2}ツールの成熟, コミュニティの発達}{74}{section.13.2}
