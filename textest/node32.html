@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>clkdivider(分周器)</TITLE>
+<META NAME="description" CONTENT="clkdivider(分周器)">
+<META NAME="keywords" CONTENT="textest">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="textest.css">
+
+<LINK REL="next" HREF="node33.html">
+<LINK REL="previous" HREF="node31.html">
+<LINK REL="up" HREF="node30.html">
+<LINK REL="next" HREF="node33.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html527"
+  HREF="node33.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html523"
+  HREF="node30.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html517"
+  HREF="node31.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html525"
+  HREF="node2.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html528"
+  HREF="node33.html">データ抽出レイヤ</A>
+<B> Up:</B> <A NAME="tex2html524"
+  HREF="node30.html">Verilogを書く</A>
+<B> Previous:</B> <A NAME="tex2html518"
+  HREF="node31.html">モジュールの構成</A>
+ &nbsp; <B>  <A NAME="tex2html526"
+  HREF="node2.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION06020000000000000000">
+clkdivider(分周器)</A>
+</H1><BIG CLASS="LARGE">
+まず初めに、もっとも簡単なモジュールを作成する。
+<BR>今回、MAX IIの基板に搭載した水晶発信器が40MHzである。今回の用途ではカメラの動作周波数は動作定格内であれば遅い方がより信号バスがノイズに強くなるため、10MHzに分周してカメラのクロックソースに入力する。分周するメリットは、さらに、分周することによって、クロックのデューティ比を50%に近くすることが可能である。
+<BR>つまり、水晶発信器が必ずしも理想的な出力をしているとは限らないが、少なくとも1サイクルの長さはほとんどかわっていない、とするとき、分周器のクロック出力がHになっている時間とLになっている時間は、クロック入力のデューティ比に関わらず、どちらも入力1サイクル分であるから、出力波形は高速動作をするプロセサのクロックソースとして適したものとなる。
+<BR>
+<BR>
+16#16
+<BR>
+今回は、2つのレジスタを設け、入力クロックの立ち上がりエッジに、t_count[0]を反転させる。すると、t_countが立ち上がるのは2入力クロックサイクルに1回となる。
+<BR>
+t_count[1]はt_count[0]が立ち上がりクロックになる時に反転するため、結果として4入力サイクルにつき1サイクルでblinkすることがわかる。
+<BR>よってこのモジュールは4:1分周器になっている。
+<BR></BIG>
+<BR><HR>
+<ADDRESS>
+Iori Yoneji
+2011-01-26
+</ADDRESS>
+</BODY>
+</HTML>

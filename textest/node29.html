@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>gitとgithubについて</TITLE>
+<META NAME="description" CONTENT="gitとgithubについて">
+<META NAME="keywords" CONTENT="textest">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="textest.css">
+
+<LINK REL="previous" HREF="node26.html">
+<LINK REL="up" HREF="node19.html">
+<LINK REL="next" HREF="node30.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html482"
+  HREF="node30.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html478"
+  HREF="node19.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html474"
+  HREF="node28.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html480"
+  HREF="node2.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html483"
+  HREF="node30.html">Verilogを書く</A>
+<B> Up:</B> <A NAME="tex2html479"
+  HREF="node19.html">開発環境</A>
+<B> Previous:</B> <A NAME="tex2html475"
+  HREF="node28.html">AlteraCPLDの開発環境</A>
+ &nbsp; <B>  <A NAME="tex2html481"
+  HREF="node2.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION05030000000000000000">
+gitとgithubについて</A>
+</H1><BIG CLASS="LARGE">
+gitというのは、分散ヴァージョン管理システムである。つまり、そのリポジトリが存在する場所が1箇所に限らないということである。それではヴァージョン間で矛盾しないのか？それは、中央サーバにただ一つのマスタリポジトリを置くことによって解決される。
+<BR>つまり、gitにはサーバにリポジトリをアップ(以降pushとよぶ)する機能がついている。そこで、無料で利用できる、データの損失の心配の無いクラウドにpushできればこれほど安心なことはない。
+<BR>さて、その要求を満たすサービスがある。それはgithubという。
+<BR>ではどうやって使うのかというと、rsa暗号鍵を用意した後、サイトにアクセスし、リポジトリ作成をリクエストする。
+<BR></BIG>
+<P>
+
+<DIV ALIGN="CENTER">
+ <DIV ALIGN="CENTER">
+14#14
+ 
+</DIV>
+</DIV><BIG CLASS="LARGE">
+その後、以下のようにコマンドを実行する。
+</BIG><PRE>
+Debian% cd 論文 
+Debian% gedit textest.tex&amp;
+[1] 16628
+Debian% ls      
+Makepdf  textest.aux  textest.dvi  textest.log	textest.out  textest.pdf  textest.tex
+textest.tex~  textest.toc
+Debian% git init
+Initialized empty Git repository in /home/ioriveur/論文/.git/
+Debian% git add ./   
+Debian% git commit -a
+[master (root-commit) 10c4ed0] First Commit
+ 8 files changed, 950 insertions(+), 0 deletions(-)
+ create mode 100755 Makepdf
+ create mode 100644 textest.aux
+ create mode 100644 textest.dvi
+ create mode 100644 textest.log
+ create mode 100644 textest.out
+ create mode 100644 textest.pdf
+ create mode 100644 textest.tex
+ create mode 100644 textest.tex~
+ create mode 100644 textest.toc
+Debian% git remote add origin git@github.com:iori-yja/Report.git
+Debian% git push origin master                                  
+Counting objects: 11, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (10/10), done.
+Writing objects: 100% (11/11), 110.86 KiB, done.
+Total 11 (delta 2), reused 0 (delta 0)
+To git@github.com:iori-yja/Report.git
+ * [new branch]      master -&gt; master
+</PRE><BIG CLASS="LARGE">
+気がつくべきなのは、これは、既に公開され、オープンソースソフトウェアとなったということだ。
+<BR>ソフトウェアを創れるならば、OSSとして育てていくことはまったくコストでは無いということが分かっていただけたと思う。
+<BR></BIG>
+<DIV ALIGN="CENTER"><A NAME="157"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 4:</STRONG>
+混迷を極める開発室</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+  15#15
+ 
+</DIV></TD></TR>
+</TABLE>
+</DIV>
+<BR><HR>
+<ADDRESS>
+Iori Yoneji
+2011-01-26
+</ADDRESS>
+</BODY>
+</HTML>

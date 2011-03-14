@@ -1,0 +1,51 @@
+mktexpk --mfmode / --bdpi 600 --mag 1+66/600 --dpi 666 ryumin-l
+mktexpk --mfmode / --bdpi 600 --mag 1+66/600 --dpi 666 ryumin-l
+mktexpk --mfmode / --bdpi 600 --mag 1+66/600 --dpi 666 ryumin-l
+mktexpk --mfmode / --bdpi 600 --mag 1+66/600 --dpi 666 ryumin-l
+mktexpk --mfmode / --bdpi 600 --mag 0+555/600 --dpi 555 rml-jis
+mktexpk --mfmode / --bdpi 600 --mag 1+66/600 --dpi 666 ryumin-l
+mktexpk --mfmode / --bdpi 600 --mag 1+66/600 --dpi 666 ryumin-l
+mktexpk --mfmode / --bdpi 600 --mag 1+66/600 --dpi 666 ryumin-l
+mktexpk --mfmode / --bdpi 600 --mag 1+66/600 --dpi 666 ryumin-l
+mktextfm expminr-v
+mktextfm expminr-h
+mktextfm expminr-v
+mktextfm expminr-h
+mktextfm expminr-v
+mktextfm expminr-h
+mktextfm expminr-h
+mktextfm expminr-h
+mktextfm expminr-v
+mktextfm expminr-h
+mktextfm expminr-h
+mktextfm expminr-h
+mktextfm expminr-h
+mktextfm expminr-v
+mktextfm expminr-v
+mktextfm expgothr-v
+mktextfm expgothr-h
+mktextfm expminr-v
+mktextfm expminr-h
+mktextfm expminr-v
+mktextfm expminr-h
+mktextfm expgothr-v
+mktextfm expgothr-h
+mktextfm expgothr-v
+mktextfm expgothr-h
+mktextfm expgothr-v
+mktextfm expgothr-h
+mktextfm expgothr-v
+mktextfm expgothr-h
+mktextfm expgothr-v
+mktextfm expgothr-h
+mktextfm expgothr-v
+mktextfm expgothr-h
+mktextfm expminr-v
+mktextfm expgothr-v
+mktextfm expgothr-h
+mktextfm expgothr-v
+mktextfm expgothr-h
+mktextfm expminr-v
+mktextfm expminr-h
+mktextfm expminr-v
+mktextfm expminr-h

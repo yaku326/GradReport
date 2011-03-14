@@ -1,0 +1,1708 @@
+\documentclass[12px,a4paper]{jsbook}
+\usepackage[dvipdfm,bookmarks=true,bookmarksnumbered=true,%
+bookmarkstype=tocx,a4paper]{hyperref}
+\usepackage[dvipdfm]{graphicx}
+\usepackage{listings, jlisting}
+\renewcommand{\lstlistingname}{リスト}
+\lstset{language=C,%
+  basicstyle=\ttfamily\small,%
+  commentstyle=\textit,%
+  classoffset=1,%
+  keywordstyle=\bfseries,%
+  frame=tRBl,%
+  framesep=10pt,%
+  showstringspaces=false,%
+  numbers=left,%
+  stepnumber=1,%
+  numberstyle=\footnotesize,%
+  tabsize=2%
+}%
+\begin{document}
+\title{Visual Synthesizer := \huge{$Sonitus \over Lucis \times Colorum$}\\
+}
+\author{Iori yoneji}
+\maketitle
+\begin{flushright}
+writtern with \pLaTeX
+\end{flushright}
+\section{アブストラクト}
+この論文は、\begin{itemize}
+\item 実際に自分がオープンソフトウェア/ハードウェア、オープンノウハウについての公開を通して、これらの活動への、読者の参加容易性の向上
+\end{itemize}
+を図るとともに、
+\begin{itemize}
+\item オープンソフトウェア/ハードウェア、オープンノウハウによる恩恵の享受可能性
+\item パーソナルファブリケーションとオープンソースをとりまく社会とビジネスモデルの現状と今後の予測
+\item 本研究で開発したハードウェア、およびソフトウェアの新規性、および課題
+\item ソースコードを実際に読み、書くことによる、ソフトウエアとハードウェアの製作についての現状の開発環境の問題点と実地でのプロセスの実例
+\end{itemize}
+を明らかにし、
+以上のことから、{\large 90億総ソースコード・リテラシィ}の時代になる事を主張している。\\
+\section{キーワード}
+電気電子,コンピュータ科学,ARM,組み込み,PLD,CPLD,C言語,Verilog,ハードウェア,ソフトウェア,開発,ものづくり,オープンソース,ヴァージョン管理,ソースコードリテラシィ,SNS
+\section{お品書き}
+今回の製作対象の、外から見た仕様について\begin{itemize}
+\item 学生が買える、廉価なカメラモジュールで、室内等の明るさや色などを元にパラメータを作成する。
+\item パラメータを元にスピーカから音が鳴る。
+\end{itemize}
+\clearpage
+\section{コンタクトなど}
+連絡をいれるには:ioriveur@ioriveurlabs.dnsalias.org\\
+ここに今回の成果物などが公開されている:\href{https://github.com/iori-yja}{ioriveur@github}\\
+この著者のブログはこちら:\href{http://iorivr.b.sourceforge.jp}{否定的なものは怠惰の中では繁殖する}\\
+
+ここで製作物に関する動画が公開されている\href{http://www.youtube.com/user/iorivr}{http://www.youtube.com/user/iorivr}
+\section{ライセンス}
+\begin{figure}[h]
+ \begin{center}
+\caption{クリエイティブ・コモンズ・ライセンス}
+\includegraphics[width=0.2\hsize]{by-nd.eps}
+ \end{center}
+\end{figure}
+This Artwork by Iori Yoneji is licensed under a \href{http://creativecommons.org/licenses/by-nd/2.1/jp}{Creative Commons 表示 - 改変禁止 2.1 日本 License}.\\
+\clearpage
+\tableofcontents
+\begin{figure}[htb]
+ \begin{center}
+ \caption{OV7670とMAX II}
+  \includegraphics[scale=0.25,bb=94 20 2300 1400,clip]{DSCN2008.JPG}
+ \end{center}
+ \end{figure}
+\clearpage
+\part{導入}
+\chapter{哲学}
+\section{前口上 -お目汚し-}
+過去に様々な形において、音楽と映像の関連づけが行われてきた。\\
+映画中の音楽であったり...といった面もあるが、それはむしろ視聴者への心理的な関連付けを両者が並列して行っているということである。\\
+ここで私が言いたいのは、むしろビジュアライザやイコライザの類についてである。\\
+つらつら長く書いてしまいそうで怖い。意味の希薄な前口上を冗長に書いて見たところでなにもない。当然だ。つまるところ、と結論を急いでしまおう。詰まるところ、私の言いたいのは、iTunesやRhythmboxのようなビジュアライザのような音楽のデータの(ごく一部をランダムに用いた)画像の自動生成システムを、なんの価値もなく、ただいたずらにPCに負担をかけるばかりで、あきるほど見てきた。しかし、いままでにおいて、その逆のハードウェアを作ってみようという試みは寡聞にして聞かない。\\
+音楽は、
+\begin{itemize}
+ \item 作業中、考え中、読書中の類のときのBGMとして。またトーク番組のBGMとして
+ \item その音楽を楽しむ。
+　\item その曲を覚えてなにか自分で歌って踊って演奏してみたいなことをする。
+\end{itemize}
+といった用途が考えられる訳だけれども、とにもかくにも、再生中のディスプレイを凝視することなんて(むしろそのウィンドウが開かれていることだって)、普通に考えて、ないことなのだ。
+
+ところが、である。なにか外を向いてみる、とかその類の、目で見ているもの、顔を向けている対象に特定の意味と意志をフォーカスしていないときには、その風景が音楽化(soundlize)されても、困らない。
+..んじゃないかなあと考えたわけである。\\
+
+崩して言ってみる。
+
+飽きているからかも知れないけれど、音楽が(機械的に)映像化されているのをみても、何とも思わないか、ムッとする。遅いPCを使って作業しているとなおさらだ。
+
+けれど、外を見たときとかみたいな、Not Watch nor Look, But seeな状況の時、それが音楽化されてみたら、ちょっと楽しいかもしれない。
+
+そういうことを企んだのだった。
+
+\section{実用性 -音楽的要素がなくても-}
+音楽的要素が無くしても、視覚情報を音声に変換するという試みは、例えば後天的に目の見えなくなってしまった人への、わずかな手助けとなる可能性を秘めている。\\
+音を位置と色で対応付けることができれば、ある程度の視覚補助になろう。もし、その目的で特化させたものを作るに至れば(今回の開発では到底無理そうだが)、日常的な交通の用に供することすら出来るかもしれない。\\
+
+\subsection{こういった、直接の役に立たない物作りの土壌}
+物作りとは、役に立つと万人が思うものを作ることのみであろうか。
+
+ある日、東京工業大学の大岡山キャンパスで開かれたMake: Tokyo Meetingに行ってきた訳だが、半球のボールにたくさんつまみがついていて、大人の科学の付録のシンセとマイコンの接続をわざわざ信号でなくてサーボモータでつまみを動かすことで音作りを視覚化したり、テスラコイルで音楽を再生してみたり、そういった、電気、光、音の融合したような分野での趣味の工作と研究の成果が大小様々に配置されては製作者(高専生、大学生、院生を中心として高校生も含む)がそばにいて、お互い、または見学者と話しているといった雰囲気であった。それに触発もされて、私はこうしてこの文章を書いている。\\
+
+幸い、先述のものを個人で、実現している例はまだない様なので良かった。\\
+
+Make:や、筑波大学主催の、産学共同で行われたprosumeといった企画は、どういう目的なのだろうか。\\
+そのままでは、役にたたないかも知れないものを作る必要がどこにあるのだろうか。\\
+引用開始***参考1\\
+\begin{verse}
+PROSUME 2010 は、個人でもここまでできる！をコンセプトとした、クリエーターのためのイベントです。電子工作、機械工作、科学実験、クラフト、音響、映像パフォーマンスなど、基本的に個人やサークル等で開発、作成したものであれば何でも出展可能です。またこれらクリエーターを応援してくれる企業の出展も募集します。\\
+
+Prosume(プロシューム)とは、produce (生産) + consume (消費)を組み合せた造語です。1980年にAlvin Toffler氏の「第三の波」の中で、生産者であり、消費者であるという意味の、Prosumer が提唱されたのが最初とされています。消費者の個別のニーズに応じた製品は、消費者自身が作り出すというもので、それを可能にするのが従来技術の低コスト化と、身近になった最新技術です。キーワードは、オープンソース、ラピッド・プロトタイピング、そしてパーソナル・ファブリケーションです。\\
+\end{verse}
+これは、prosumeに実際に出展した人との会話を通して得た、私の解釈であるが、"産業資本主義の末期的構造"として一般に問題提起されている構造-すなわち生産者(企業)というブラックボックスから与えられたものを「欲しい！」という動機のみで消費し、"需要が供給を生み出しているのではなく、「開発された量産製品」の存在が需要を生み出している"-に対する一つの答えだと思っている。\\
+具体的には、こんなものがあったら良いなというものを作り、そこから情報やアイディアを(消費者として、かつ製作者として)シェアすることにより、他人の作った物より斬新なもの、より複雑なものを目指すことが容易になり、PROSUMEにあげられた"従来技術の低コスト化"と、情報技術の高度な発達によってそれが加速されたということである。\\
+もし、一般の「消費者であり生産者ではない」人への応用が可能になるものをそこから「純粋な生産ブラックボックス」である企業が見いだし、量産し、人類の生活をわずかでも向上できれば、"Prosumer"として本望なのではないか。\\
+
+\subsection{キーワードとしての オープンソース ラピット・プロトタイピング パーソナル・ファブリケーション}
+
+「第三の波」が1980年に書かれていることは非常に衝撃的である。なぜか？それは、上にあげた様々な革命がほとんど無名の赤ん坊でしかなかった時代だからだ。\\
+\subsubsection{オープンソースとは一体何か}
+参考2として、最も普及しているオープンソースライセンス及び哲学のうちの特に歴史があるものとして、FreeBSDライセンスとGPL(GNU General Public License)を示す。\\
+\href{http://opensource.org/licenses/mit-license.php}{The MIT License}
+\begin{verse}
+Copyright (c) <year> <copyright holders>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A chapterICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+\end{verse}
+\href{http://www.gnu.org/licenses/gpl.html}{GNU GENERAL PUBLIC LICENSE}
+\begin{verse}
+You may convey verbatim copies of the Program's source code as you receive it,in any medium, provided that you conspicuously and appropriately publish on each copy an appropriate copyright notice;
+a) The work must carry prominent notices stating that you modified it, and giving a relevant date.
+b) The work must carry prominent notices stating that it is released under this License and any conditions added under section 7. This requirement modifies the requirement in section 4 to “keep intact all notices”.
+c) You must license the entire work, as a whole, under this License to anyone who comes into possession of a copy. This License will therefore apply, along with any applicable section 7 additional terms, to the whole of the work, and all its chapters, regardless of how they are packaged. This License gives no permission to license the work in any other way, but it does not invalidate such permission if you have separately received it.
+d) If the work has interactive user interfaces, each must display Appropriate Legal Notices; however, if the Program has interactive interfaces that do not display Appropriate Legal Notices, your work need not make them do so.
+\end{verse}
+参考3にしめすのはsourceforge社(オープンソース文化のハブとして活躍し続けるプログラム開発支援やテクノロジ系ニュースコミュニティのホスト会社として世界的に有名)にホストされているOpenSourceGroupJapanによる非公式訳である。\\
+\href{http://sourceforge.jp/projects/opensource/wiki/licenses/MIT_license}{The MIT License}
+\begin{verse}
+Copyright (c) <year> <copyright holders>
+
+以下に定める条件に従い、本ソフトウェアおよび関連文書のファイル（以下「ソフトウェア」）の複製を取得するすべての人に対し、ソフトウェアを無制限に扱うことを無償で許可します。これには、ソフトウェアの複製を使用、複写、変更、結合、掲載、頒布、サブライセンス、および/または販売する権利、およびソフトウェアを提供する相手に同じことを許可する権利も無制限に含まれます。
+
+上記の著作権表示および本許諾表示を、ソフトウェアのすべての複製または重要な部分に記載するものとします。
+
+ソフトウェアは「現状のまま」で、明示であるか暗黙であるかを問わず、何らの保証もなく提供されます。ここでいう保証とは、商品性、特定の目的への適合性、および権利非侵害についての保証も含みますが、それに限定されるものではありません。 作者または著作権者は、契約行為、不法行為、またはそれ以外であろうと、ソフトウェアに起因または関連し、あるいはソフトウェアの使用またはその他の扱いによって生じる一切の請求、損害、その他の義務について何らの責任も負わないものとします。
+\end{verse}
+\href{http://sourceforge.jp/projects/opensource/wiki/licenses\%252FGNU\_General\_Public\_License\_version\_3.0}{GNU 一般公衆利用許諾書 (GNU General Public License)}
+\begin{verse}
+入手した(GPLでライセンスされた)ソースコードの(一字一句正しい)原本をどんな形でも配布できる。そのとき、GPLライセンスされたソフトウェアであることを、明らかに分かるように示さなければならない
+a) 作品には、あなたが作品を改変したということと、改変に関連した日時を記述した告知を目立つように載せなければならない。
+b) 作品には、それが本許諾書と、下記第7項に従って追加された条件すべての下で公開されていることを記述した告知を目立つように載せなければな らない。この条件は、上記第4項における「告知をすべてそのまま保全」するための条項を改変する。
+c) 作品の全部分を、総体として、コピーを所有するに至った人全員に、本許諾書の下でライセンスしなければならない。そこで、本許諾書は、本許諾 書第7項に基づく適用可能な追加的条項のすべてとともに、作品全体に、すなわちその全部分に、それらがどのようにパッケージされているかに関わらず 適用されることになる。本許諾書は、これ以外のやり方には作品をライセンスする許可を与えないが、あなたが本許諾書以外で別途許可を得ていた場合 には、それによって得られた許可まで無効とするものではない。
+d) 改変された作品が対話的なユーザインターフェースを有する場合、それらのインターフェースは『適切な法的告知』を表示しなければならない。ただし、『プログラム』に元々『適切な法的告知』を表示しない対話的なインターフェースがある場合、あなたの作品で表示するようにする必要はない。
+\end{verse}
+ここで特徴的なのはコピーされ、改変されたwork(作品)もGPLでライセンスされることであるが、オープンソースして重要なのはそこではない。\\\\
+
+オープンソースの全体的な一般論として、だれかが先行して何かをオープンソースとして作った場合、それをいかなる形でも利用でき、その成果をオープンにすれば誰かに利用してもらえるのだ。\\
+これは開発期間の短縮及びモチベーションの向上につながる。\\
+また、ソースコードを作品と呼んでいるのも、ProsumeやMake:的な感性に置ける、芸術としての技術的作品という側面を強く押し出しているとも言えよう。\\
+しかし、このGPLというライセンスすらも、1989年になって初版が策定されるのだ。
+Alvin Toffler氏すごい。
+
+オープンソースとソースコード文学に関しての議論だけ進めてもたくさんもの論文がかけよう。しかし、ここでは割愛させていただく。\\
+少なくとも、ここで述べたことが、"Prosumer"という「第三の波」を生み出す土壌になっていることは明らかである。\\
+\subsubsection{ラピット・プロトタイピング}
+rapid prototypingとは高速な試作である。企業単位でしか買えないような大仰な装置を使って試作品を時間をかけてデバッグして世に送り出してるようでは、個人では当然できない上に、大企業が圧倒的に有利で、また、設計時間も長くなってしまう。しかし、計算機科学の驚くべき進化によって、またはコンテンツ産業の貪欲な大規模化によって、たかだかウェブサイトを閲覧する程度のつもりで個人が購入したコンピュータが一昔前のスーパコンピュータの様な圧倒的な速度を誇っている。このことは、設計工程に関して、廉価なPCで、短期間でCADを使用して、アナログ回路、論理回路、コンピュータソフトウェア、機械、模型など多くのものをシミュレートし、設計できる様にした。\\
+このことは個人の休日の工作のできる幅を押し広げつづけている。
+\subsubsection{パーソナルファブリケーション}
+この単語は個人でのものづくりをさしている。これは、上で述べてきたことが一般化し、個人の製作能力を飛躍的に上昇させ、様々なことを個人にとって可能にしてきたという事の当然の帰結として、出てきた概念である。個人のファブリケーションの持つ可能性が無視でき無くなってきたとき、"Prosumer"の先駆者が自然に発生し、あとから「第三の波」がやってきたといって過言ではないだろう。\\
+当然の事ながらインタネットの高速化、リッチソフトウェア化、利用人口の増大は、その「波」を明らかに加速させている。\\
+今回の純粋な技術的なヒントの半分ほどはインタネットを介して入ってきてる。特に、半導体のデータシートを個人が入手できるというのは革命である。\\
+\begin{figure}[htb]
+ \begin{center}
+ \caption{接写ターゲット基板}
+  \includegraphics[scale=0.25,bb=94 20 2500 1400,clip]{DSCN2012.JPG}
+ \end{center}
+ \end{figure}
+\clearpage
+\chapter{内部仕様について}
+\section{最初期の仕様}
+以下に全体構成を示す。(中心となるチップ / メーカ /ベンダ)
+\begin{itemize}
+ \item カメラ(OV7670 / Omnivision / aitendo)		{2980円}
+ \item マイクロプロセッサ(LPC2388 / NXP semiconductor / CQ出版)	{1980円(本込み)}
+ \item CPLD (EPM570T100C5 / Altera / optimize)		{1600円(未実装)}
+ \item SRAM (CY7C1041DV33 / Cypress / 秋月電子通商)	{500円}
+\end{itemize}
+上記の構成の理由について述べる。
+
+\subsection{カメラ -目玉-}
+映像を電気信号に変える素子。
+\subsection{プロセッサ -大脳-}
+ワンチップ・コンピュータ。プログラムを実行でき、Flash EPROMがプログラム領域なので、いくらでも書き換えができる。
+
+\subsection{CPLD -脊髄脳髄その他-}
+プログラマブルなロジックIC群。プロセッサとおおきくちがうのは、"手順"をプログラムするのではなく、回路そのものを組み込むことである。
+動作のシミュレーションができる。クロックに同期しない動作が可能であるので、低速であっても、メモリ操作などができる。
+後述のHBEやLBEを素早く制御するのに、上記のプロセッサでは役不足である。
+
+\subsection{SRAM -海馬。中期記憶-}
+SDRAMはコマンドがある。RAMに一度カメラからのコンスタントな情報をプールするのはCPLDになるので、実質制御はCPLDになろう。すると、ロジックICでしか処理出来ない速度で、SRAM以上の複雑なコマンドを送るのは、初めてのRAM制御としては酷であると判断した。\\
+よってSRAMを使用する。\\
+SDRAMは価格が比較的安く、入手性も高いが、今回は簡単に実現できる事を優先させていただく。
+
+さらに、なぜこのチップを選択したかというと、実はカメラのデータアウトプットと深い関係がある。\\
+カメラのデータバス幅は8bitである。しかし、1pixelのデータは16bit、1データ集合を2回に分けて送信してくるのである。\\
+
+そこで、16bit幅の普通のRAMで簡単に制御しようとすると、実際のカメラからのデータの2倍のデータ容量が必要となる。\\
+必要となるRAM容量=\\
+$アドレス長 \times 1アドレスに於けるデータ幅 = vetical \times horizonal\times 2 \times 8bit$\\
+
+16bit幅のRAMを同じ方法で(1回受信し8シフトして次回受信分と足すという大変な作業無しで)扱うときの必要とされるRAM容量=\\
+$アドレス長 \times 1アドレスに於けるデータ幅 = vetical \times horizonal\times 2 \times 16bit$\\
+となり、2倍のRAM容量が必要なのは自明だ。\\
+
+しかもこの方式では、プロセッサがRAMから値をとるという簡単な行為のために2cycleも浪費しなければならない。残念である上に、連結処理に(Greenが上位bitsと下位bitsに分かれているため)時間を割く必要がある。手間も割く。しかし、このSRAMのデータシートを読むと16bitのSRAMでありながら、下位bit、上位bitのゲートの開け閉めが任意に行えるため、上位bitに関する値だけ取り込みたい！といったあと、下位bitだけまた同じアドレスに取り込みたい!といったわがままが効くのだ。\\
+しかも、上位も下位も開けておけば16bitいっぺんに読み込み書き込み可能なのである。\\
+\large{It's fits into just my needs!!}
+引用開始。資料2*****
+\begin{verse}
+To write to the device, take Chip Enable ($\overline {CE}$) and Write Enable
+($\overline {WE}$) inputs LOW. If Byte Low Enable ($\overline {BLE}$) is LOW, then data
+from IO pins (IO{\small 0} through IO{\small 7}) is written into the location
+specified on the address pins (A{\small 0} through A{\small 15}). If Byte High
+Enable ($\overline {BHE}$) is LOW, then data from IO pins (IO{\small 8} through IO{\small 15})
+is written into the location specified on the address pins (A{\small 0}through A{\small 15}).\\
+To read from the device, take Chip Enable ($\overline{CE}$) and OutputEnable ($\overline{OE}$) LOW while forcing the Write Enable ($\overline{WE}$) HIGH. If Byte Low Enable ($\overline{BLE}$) is LOW, then data from the memory location specified by the address pins appear on IO{\small 0} to IO{\small 7}. If Byte High Enable ($\overline{BHE}$) is LOW, then data from memory appears on IO{\small 8} to IO{\small 15}. See the “Truth Table” on page 9 for a complete description of read and write modes.
+\\
+\end{verse}
+引用終了。
+また、文中に参照しろ！と書いてあるTruth Table(真理表)\\
+{\Large Truth Table}
+\begin{tabbing}
+qCE\=qWE\=qOE\=qBHE\=qBLE\=qqInputOutputqqqqqq\=qqqqqqMode\kill
+$\overline {CE}$\>$\overline {WE}$\>$\overline {OE}$\>$\overline {BHE}$\>$\overline {BLE}$\>Input/Output\>      Mode\\
+H\>X\>X\>X\>X\>     HighZ\>Deselect\\
+\>\>\>\>\>\>PowerDown\\
+L\>X\>X\>H\>H\>HighZ\>Output Disabled\\
+L\>H\>L\>L\>L\>Data Out (IO{\small0}-IO{\small15})\>Read\\
+L\>H\>L\>H\>L\>Data Out (IO{\small0}-IO{\small7});\>Read\\
+\>\>\>\>\>IO{\small8}-IO{\small15} in High Z\\
+L\>H\>L\>L\>H\>Data Out (IO{\small8}-IO{\small15});\>Read\\
+\>\>\>\>\>IO{\small0}-IO{\small7} in HighZ\\
+L\>H\>H\>L\>L\>HighZ\>Output Disabled\\
+L\>H\>H\>H\>L\>HighZ\>Output Disabled\\
+L\>H\>H\>L\>H\>HighZ\>Output Disabled\\
+L\>L\>X\>L\>L\>Data In(IO{\small0}-IO{\small15})\>Write\\
+L\>L\>X\>H\>L\>Data In(IO{\small0}-IO{\small7});\>Write\\
+\>\>\>\>\>IO{\small8}-IO{\small15} in High Z\\
+L\>L\>X\>L\>H\>Data In(IO{\small8}-IO{\small15});\>Write\\
+\>\>\>\>\>IO{\small0}-IO{\small7} in High Z\\
+\end{tabbing}
+\section{現在の仕様}
+\subsection{SRAMの破棄}
+SRAMを使用することに関して以下のデメリットがあった:\begin{itemize}
+\item SRAM自体のサイズは小さいが、変換基板が無用に大きく、配置が手間である
+\item ピン数が多いために、ユニバーサル基板上に配置し、ピンを通じてコードで配線をすると、安定性が著しく低下する
+\item データ入出力層がSRAMに対してマイコン及びCPLDにつながることとなり、短絡防止の保護回路を別に必要とする
+\end{itemize}
+また、後述する通り、作成に伴ってSRAMを必要としなくても(信号データを一度RAM展開しなくても)データ抽出ができるようになったため、いらなくなった。\\
+
+\subsection{音源デヴァイス}
+どんな音源が簡単に使えるかというのを念頭に探した。すると、音楽理論などに明るくない僕が低コストかつ簡単に扱える音源はPSGだと気づいた。これは古典的なPCやゲーム機に搭載されていた簡易な音源LSIである。込み入ったレジスタいじりをせずにすむ。
+\begin{figure}[htb]
+ \begin{center}
+ \caption{左が使用を中止したSRAM,右は後述する$I^2C$のテスト用EEEPROM(24LC256)と発振回路}
+  \includegraphics[scale=0.25,bb=94 20 2500 1400,clip]{DSCN2016.JPG}
+ \end{center}
+ \end{figure}
+\clearpage
+\chapter{開発環境}
+この開発環境の整備が、ファストプロトタイピングや、とくにパーソナルファブリケーションの大きなネックとなる。
+これが改善されなければ、今後の組み込みにおける、オープンソース環境での開発において大きな損失を招くであろう。
+
+以下に、どのような開発環境の整備が簡易にでき、また、何が難しいか、不可能かを述べる。
+
+\section{オープンソースデスクトップ環境において}
+このサブセクション内で、一般に、ソフトウェアと言った場合、オープンソースであることとする。\\
+また、デスクトップ環境とは、いわゆるPCでの環境のことを指し、ここでは\textbf{ホスト}と同意義とする。\\
+『ホスト』は組み込み開発の『ターゲット』に対する用語とし、組み込み開発の母艦というニュアンスを含む。\\
+プロプライエタリ(私企業や個人、政府が保有し、OSSでない)ソフトウェアの場合は配布企業とプロプライエタリであることを明示する。\\
+オープンソースデスクトップ環境(以降OSSDE)として、以下の3つのOSを対象とした。\\
+\begin{itemize}
+\item Debian GNU/Linux(Debian project)
+\item OpenSuSE (OpenSuSE project)
+\item OpenBSD (OpenBSD)
+\end{itemize}
+また、オープンソースではないデスクトップ環境(以降non-OSSDE)として、以下の2つのOSを対象とした。\\
+\begin{itemize}
+\item Windows 7 リリース候補版(マイクロソフト)
+\item Windows XP professional(マイクロソフト)
+\end{itemize}
+OSSDEとして使用したOSはいずれもUNIX互換プラットフォームであり、強力なコンソールを備える(その他にも十分に便利なX windows systemを備える)。
+対して、windowsでは、コマンドプロンプトの機能は貧弱であるといわざるを得ない。\\
+これはCygwin(後述)などといったソフトウェアを利用することにより補完されるものの、パッケージ管理などといった大きなOSSDE側のアドヴァンテージを解消することはできない。\\
+パッケージ管理システムとは、UNIX互換の環境などにおいて存在する機能で、OS(正確には開発/配布者)ごとに存在する。\\
+たとえばDebianの場合、dpkgというソフトウェアがパッケージを管理し、インストール、依存関係の確認、リムーブ、パージなど管理を行う。パッケージとは、ソフトウェアについて、作者による定義ファイルやバイナリファイル、場合によってはソースコードなどインストールに必要な情報が入った圧縮ファイルである。一般にパッケージ管理システムはこれだけの機能しかないわけではない。\\
+Debianではaptというソフトウェア群が、あるソフトウェアの導入に伴って、依存関係の洗い出しを行い、必要なソフトウェアを自動でインストールし、不要になれば自動的に削除する。\\
+これにより、さまざまな(開発が私企業でなく、個人が参加しているため\textbf{本当に}さまざまな)ライブラリが存在するにもかかわらず、使用者はライブラリを意識することなくただ目的のソフトウェアにありつけるし、開発者としても依存するライブラリとそのヴァージョンについて定義しておけば、利用者は必ずこのライブラリを持っているとみなせるので、自分が開発したいソフトウェアのみに専念することができる。\\
+今回の組み込みに対する開発では、ホスト側とっては一利用者に過ぎないことになるが、これらのOSSDEの特徴は、まさにprosumeという風潮に適したシステムだと言える。\\
+
+また、強力なコンソールを備えている事は、開発において、自動化したい部分をスクリプト化することで能率をあげることもでき、また、ウィンドウを利用してマウス操作でディレクトリの移動やソフトウェアの起動を行うよりも素早くて、なおかつ開発に関係の無いことに患わされることが無いことを意味する。\\
+これについてはさらに後述する。
+
+まず、開発環境の導入の最初の一歩はインストールである。開発環境のインストールについて、比較する。
+\subsection{ARMマイコンのコンパイラ}
+一般に、ARMマイコンにおいて、もっとも安定しているコンパイラはarm-none-eabiであるとされている。\\
+これはCodeSourcery社によって開発されているもので、GUI(グラフィカルユーザインタフェース:ウィンドウとアイコンによって提供される環境)を備えた製品と、それに対するサポートを販売しているが、コンソールで扱うツールキットに関しては無料で提供している。このツールキットは、フロントエンドがGNU toolchainであり、これは非常に有名かつ有用なツールキットであり、オープンソースソフトウェアである。\\
+また、ほかのARMコンパイラとして、以下のものと比較対象にした。自分のソースコードにもっとも馴染んだものがarm-none-eabiであり、大きな性能差を感じたわけではないことをここに記しておく。
+\begin{itemize}
+\item arm-elf-eabi ビルドに失敗。
+\item arm-eabi
+\item arm-elf
+\end{itemize}
+上2つは、Linux上でのみ確認できた。また、arm-elfについてはOpenBSDのみで試してみた。\\
+\subsection{ARMマイコンLPCxxxxの書き込み}
+PC上で動作するソフトウェアと違い、組み込みでは、書き込まなければ動かない。
+そこで、書き込みソフトウェアが必要となる。\\
+このソフトウェアとして\href{http://sourceforge.jp/projects/sfnet_lpc21isp/}{LPC21ISP}を使用した。これもオープンソースなソフトウェアである。また、成熟していてもはや直すところが無いが、英語の情報が多いため、作成者への恩返しとして、とりあえずプロジェクトの概要などの日本語に翻訳する作業を行った。\\
+このような翻訳ボランティアも一種のオープンソース活動である。
+\subsection{AlteraCPLDの開発環境}
+Alteraの開発環境、Quartus IIはwindows,Linuxどちらでも動作する。過去のヴァージョンではSolarisで動作するものもあるようだ。\\
+逆に言えば、マイコンと違って、CPLDの開発環境は完全なブラックボックスであるので、windowsのみのサポートでは不満があったのだと思われる。\\
+Quartus IIにかぎらず、AlteraやXilinxなどの、PLDメーカがサポートしているLinuxディストリビューションは、Redhat系と言われるものの中でも、RedHatEnterpriseLinux(RHEL)とCentOS(RHELからサポートとロゴなどの著作権物を除いたOSSなOS)、およびOpenSuSEのみである。\\
+
+ところが、Debianで動作させることが一般に可能であり、使う上で、特に問題があるわけではない。唯一ライブラリの問題があるが、古いライブラリを持ってきて展開すれば使用できる。\\
+
+また、OpenSuSEでは、書き込み機であるUSB-Blasterの認識が不安定で、一般的な問題ではないようだが、私が使った上では、まったく使い物にならなかった。
+むしろ、サポート対象ではないはずのDebianでの使用の方が快適である。
+それには以下のようにする。
+\begin{verbatim}#echo /dev/usbfs　/proc/bus/usb　usbfs　devmode=0666 0　0 >> /etc/fstab\end{verbatim}
+\subsection{その他}
+\subsubsection{Make}
+UNIX系OSでのコマンドラインによる快適な操作と相まって、Makeというのはすばらしいソフトウェアである。\\
+Makeというのは、いくつかのソースファイルがあった場合に、差分のみコンパイルすることができて、高速にソフトウェアをビルドできる。
+また、オプションによって動作を変えることが出来るため、役に立つ。
+\subsubsection{git}
+gitというのはヴァージョン管理システムである。AppleのTimeCapsureなどは有名だが、同じように、一里塚過ぎたら(過ぎなくともかまわないが)Commitすることによって、あらたなヴァージョンとして登録される。もし、前のヴァージョンに戻したい場合も、またブランチ(枝分かれ)する場合も、破壊的なことを一切せずに要求をこなすことができる。\\
+これはOSSにとって非常に大きな意味を持つ。なぜならOSSでは、ある人が創っているソフトウェアを元に、別のソフトウェアを派生させる、ということが日常的に行われる。そのためにソースコードを公開しているといっても過言ではない。バグフィクスであれば元のソフトウェアに取り込まれるかもしれないし、別の方針をこれから歩んでいこうということもある。たとえば便利さやリリースの速さを優先したり、セキュリティを優先したりするためにブランチしたプロジェクトなど枚挙に暇が無い。\\
+
+他にも、たとえば操作ミスや思い直した事があって論文の身に何かあっても、落ち着いて過去のヴァージョンのファイルを取り出すことができる。
+\section{Windows環境において}
+\subsection{ARMの開発環境}
+\begin{itemize}
+\item IAR workspace(nonOSS:IAR systems)
+\end{itemize}
+IAR systemsの製品であるが、ライブラリの名前が嫌で、しかも見た目がすきじゃなかった。使い辛い。\\
+使用可能な規模に制限がある。
+\subsection{AlteraCPLDの開発環境}
+Quartus IIをなんら問題なく使うことができるが、フォントが汚い。これはwindowsに起因する問題で修正ができる。\\
+\\
+
+
+このように、windowsで使う開発環境として問題になることはほとんどなく、素晴らしいように見えるが、gitを使うにも、ちゃんとしたコマンドラインを使うにも、不思議なほど手間がかかる。
+\section{gitとgithubについて}
+gitというのは、分散ヴァージョン管理システムである。つまり、そのリポジトリが存在する場所が1箇所に限らないということである。それではヴァージョン間で矛盾しないのか？それは、中央サーバにただ一つのマスタリポジトリを置くことによって解決される。\\
+つまり、gitにはサーバにリポジトリをアップ(以降pushとよぶ)する機能がついている。そこで、無料で利用できる、データの損失の心配の無いクラウドにpushできればこれほど安心なことはない。\\
+さて、その要求を満たすサービスがある。それはgithubという。\\
+ではどうやって使うのかというと、rsa暗号鍵を用意した後、サイトにアクセスし、リポジトリ作成をリクエストする。\\
+
+\begin{figure}[h]
+ \begin{center}
+  \includegraphics[scale=0.7,bb=10 20 600 400,clip]{fig1.eps}
+ \end{center}
+\end{figure}
+その後、以下のようにコマンドを実行する。
+\begin{verbatim}
+Debian% cd 論文 
+Debian% gedit textest.tex&
+[1] 16628
+Debian% ls      
+Makepdf  textest.aux  textest.dvi  textest.log	textest.out  textest.pdf  textest.tex
+textest.tex~  textest.toc
+Debian% git init
+Initialized empty Git repository in /home/ioriveur/論文/.git/
+Debian% git add ./   
+Debian% git commit -a
+[master (root-commit) 10c4ed0] First Commit
+ 8 files changed, 950 insertions(+), 0 deletions(-)
+ create mode 100755 Makepdf
+ create mode 100644 textest.aux
+ create mode 100644 textest.dvi
+ create mode 100644 textest.log
+ create mode 100644 textest.out
+ create mode 100644 textest.pdf
+ create mode 100644 textest.tex
+ create mode 100644 textest.tex~
+ create mode 100644 textest.toc
+Debian% git remote add origin git@github.com:iori-yja/Report.git
+Debian% git push origin master                                  
+Counting objects: 11, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (10/10), done.
+Writing objects: 100% (11/11), 110.86 KiB, done.
+Total 11 (delta 2), reused 0 (delta 0)
+To git@github.com:iori-yja/Report.git
+ * [new branch]      master -> master
+\end{verbatim}
+気がつくべきなのは、これは、既に公開され、オープンソースソフトウェアとなったということだ。\\
+ソフトウェアを創れるならば、OSSとして育てていくことはまったくコストでは無いということが分かっていただけたと思う。\\
+\begin{figure}[htb]
+ \begin{center}
+ \caption{混迷を極める開発室}
+  \includegraphics[scale=0.25,bb=94 20 2500 1400,clip]{DSCN1987.JPG}
+ \end{center}
+ \end{figure}
+\clearpage
+\part{開発}
+\chapter{Verilogを書く}
+\section{モジュールの構成}
+このモジュールの全体像を示す。\\
+\begin{figure}[htb]
+ \begin{center}
+ \caption{モジュールの全体図:拡大できます}
+  \includegraphics[scale=1,bb=60 850 600 0,clip]{print.pdf}
+ \end{center}
+ \end{figure}
+\clearpage
+\section{clkdivider(分周器)}
+まず初めに、もっとも簡単なモジュールを作成する。\\
+今回、MAX IIの基板に搭載した水晶発信器が40MHzである。今回の用途ではカメラの動作周波数は動作定格内であれば遅い方がより信号バスがノイズに強くなるため、10MHzに分周してカメラのクロックソースに入力する。分周するメリットは、さらに、分周することによって、クロックのデューティ比を50\%に近くすることが可能である。\\
+つまり、水晶発信器が必ずしも理想的な出力をしているとは限らないが、少なくとも1サイクルの長さはほとんどかわっていない、とするとき、分周器のクロック出力がHになっている時間とLになっている時間は、クロック入力のデューティ比に関わらず、どちらも入力1サイクル分であるから、出力波形は高速動作をするプロセサのクロックソースとして適したものとなる。\\
+\begin{lstlisting}[caption=分周器]
+module clkdivider (input clk, output xclk);
+	reg [1:0] t_count = 0;
+	always@(posedge clk) t_count[0] <= ~t_count[0];
+	always@(posedge t_count[0]) t_count[1] <= ~t_count[1];
+	assign xclk = t_count[1];
+endmodule
+\end{lstlisting}
+今回は、2つのレジスタを設け、入力クロックの立ち上がりエッジに、t\_count[0]を反転させる。すると、t\_countが立ち上がるのは2入力クロックサイクルに1回となる。\\
+t\_count[1]はt\_count[0]が立ち上がりクロックになる時に反転するため、結果として4入力サイクルにつき1サイクルでblinkすることがわかる。\\
+よってこのモジュールは4:1分周器になっている。\\
+\section{データ抽出レイヤ}
+\subsection{ピクセル選択モジュール}
+\begin{lstlisting}[caption=特定のピクセルのサイクルのときに立ち上がる、一部省略]
+module TimingManager(
+	input VSYNC, 
+	input HREF,
+	input pclk,
+	output reg Sig_En,
+	output enC);
+reg [8:0] line = 0;
+reg [8:0] foo = 0;
+always @(posedge HREF or posedge VSYNC)begin
+  if(HREF == 1'b1)line <= line +1'b1;
+  else line = 8'h00;
+  end
+assign enC = (line==9'h30 ) ? 1'b1 : 1'b0;
+
+always @(posedge pclk)begin
+		if ( HREF&enC ) foo <= foo + 1'b1;
+		else foo <= 7'b0000000;
+		if(foo[0]&foo[8]&HREF)begin
+			Sig_En<=1'b1;
+			foo <= 7'b0000000;
+		end
+		else begin
+			Sig_En<=1'b0;
+		end
+	end
+endmodule
+\end{lstlisting}
+このモジュールでは、カメラが生成する制御信号をすべて取り扱っていて、ほかのモジュールと分け合っていたりしないため、タイミング系で不具合が発生した場合はここに問題がある、と比較的迅速に問題の特定が出来る。\\
+まず、簡単にOV7670の制御信号について説明する。\\
+CMOSカメラOV7670モジュールの外に出ている制御信号は\begin{itemize}
+\item VSYNC
+\item HREF
+\item pclk
+\end{itemize}
+のたった3つである。また、カメラ内に止まっていて、普段引き出されないものにHSYNCがあるが、基本的に使わずにすむようだ。\\
+フレーム(1つの画像)の最初の行の最初のピクセルを送出する前に、VSYNCが立ち上がり、3行分の時間ホールドされる。その間、有効なデータは流れてきていないが、なんの値が出ているのかは未だ不明であり、タダの不定値である。\\
+その後、VSYNCが立ち下がり、実データが送出される条件が一つ揃うようになる。\\
+次に、17フレーム分の時間、制御信号のバスに変化は無い。その後、HREFが上がると、ようやく実データが送出され始める。1行がおわると、一度HREFが立ち下がり、144px分やすむ。\\
+その間、データシートによると、実データはキューに入れられて待っているらしい。\\
+\begin{figure}[b]
+ \begin{center}
+ \caption{OV7670のデータシートによるタイミングチャート}
+  \includegraphics[width=\hsize]{tmchart.eps}
+ \end{center}
+ \end{figure}
+まず、このソースの目につくのは、pclk立ち上がりエッジで起動する以下のカウンタ\\
+\begin{lstlisting}[caption=ピクセルごとのカウンタ]
+always @(posedge pclk)begin
+		if ( HREF&enC ) foo <= foo + 1'b1;
+		else foo <= 7'b0000000;
+		if(foo[0]&foo[8]&HREF)begin
+			Sig_En<=1'b1;
+			foo <= 7'b0000000;
+		end
+		else begin
+			Sig_En<=1'b0;
+		end
+	end
+\end{lstlisting}
+であろう。しかし、このカウンタは、中のif文の通り、HREFとenCがHでなければ動かない。また、ifを満たさない場合は0にリセットされる。\\
+HREFがLのとき、無効なデータがやってくる。だからこのデータを手っ取り早く見ないようにするためには、カウンタをリセットして、0のときに少なくともデータを見ない様にすればいい。\\
+ただ、enCとはなんだろうか。これは、
+\begin{lstlisting}[caption=行のカウンタ]
+always @(posedge HREF or posedge VSYNC)begin
+  if(HREF == 1'b1)line <= line +1'b1;
+  else line = 8'h00;
+  end
+assign enC = (line==9'h30 ) ? 1'b1 : 1'b0;
+\end{lstlisting}
+でアサインされているワイヤがenCであり、line(行数)の値によってドライブされる。つまり、特定の行の時のみピクセルカウンタが起動される様になっているわけだ。\\
+実を言うと、この設計にたどり着くまで、もっと別の設計でやろうとしていた。最初は一つのalwaysでやっていたが、implicit latchを生成しますよ！っていうワーニングや、always@文で呼び起こされたのに何も値を変えないことがあります、といったワーニングが出ていて、調べても何の事だかよく分かっていなかった。\\
+もし、この設計を思いついていなかったら、ずーっと気持ち悪いままだったが、これによってワーニングが消えたどころか、使用するロジックエレメントの数もグッと減ったため、きっと裏でなにかあって、always@文が何のレジスタの値も変えない可能性があると、無駄なラッチを生成することがある様だ。\\
+ということがわかったが、具体的なバッドノウハウもリゾルブノウハウもほとんど出回っていないという状態であるため、今後のワーニングメッセージの改善や、教本、ノウハウ集として有用なブログなどの登場を期待する必要があると感じた。\\
+このためには、半導体ベンダ側の努力のみならず、企業のような、ノウハウが閉鎖的にこもりがちな顧客だけ、という状態から脱して、それこそ手芸やバレエのごとく、幅広い一般人がFPGAやCPLDなどを使うようになる必要も、当然あるだろう。どれくらい未来になるか分からないが、ITがもっと陳腐化すればいずれ来る未来であると思う。\\
+\clearpage
+\subsection{ピクセルデータフェッチ,連結モジュール}
+\begin{lstlisting}[caption=データコミッタ]
+module Dtacutcmmit(
+	input SigEn,
+	input [7:0]pshdta,
+	output WrCmplt,
+	output reg [11:0]popdta
+	);
+	assign WrCmplt = ~SigEn;
+	reg [3:0]redpx;
+	always @(posedge SigEn)begin
+		redpx [3:0] <= pshdta[3:0];
+	end
+	always @(negedge SigEn)begin
+		popdta[11:0]<= { redpx[3:0], pshdta[7:0] };
+	end
+endmodule
+\end{lstlisting}
+このモジュールは、SigEnの両エッジで働く。\\
+そもそも、カメラのデータが2クロックサイクルに渡って分割して送信されるため、特定の瞬間のバスデータをフェッチすれば良いと言う訳ではないため、少々複雑になる見込みであった。
+ところが現状、大分シンプルにまとまっている。\\
+SigEnと言うのはピクセル選択モジュールであるTimingManagerのものと同じである。\\
+これは、上で述べた変更によってpclkの立ち上がりエッジでのみ動作するようになったため、Sig\_Enのエッジ動作時には、ピクセルデータが流れているpshdtaは必ず保証されている。
+これは上のタイミングチャートを見てほしい。pclk立ち下がりエッジのときにデータ値が変化し、逆に立ち上がりエッジの前約15ms以上と後8msが保証されている。(ただし24MHz動作時、今回はさらに2.4倍遅い)\\
+\clearpage
+\section{データ転送モジュール}
+これについては、独自シリアル転送プロトコルの項で後述する。
+\section{シミュレーション}
+\subsection{シミュレータの意義}
+つぎに、モジュールが書けたら、マイコンでは実機で動かすことが一般的だが、PLDではシミュレータにかけることが多い。\\
+理由としては、まずマイコンよりもさらに可観測性が低いため、予期せぬ動作をした場合にデバッグが非常に大きな仕事となってしまうということ、C言語でマイコンに対して書いたものとくらべ、人間にとって可読性が高いものではないため、まったく想定外のことを書いてしまっている可能性がより高いということ、シミュレーションを行う上では、マイコンの、特にペリフェラルでの動作と比べてVerilogの方が可視性があるということなどが挙げられるはずだ。\\
+
+シミュレータは今回、Modelsim-altera starter edition(nonOSS:MentorGraphics社)を用いた。\\
+
+シミュレーションモデルもHDLを使って表記する。\\
+論文の構成上、他のモジュールより後に書いたが、すべてのモジュールを書き終えてから回路検証をするのではなく、一つのモジュールを書きながらテストモジュールを書いて逐一懸賞をしていくことが何よりも大切だと思われる。\\
+この方法であれば、検証対象モジュールとシミュレーションモデル、双方とも、バグを書いた時点でそうと分かる上、比較的見つけることが容易であり、最も効率がいいと思われる。\\
+
+また、ModelSimでのコマンドはtclであるため、セミコロンで連接することにより一気にビルドから波形を追加してシミュレーションまで終えてしまうことができる。\\
+\begin{lstlisting}[caption=一気にシミュレーションまで行う1行スクリプト]
+vsim work.TEST;add wave -r /*;run 1600000;
+\end{lstlisting}
+もし、add waveしなければ、シミュレーションが行われた後もタイミングチャートをみることは出来ない。また、ModelSimのGUIは貧弱で、それのみに頼るには不足している印象を受けた。
+
+\begin{figure}[htb]
+ \begin{center}
+ \caption{ソースコードを開いたModelSim Altera Starter Edition}
+  \includegraphics[width=0.7\hsize]{fig2.eps}
+ \end{center}
+\end{figure}
+\begin{figure}[htb]
+ \begin{center}
+ \caption{シュミレーションを終え、タイミングチャートを表示するModelSim Altera Starter Edition}
+  \includegraphics[width=0.7\hsize]{fig3.eps}
+ \end{center}
+\end{figure}
+\clearpage
+\subsection{シミュレーションモデル}
+他の、実回路で動かすためのVerilogと違い、シミュレーションではさまざまな便利な命令を使うことが出来るが、私が思うに、これらを一まとめにしてVerilogと呼んでいる現状が、現在の簡易的では無いが実装されるべき構文の、実回路での論理合成可能性がいまだに上がらないままである元凶であるように見える。\\
+ちなみに、このシミュレーションモデルでは、コメントアウトした部分も、わざと掲載している。それは、消してしまうのではなく、コメントアウトすることによって、また後で検証対象モジュールのバスを観測したくなったときにすぐ戻せるようにするという技を明示的に示すためだ。\\
+\begin{lstlisting}[caption=回路検証のためのモジュール.実回路には組み込まれない]
+module TEST;
+reg VSYNC;
+reg HREF;
+//wire WEb; ここら辺は外付けのSRAMを使う予定だったころの名残りが残っている
+//wire BHEb;
+//wire BLEb;always @(posedge pclk)begin
+		if ( HREF&enC ) foo <= foo + 1'b1;
+		else foo <= 7'b0000000;
+		if(foo[0]&foo[8]&HREF)begin
+			Sig_En<=1'b1;
+			foo <= 7'b0000000;
+		end
+		else begin
+			Sig_En<=1'b0;
+		end
+	end
+wire pclk;
+//wire Enasg; これはピクセル選択モジュールのイネーブルシグナルの観測用
+reg clk; //40MHzのマスタクロック
+wire xclk;
+reg [64:0]countpclk = 0;
+wire [7:0]pixdata = 8'h46;
+//wire [7:0] line,foo;バスの観測用
+//wire CEb;
+//wire [17:0] adr;
+//wire pck;
+reg Serck = 0;
+wire Serot;
+assign pclk = ~xclk;
+wire [11:0]pixbus;
+//wire Serctl,Serck,Serot;
+wire TEST;
+ReShynth i1(clk,pclk,HREF,VSYNC,Serck,Serot,pixdata,xclk,pixbus,TEST);
+initial clk <= 1'b0;
+initial HREF <= 1'b0;
+initial VSYNC <= 1'b1;
+initial #9408 VSYNC <= 0;
+
+always begin
+#1000 Serck <= ~Serck;
+end
+always begin
+#1 clk <= ~clk; //マスタクロック生成
+end
+always begin
+  #576 HREF <= 1;
+  #2560 HREF <= 0;
+end
+always begin
+  #1589952 VSYNC <= 1;
+  #9408 VSYNC <= 0;
+end
+always @(negedge pclk)
+  if(VSYNC) countpclk <= 0;
+  else
+  countpclk <= countpclk + 1;
+always @pixbus $display($time, "pix:%d countpclk is %d", pixbus,countpclk);
+endmodule
+\end{lstlisting}
+このテスト用モジュールは、主に\begin{itemize}
+\item クロックソースの流し込み(マスタクロック,シリアルクロック,ピクセルクロック)
+\item カメラの制御信号の生成、流し込み
+\item バスデータの仮想的な提供
+\item 特定の観測しているワイヤに変化があった場合のモニタリング
+\end{itemize}
+を行っている。\\
+たとえば\begin{lstlisting}
+always begin
+  #576 HREF <= 1;
+  #2560 HREF <= 0;
+end
+always begin
+  #1589952 VSYNC <= 1;
+  #9408 VSYNC <= 0;
+end
+\end{lstlisting}
+ここの下りでは、カメラから送られてくる制御信号を提供しているが、これはカメラのデータシート(\\http://aitendo2.sakura.ne.jp/aitendo\_data/product\_img2/product\_img/camera/CAMERA30W-V7670/OV7670\_DS\_(1\_4).pdf\\)を参考することによって比較的早くにできあがっていた。\\
+逆に、テストモジュールを書きづらいのは、仕様が決まってない自分の回路にたいしてであったりするため、侮れない。
+\begin{figure}[htb]
+ \begin{center}
+ \caption{CPLDボードの裏側の水晶発振子とそのデータシート}
+  \includegraphics[scale=0.25,bb=94 20 2500 1400,clip]{DSCN2010.JPG}
+ \end{center}
+ \end{figure}
+\clearpage
+
+\chapter{I2Cセットアップ関数の開発}
+$I^2C$ドライバが必要だったため、作成した。割り込みを使わない$I^2C$で必要となる動作が、2番ポートにおいてすべてカヴァーされているため、ライブラリとして公開する。\\
+ただ、このコードを書いたのがずっと昔で、今回だましだまし使っていたので、とても汚いコードとなっている。\\
+そんな汚いコードを公開するのか？という疑問もあるが、そもそもなにもないよりマシであるという考え方もある。
+\section{データ送出関数}
+\begin{lstlisting}
+void i2csender(int Continue, unsigned int Data, int Keta){
+//int i2cStatus;
+			if(Continue==0){
+				I22DAT = Data;
+				I22CONSET |= 0x04;
+				I22CONCLR  = 0x08;
+				while(I22STAT!=0x18 && I22STAT!=0x20);
+	FIO2PIN1 = 0x2;
+				if(I22STAT==0x20){
+					printf("No such device%4x\n",Data);
+					i2cErr = 0x22;
+					return;
+					}
+			}else {
+				for(;Keta != 0;Keta-=8){
+					I22DAT = (Data & 0xFF);
+					I22CONCLR  = 0x28;
+				while(I22STAT!=0x28);
+					Data = Data >> 8;
+				}
+		}
+	}
+\end{lstlisting}
+\subsection{動作}
+この関数の動作は、ライトサイクルとして最初であった場合には、まず割り込みをクリアし、マスタモードに入らないようにセットアップし、また、"データ"としてアドレスを送出させるところから始まる。その後、デバイスから返答があるか、どこからも返答が無いと分かるまで待ち、終了処理を行う。\\
+ライトサイクルとして最初では無かった場合は、int値を、下8bitずつ送出する。\\
+\subsection{問題点}
+これをFreeRTOS上で動作させると、初回呼び出し時の3回に2回、しかも周期的にOS全体を落とすという大きな問題を抱えている。
+\section{シーケンシャルデータ受信関数}
+\begin{lstlisting}
+int i2creader(int size, int Adr, int registernumber){
+char Loopy;
+upper:
+				I22DAT = (Adr + 1);
+				I22CONSET |= 0x04;
+				I22CONCLR  = 0x08;
+				printf("Status is %x\n",I22STAT);
+				while(I22STAT!=0x40 && I22STAT!=0x48)printf(".");
+				if(I22STAT==0x48){
+					printf("no acknowlege(%x)\n",I22STAT);
+					i2crestart(2);
+					goto upper;
+					}
+				while(registernumber!=(size+1)){
+					I22CONSET |= 0x04;
+					I22CONCLR  = 0x28;
+					while(I22STAT != 0x50 );
+					vTaskDelay(10 / portTICK_RATE_MS);
+					printf("Adress%x,\tData%x",regisiternumber++,I22DAT);
+				}
+				printf("done.....");
+				fflush(stdout);
+				I22CONCLR = 0x0C;
+}
+\end{lstlisting}
+これは、SCCBレジスタに対して、シーケンシャルリードを0番地から最大値である0xcaまでを一期に読み取る関数である。あまり美しいコードにはなっていない。
+\subsection{バイトリード}
+サイズを1にすれば、バイトリードとなる。本質的に、シーケンシャルリードとバイトリードに違いは無いのだ。
+\section{OV7670全リード関数}
+OV7670のSCCBレジスタをリードする関数である。
+\begin{lstlisting}
+void SCCBread(int subadr, int size, int NumByte){
+	i2cstart(2);
+//	vTaskDelay(300 / portTICK_RATE_MS);
+	i2cErr = 0;			//i want to read!b So, start.
+	i2csender(0,0x42,8);	//Hey, ?
+	if(i2cErr==0x22){
+		printf("fatal");
+		i2cstop(2);
+		return;
+	}
+	i2csender(1,subadr,8);
+//	printf("Adress read request at%4x OK\n\n", subadr);	//0x03byte? 
+	i2crestart(2);
+	i2creader(size,0x42,NumByte);
+	i2cstop(2);
+	printf("Debu331g\n");
+}
+\end{lstlisting}
+一つ目のコメントアウトは、安全性のために最初いれておいたものだが、無くても動くらしいと分かったためコメントアウトした。
+i2cstart($int port$)関数はそのままなのでここでは割愛する。\\
+二つ目のコメントアウトは、はずすと冗長な出力となる。\\
+これをみるとわかるとおり、リクエストの送信とデータの受信を一括して行う。
+\section{OV7670バイトライト関数}
+\begin{lstlisting}
+int SCCBwrite(int subadr, int size, int Data ){
+	i2cstart(2);
+	i2cErr = 0;
+	i2csender(0,0x42,8);	//Hey, ?
+	if(i2cErr==0x22){
+		printf("fatal");
+		i2cstop(2);
+		return -1;
+	}
+	i2csender(1,subadr,8);	//3byte? 
+	i2csender(1,Data,size);
+	i2cstop(2);
+	return 0;
+}
+\end{lstlisting}
+1バイト書くのは非常に簡単だ。\\
+通信スタートが成立した場合、サブアドレスとデータを順繰りに送信して通信をとじればいい。
+\chapter{SCCBでのOV7670コンフィギュレーション}
+\section{OV7670の注意点}
+$SCCB$というのは、$I^2C$というシリアル通信のスーパセットで、実質$I^2C$と同じ方法で通信が出来るとされている。ただし、実際にやってみるといくつか違いがあった。\\
+まず、$I^2C$接続のEEEPROMでの実験をしめす。
+今回使用したのは、\href{http://akizukidenshi.com/download/24LC256.pdf}{microchip社製24LC256}である。\\
+これに、バイトライト、バイトリード、シーケンシャルリード、シーケンシャルライトを試したが、バイトライトの後にwaitをはさむ必要が無く、シーケンシャルライトも問題なく行えた。\\これに対して、OV7670では、書き込みの後にwaitを必要としていてなおかつ、データシートには記述が無いものの、実験によるとシーケンシャルライトは出来ないようだ。このことから、完全な$I^2C$メモリインタフェースを積んでいるというよりは、あくまで$I^2C$インタフェースをつかった通信が出来ますよ、という程度に考えておくべきだ。\\
+また、ただのRAMのつもりでヴェリファイプログラムを書くべきではない。理由は後述する。
+\section{OV7670用のレジスタセットアップデータの整理}
+http://www.cs.fsu.edu/~baker/devices/lxr/http/source/linux/drivers/media/video/ov7670.c
+ここに、OV7670用のlinuxドライバがあるが、非常に不思議な事に、データシートにはalways "0"などとかかれた場所やreserved領域に書き込んだりしている。
+ともかく、これをどれほど信用すべきなのかんがえあぐねているところに、\href{http://www.hmwr-lsi.co.jp/fpga/fpga_9.htm}{FPGAで遊んでみる}さんが既に試していた。\\
+\begin{lstlisting}[caption=ov7670\_set\_up.ttl]
+; OV7670<81>@set up macro
+;
+; delay set
+pause_ms =0
+; delay for debug
+;pause_ms =2000
+;
+; ADR=0x12 WDATA=0x04
+sendln  'W1204'
+sendln
+mpause pause_ms
+;
+; ADR=0x40 WDATA=0xd0
+sendln  'W40D0'
+sendln
+mpause pause_ms
+;
+; ADR=0x8c WDATA=0x02
+sendln  'W8C02'
+sendln
+mpause pause_ms
+sendln  'W703a'
+sendln
+mpause pause_ms
+sendln  'W7135'
+sendln
+mpause pause_ms
+sendln  'W7211'
+sendln
+mpause pause_ms
+sendln  'W73f0'
+sendln
+mpause pause_ms
+sendln  'Wa202'
+sendln
+mpause pause_ms
+sendln  'W1500'
+sendln
+mpause pause_ms
+sendln  'W7A20'
+	:
+	:
+	:
+	:
+\end{lstlisting}
+これはTeratermかなんかのスクリプトで、このままでは使えないので、vimで整形し、そのままSCCBレジスタに書き込む関数にした。\\
+\begin{lstlisting}
+	SCCBByteWrite(0x1204); 
+	vTaskDelay(2 / portTICK_RATE_MS);
+	SCCBByteWrite(0x40D0); 
+	vTaskDelay(2 / portTICK_RATE_MS);
+	SCCBByteWrite(0x8C02); 
+	vTaskDelay(2 / portTICK_RATE_MS);
+	SCCBByteWrite(0x703a); 
+	vTaskDelay(2 / portTICK_RATE_MS);
+	SCCBByteWrite(0x7211); 
+	vTaskDelay(2 / portTICK_RATE_MS);
+	SCCBByteWrite(0x40D0); 
+	vTaskDelay(2/portTICK_RATE_MS);
+	SCCBByteWrite(0x8C02); 
+		:
+		:
+		:
+		:
+		:
+\end{lstlisting}
+しかし、その後、関数内に定数を置いてしまうことによる、保守性、可読性、コード密度の低さなどの問題があり、これを解決するために分離することとなった:
+\begin{lstlisting}[caption=i2c.cのvi2cタスクの冒頭]
+	printf("Setup begin[>  ");
+	fflush(stdout);
+	for(regpointer=0;regpointer!=129;){
+		if(SCCBByteWrite(OV7670[regpointer])==-1)continue;
+		regpointer++;
+		switch (regpointer%4){
+			case 0:
+			Loopy='|';
+			break;
+			case 1:
+			Loopy='/';
+			break;
+			case 2:
+			Loopy='-';
+			break;
+			case 3:
+			Loopy='\\';
+			break;
+			}
+		printf("\b\b\b=>%c",Loopy);
+		fflush(stdout);
+		vTaskDelay(10 / portTICK_RATE_MS);
+		}
+	printf("\rData transmition End!\n");
+	fflush(stdout);
+\end{lstlisting}
+とし、
+\begin{lstlisting}[caption=OV7670userconfig.hの抜粋]
+const int OV7670[]={
+0x1204,
+0x40D0,
+0x8C02,
+0x703a,
+0x7211,
+    :
+    :
+    :
+    :
+\end{lstlisting}
+というヘッダファイルを設けた。これにより、ループを回して書き込むようになったというのと、設定ファイルを別ファイル扱いにできたので、修正が容易になった。\\
+また、これにより、二次的なメリットが得られた。
+\begin{lstlisting}
+Hello, world!1:0
+203PDIRRegister Reset
+Setup begin
+[======================================>      \
+\end{lstlisting}
+いままでのメッセージはデバッグを目的とした冗長な出力がなされていたため、上の様なメッセージととした。
+簡潔であり、また十分な情報量である。\\
+ひとつのノウハウとしては、バグが存在する間は冗長な出力が好ましいが、安定して動かせるようになったら静かな方が好ましい。\\
+また、ヴェリファイは今回行っていない。なぜなら、制御用レジスタにまざって、動的に変化するレジスタ、例えばアイリス値などがあり、また、述べた通り不思議な事だが、なぜかそのようなレジスタにも値を書き込むようになっている。このようなレジスタがすべて分かれば良いものの、ReservedやAlways zeroとかかれたレジスタにも値を書き込んでいるため、これらがまた、動的に変化するレジスタであったらデバッグの難度が非常に高いと言わざるを得ず、また、すでに十分に動いていると言う現状から、個人では把握できないものとして考えるべきと言える。\\
+\\
+メーカはデータシートなど、デバイスを使用するに当たってどうしても必要な情報は大口顧客などにのみ提供するのではなく、万人が使えるものにするよう努めるべきである。
+\begin{figure}[htb]
+ \begin{center}
+ \caption{カメラ$\rightleftharpoons$CPLDで動いている様子}
+  \includegraphics[scale=0.25,bb=94 20 2500 1400,clip]{DSCN2009.JPG}
+ \end{center}
+ \end{figure}
+ \clearpage
+\chapter{独自シリアル転送プロトコル}
+必要なロジックエレメンツの数を最小限にとどめるため、できるだけシンプルなシリアル送信プロトコルが必要だったが、探してもなかなか出てこなかったため作ることとした。\\
+目標は
+\begin{itemize}
+\item 非常に小さいこと
+\item デバッグが簡単であること
+\item 実装が難しくないこと
+\end{itemize}
+とさだめた。
+\section{トランスミッタ}
+\begin{lstlisting}
+module transmittr (
+	input Srialclk,
+	input Wrtcmplt,
+	input [11:0]data,
+	output SrialData
+);
+reg [11:0]Datareg;
+reg Endflg;
+wire Endtoken;
+assign Endtoken = Endflg & ~Srialclk;
+assign SrialData = Endtoken ? ~Datareg[0] : Datareg[0];
+reg  [3:0]ShftCount = 0;
+	always@( posedge Srialclk )begin
+			Datareg[11:0] <= { 1'b0, Datareg[11:1] };
+			ShftCount <= ShftCount + 4'h1;
+			if ( ShftCount == 4'hB )begin
+				Endflg <= 1'b1;
+				if( Wrtcmplt )begin
+					ShftCount <= 0;
+					end
+				end
+			else if ( ShftCount == 4'h0 )begin
+				Endflg <= 0;
+				Datareg[11:0] <= data[11:0];
+				end
+			end
+
+endmodule
+\end{lstlisting}
+\subsection{何が起きているか}
+まず、カメラ制御層から特定のピクセルが検出された瞬間を考えてみよう。\\
+その時はまだ、上位バイトのみがバスに流れているため、その時フェッチするのではなく、わかりやすさのため、フェッチモジュールで、12bitすべてのデータを用意し終えた後に立ち上がるWrtcmpltを用意して、それを接続して制御する。\\
+また、たくさんリクエストして、同じデータが重複して送信されても問題が無いため、キュー構造を取る必要が無く、よって制御信号もサイクル終了トークン以外必要なかった。\\
+
+サイクル終了トークンとは、12bitのデータのどこが切れ目か分かるような合図の事とする。
+これを、データ末尾に制御用コンディションを載せることで表現した。\\
+
+Endtokenは
+\begin{lstlisting}
+assign Endtoken = Endflg & ~Srialclk;
+assign SrialData = Endtoken ? ~Datareg[0] : Datareg[0];
+\end{lstlisting}
+この様に用いられている。
+シリアルクロックがLでEndflg(カウンタが11を指しているときに発行される)がHのときに成立する。\\
+そして、これがHのときに、シリアル出力が反転する。シリアルクロックがたち下がるときにかならず変化し、また、他のコンディションでは立ち下がりエッジでの変化は行われないので、確実に検出される。
+\subsection{公開とREADME}
+別の切り口で後述するが、もしこの様な独自プロトコルなどを作成した場合はREADME(規模と場合によってはデータシートやチュートリアルマニュアルまで)を作成することは不可欠である。\\
+なぜなら、まだそれが人気になる前であれば、そのプロトコルに熟知している人は{\large 全世界であなたしかいない}からだ。\\
+もし、他の人が、自分が新しく公開したものを使おうとしても、それがいくら素晴らしいものであっても、使い方がわからなければ、せっかく頑張って創って公開した自分の成果物が人に使ってもらえる機会を失してしまうことになる。使ってみてそれがそもそもつまらないものだ、と思われる以前に、ぱっと見でどんなものか分からなければ、気に留めてすらもらえないかもしれない。それは悲しいことだ。\\
+だからちゃんとREADMEをつくって、なおかつブログで紹介するといい。しばらくマイブームと言うか熱が覚めてしまうまで、連載ができるし、体裁を整えたサイトも非常に有意だが、体裁や整合性にばかり気を使ってしまって、開発者の意欲を削ぐような事があっては良くない、と思う。\\
+\section{レシーバ}
+\begin{lstlisting}
+void getISSI( void )
+{
+int bitshift=0;
+int il=0;
+int prv;
+int crr;
+vTaskDelay( 1 / portTICK_RATE_MS );
+	printf("start ISSI connection\n");
+
+	while(1){
+		il++;
+		FIO2SET = 2;
+		prv=(FIO2PIN&6)>>2;assign Endtoken = Endflg & ~Srialclk;
+assign SrialData = Endtoken ? ~Datareg[0] : Datareg[0];
+		printf("up\t%x\n",prv);
+		bitshift = (bitshift<<1)+prv;
+		vTaskDelay(1 / portTICK_RATE_MS);
+		FIO2CLR = 2;
+		printf("prv=%x",prv);
+		crr=(FIO0PIN&6)>>2;
+		printf("Cr=%d",crr);
+		if(crr&2!=prv&2){
+			printf("-%d\t%d\n",crr,il);
+			break;
+			}
+		vTaskDelay(1 / portTICK_RATE_MS);
+		printf("Delaying%d",0.01 / portTICK_RATE_MS);
+		}
+	}
+\end{lstlisting}
+実はこのモジュールは完全にうまく動いているとは言えない。\\
+既に提出しなければいけないため、そのように現状を報告しておく。\\
+動いた時には、既に述べたブログ等で紹介するであろうから、もし良かったらみてみてほしい。
+\begin{figure}[htb]
+ \begin{center}
+ \caption{オシロスコープのプローブ}
+  \includegraphics[scale=0.25,bb=94 20 2500 1400,clip]{DSCN2019.JPG}
+ \end{center}
+ \end{figure}
+\clearpage
+\chapter{SSGドライバの製作と研究}
+まず、前提として、FIO4ポートにパラレルバスをつないだものとする。\\
+また、YMZ294のデータシートはネット上で手に入れることは出来ない。\\
+\section{SSGというのは}
+YMZ294というのは、MSXのSOUNDコマンドと同一のレジスタ操作で発声できる。この音源をPSGという。ヤマハはこれを政治的な理由によりSSGと呼ぶがほとんど同じものだ。\\
+PSGのレジスタについては、AY-3-8910が元となっている。\\
+わたしはH-1 MSXマシンの手引書を読んで学習したが、手に入らない場合は姉妹品\href{http://www.alldatasheet.jp/datasheet-pdf/pdf/82065/YAMAHA/YMZ284.html}{YMZ284のデータシート}をみるとよいとおもわれる。違いは、284は294と比べ、不要だった2つの端子が削られている。これによって、動作クロックが4MHzにしぼられる。\\
+逆に言えば、ほかには特に違いが無い。\\
+\section{ハードウェア層での結線}
+YMZ294のパッケージは18pinで、ピン順序は /WR(write enable) /CS A0(address mode) VDD(5V) SoundOut GND ΦM 4/8(clk select) /IC(reset) /TESTで、のこりはD[7:0]となっている。\\
+
+秋月で買うといかつい水晶発振器がついてくる。これは4MHzであり、4/8はHiレベルに設定することで2分周して2MHzを生成し、これがLSI内のfscとして扱われる。
+このことは秋月のデータシートに明示しておらず、誤解を生みやすいので注意すること。\\
+
+また、/TEST, 4/8, /ICは内部に60-260-600kΩというあまり精度の良くないプルアップ抵抗が入っており、結線しなくてもデフォルトとしてプルアップされ、使えるようになっている。\\
+さらに、その他のピンに於けるHiレベルが2.2Vからであるので、2.8Vや3.3Vで動作するマイコンやFPGAからも容易にアクセスできる。\\
+これは大きな利点である。\\
+
+/CSは、普通プルアップしっ放しでもとりあえずつかえるチップ(ex.SRAM)が多いように思うが、この場合、一回アクセスするごとに上げ下げせねばならないようで、読み込むわけでもないのに/WRも上げ下げせねばならない。ところが、/CSと/WRはショートしても問題無いようだ。\\
+サンプルプログラムも同時に同じアクセスを行っているではないか。これらは隣のピンであり、実際にくっつけて使用しても問題ない。\\
+
+/WRすら操作せずにうごかしたいとおもったが、それはできなかった。\\
+情けないことに、この後僕はとんでもなくしょうもないことに2日間も悩むことになった。\\
+それはビットオーダである。こういう単純なミスをなくすためにも、データシートの熟読は欠かせない。
+ビットオーダというのは、どっちが桁が小さい方で、どっちが桁が大きい方か、ということだ。\\
+\section{ソフトウェア層での工夫}
+\subsection{SOUND文と同じ機能}
+まず、原理的な方を書いてみよう。
+この関数はMSX-BASICに於けるPSG発声の"SOUND文"と同じ文法で使用する。また、機能も等しい。
+\begin{lstlisting}
+void ymzwrite1(int value,int adr){
+	FIO4PIN=0×00;
+	FIO4PIN=adr;
+	FIO4PIN=(0×200+adr);
+	FIO4PIN=(0×100+value);
+	FIO4PIN=(0×300+value);
+}
+\end{lstlisting}
+まず、データシートを見ると、それぞれたくさんステップを踏まないと書き込めないように見える。\\
+しかし、これは単純化できる。タイミング要求のところを読むと分かる。\\
+\begin{figure}[htb]
+ \begin{tabular}{cc}
+\begin{minipage}{0.5\hsize}
+\begin{center}
+\caption{タイミングチャート}
+  \includegraphics[scale=0.12,bb=94 20 2500 1400,clip]{DSCN2023.JPG}
+  \end{center}
+\end{minipage}
+\begin{minipage}{0.5\hsize}
+\begin{center}
+ \caption{タイミング要求}
+  \includegraphics[scale=0.12,bb=94 20 2500 1400,clip]{DSCN2024.JPG}
+\end{center}
+\end{minipage}
+\end{tabular}
+\end{figure} ようは、A0もWRもLにし、Dataを書き込む。これは1サイクルで出来る。\\
+その後A0がLowのままにしつつ、/WRをHiレベルにするとレジスタ選択を行う。\\
+これはブロック図をみれば雰囲気がつかめる。
+\begin{figure}[h]
+ \begin{center}
+ \caption{YMZ294ブロック図(ところでこの干渉縞は一体…)}
+  \includegraphics[scale=0.25,bb=94 20 2500 1400,clip]{DSCN2025.JPG}
+ \end{center}
+ \end{figure}
+その後A0が上がり、/WRが落ちるとD[7:0]を同じくフェッチし、/WRが上がることでそのレジスタにデータを書く。
+これがまさに指定した、一意に定まる場所にデータを書き込むということだ。\\
+
+\subsection{更なる改善を求めて}
+PSGの楽音周波数とエンベロープ周波数は2つのレジスタにまたがって書き込まれる。\\
+いちいち楽音やエンベロープに関して、この低レイヤ部分が見えていて、意識して書かなければならないとすると不都合である。\\
+\begin{lstlisting}
+void ymzwrite0(int frec,int adr){
+int highbyte;
+	FIO4PIN=0×00;
+	FIO4PIN=adr;
+	FIO4PIN=0×200+adr;
+	FIO4PIN=0×100+(frec&0xFF);
+	FIO4PIN=0×300+(frec&0xFF);
+	FIO4PIN=adr+1;
+	FIO4PIN=0×201+adr;
+	highbyte=(frec>>8)&0xFF;
+	FIO4PIN=0×100+highbyte;
+	FIO4PIN=0×300+(frec>>8);
+}
+\end{lstlisting}
+2つのレジスタにまたがっている値も、一つのレジスタの用に書き込めたら便利だ。\\
+\section{制御速度に関する実験}
+この函数、Delayをはさんでいない。しかしマイコンのクロックは72MHzである。
+LPC2388のFGPIOはCPUバスに直接つながっているため、CPU速度で動く。
+
+しかし、データシートにはこう書いてある:
+ライトパルスオフ時間 tWOFF 40ns以上
+
+あれ？おかしい。
+こういうときはアセンブリを読めば良い。
+\begin{lstlisting}
+.global ymzwrite1
+.type   ymzwrite1, %function
+ymzwrite1:
+@ Function supports interworking.
+@ args = 0, pretend = 0, frame = 0
+@ frame_needed = 0, uses_anonymous_args = 0
+@ link register save eliminated.
+mvn     r3, #-1073741824@0x-40000000
+sub     r3, r3, #12288@r3=0x-40003000
+mov     r2, #0
+str     r2, [r3, #-3947]@ 0 -400030F6B (FIO4PIN=0×00に対応
+str     r1, [r3, #-3947]@FIO4PIN=adr; 1clkでアクセス
+add     r1, r1, #512
+str     r1, [r3, #-3947]@2clk分でtCSW<30ns<2clk分=28nsあれ？
+add     r2, r0, #256
+str     r2, [r3, #-3947]@余談だけどr2つかわずに済むよね
+\end{lstlisting}
+またもや2clkでFIO4PIN=(0×100+value);
+これは$t_{WOFF}$ を満たしてないはずだ。
+\begin{lstlisting}
+add     r0, r0, #768
+str     r0, [r3, #-3947]
+bx      lr
+.size   ymzwrite1, .-ymzwrite1
+\end{lstlisting}
+
+データシートの定格中の最速より1.4倍も高速にうごかせるのか。\\
+理由として考えられるのは、古いICであるため、そのままの仕様で生産するのが難しく、製造プロセスの微細化などがされた、高速に動作可能なICの製造が可能な近代的な半導体工場に、設備の集約などに伴って、製造が移管されたため、公称性能よりも速度が上がったのかもしれない。
+\begin{figure}[htb]
+ \begin{center}
+ \caption{中央が音源LSI,右上から中央上がアンプ}
+  \includegraphics[scale=0.25,bb=94 20 2500 1400,clip]{DSCN2037.JPG}
+ \end{center}
+ \end{figure}
+\chapter{ソースコードを読む技術}
+\section{関数値渡しの謎}
+ARMでの関数の値渡しに疑問を持ち研究を行った。\\
+FreeRTOS上でにあるプロセスのサブルーチンが孫ルーチンを呼ぶ部分をまず見てみることにする。\\
+子ルーチン:(思ったより長くなったので抜粋)\\
+\begin{lstlisting}[caption=子ルーチン]
+.LVL64:
+.loc 1 264 0
+mov ip, #0
+.loc 1 265 0
+mov r0, ip
+mov r1, #66
+mov r2, #8
+.loc 1 264 0
+str ip, [r4, #0]
+.loc 1 265 0
+bl i2csender
+\end{lstlisting}
+\begin{lstlisting}[caption=孫ルーチン]
+i2csender:
+.LFB5:
+.loc 1 134 0
+.cfi_startproc
+@ Function supports interworking.
+@ args = 0, pretend = 0, frame = 0
+@ frame_needed = 0, uses_anonymous_args = 0
+.LVL22:
+.loc 1 136 0
+cmp r0, #0
+.loc 1 134 0
+stmfd sp!, {r3, r4, r5, r6, r7, lr}
+.LCFI1:
+.cfi_def_cfa_offset 24
+.loc 1 134 0
+mov r4, r1
+.cfi_offset 14, -4
+.cfi_offset 7, -8
+.cfi_offset 6, -12
+.cfi_offset 5, -16
+.cfi_offset 4, -20
+.cfi_offset 3, -24
+mov r6, r2
+.loc 1 136 0
+beq .L58
+.loc 1 148 0 discriminator 1
+cmp r2, #0
+.loc 1 149 0 discriminator 1
+ldrne r5, .L71
+.loc 1 150 0 discriminator 1
+movne r7, #40
+.loc 1 148 0 discriminator 1
+beq .L57
+.LVL23:
+.L68:
+.loc 1 149 0
+and r1, r4, #255
+str r1, [r5, #8]
+.loc 1 150 0
+str r7, [r5, #24]
+.L63:
+.loc 1 151 0 discriminator 1
+ldr r3, [r5, #4]
+cmp r3, #40
+bne .L63
+.loc 1 152 0
+ldr r0, .L71+4
+mov r1, r4
+bl printf
+\end{lstlisting}
+ここで、孫ルーチンのC言語での記述を見てみよう。
+\begin{lstlisting}[caption=孫ルーチン:C言語]
+void i2csender(int Continue, unsigned int Data, int place){
+if(Continue==0){
+I22DAT = Data;
+I22CONSET |= 0×04;
+I22CONCLR  = 0×08;
+printf(“requesting\%x”,Data);
+while(I22STAT!=0×18 && I22STAT!=0×20)printf(“.”);
+if(I22STAT==0×20){
+printf(“No such device\%4x\n”,Data);
+i2cErr = 0×22;
+return;
+}
+}else {
+for(;place != 0;place-=8){
+I22DAT = (Data & 0xFF);
+I22CONCLR  = 0×28;
+while(I22STAT!=0×28);
+printf(“Data\%4x\n”,Data);
+Data = Data >> 8;
+}
+}
+}
+\end{lstlisting}
+呼び出し部:引数が3つある。		i2csender(0,0×42,8);
+0,0×42(0d66),8を投げている。もう一度子ルーチンを見る。
+\begin{lstlisting}[caption=子ルーチンさらに抜粋]
+.LVL64:
+.loc 1 264 0
+mov ip, #0
+.loc 1 265 0
+mov r0, ip @引数1つめ、何故mov ip, #0をへるのか不明、mov r0, #0ではいけないのか
+mov r1, #66 @引数2つめ
+mov r2, #8 @引数3つめ
+.loc 1 264 0
+str ip, [r4, #0]
+.loc 1 265 0
+bl i2csender
+\end{lstlisting}
+ということでどうやらARMでは3つの引数を渡すときにr0〜r2に置くということが分かった。本当だろうか。
+最初にあるstmfd sp!, {r3, r4, r5, r6, r7, lr}と最後にあるldmfd sp!, {r3, r4, r5, r6, r7, lr}をみる。つまり、スタックにr3〜r7とlrを積んで、作業スペースを確保しているのだろう。
+
+では次に、printf()のような文字列引数の場合、どうやって渡してるんだろうという疑問が沸く。レジスタ1こ文字列が収まりきるとは限らないからだ。
+\begin{lstlisting}[caption=printf呼び出し:アセンブリ]
+.LCFI1:
+.cfi_def_cfa_offset 24
+.loc 1 134 0
+mov r4, r1
+.cfi_offset 14, -4
+.cfi_offset 7, -8
+.cfi_offset 6, -12
+.cfi_offset 5, -16
+.cfi_offset 4, -20
+.cfi_offset 3, -24
+mov r6, r2　@第3引数をr6に退避(r2が0だと0フラグが立つ)
+.loc 1 136 0
+beq .L58 @0フラグ立ってたら分岐
+.loc 1 148 0 discriminator 1
+cmp r2, #0 
+.loc 1 149 0 discriminator 1
+ldrne r5, .L71 @I22DATのアドレス
+.loc 1 150 0 discriminator 1
+movne	r7, #40 @0を第3引数にしてないので、r7に40を入れる。
+.loc 1 148 0 discriminator 1
+beq	.L57 
+.LVL23:
+.L68:
+.loc 1 149 0
+and	r1, r4, #255
+str	r1, [r5, #8] @I22DATにいれます
+.loc 1 150 0
+str	r7, [r5, #24] @I22CONCLRに0×28をいれる
+.L63:
+.loc 1 151 0 discriminator 1
+ldr	r3, [r5, #4] @I22STATをロード
+cmp	r3, #40 @それって0×28？
+bne	.L63 @違う間ループ, 3命令かな？(実は.locがようわかってない)
+.loc 1 152 0
+ldr	r0, .L71+4 ここが問題のprintf()にたいする引数渡し
+mov	r1, r4
+bl	printf
+\end{lstlisting}
+さて、L71+4が何をさすのだろうか。
+\begin{lstlisting}[caption=ラベルL71]
+.L71:
+.word -536346624
+.word .LC3
+.word .LC1
+.word .LC2
+.word i2cErr
+.cfi_endproc
+\end{lstlisting}
+
+ふむ。+4ということは、きっと.LC3だろう。(4byte = 32bit,まえのが.wordだから32bitでアラインされている)
+.LC3にはなにがはいっているのであろうか。
+\begin{lstlisting}[caption=ラベルLC3]
+.LC3:
+.ascii ”Data\%4x$\backslash$012$\backslash$000″
+.space 3
+\end{lstlisting}
+
+これを見るとどうやら.asciiというアライン方法があるらしいが、そんなものは見たことが無い。\\
+ということで、データシートを開く。\\
+$https://dl.dropbox.com/u/15570814/051020DDI0100HJ_v6_1.pdf$
+しかし載ってない。\\
+あれ？とにかく、.asciiっていうアライン方法で、 “ASCIIencoded string“ってやってやれば、(多分アセンブラが)対応するバイナリに変換してLC3に置いているのだろう。\\
+ところで、$\backslash$012$\backslash$000ってなんだろう。
+とりあえず、$\backslash$nを$\backslash$tに変えてもっかいコンパイルする。\\
+.ascii “Data\%4x$\backslash$011$\backslash$000″
+どうやら$\backslash$nが$\backslash$012で、$\backslash$tでは$\backslash$011っぽい。
+しかし、なんのことかわからない。\\
+では、PCではどうなるんだろう。\\
+.string “Hello,World!”
+おや？\\
+movl \$.LC0, \%edi\\
+call puts\\
+そんな最適化いらないぞ！ということで....\\
+$\backslash$tにしてみる。\\
+.string “Hello,world!$\backslash$t”\\
+$\backslash$とでた。$\backslash$012$\backslash$000にあたりそうなasciiコードも$\backslash$nになさそうだし、PCじゃふつうに$\backslash$tって渡すため謎。\\
+とにかく、これでは8byteなため、r0にわたしてprintfにリンク付き分岐するようだ。\\
+printf(“Data\%4x::::$\backslash$n”,Data);\\
+と言う風に変えてみた。\\
+ところが、
+\begin{lstlisting}[caption=ラベルLC3]
+.LC3:
+.ascii “Data\%4x::::1200″
+.space 3
+.L71:
+.word -536346624
+.word .LC3
+.word .LC1
+.word .LC2
+.word i2cErr
+.cfi_endproc
+\end{lstlisting}
+
+命令も
+\begin{lstlisting}[caption=printf()呼び出し部]
+ldr r0, .L71+4
+mov r1, r4
+bl printf
+\end{lstlisting}
+変わらない。\\
+もしや、.L71+4には.LC3のアドレスがはいってるのか？\\
+arm-none-eabi-objdumpする
+\begin{lstlisting}[caption=objdumpで見たprintf()呼び出し部]
+3c: e59f009c ldr r0, [pc, #156] ; e0 <i2csender+0xe0>
+40: e1a01004 mov r1, r4
+44: ebfffffe bl 0 <printf>
+e0: 0000003c .word 0x0000003c
+\end{lstlisting}
+あれ？3cってだれ？0x3cをr0にロードしているのにもかかわらず、0x3cをなにがはいるかは未知であるはず。\\
+この問題は\href{http://infocenter.arm.com/help/topic/com.arm.doc.ihi0042d/IHI0042D_aapcs.pdf}{Procedure Call Standard for the ARM Architecture}で答え合わせが出来る様だ。
+
+\section{返り値の研究}
+この疑問は一度置いておくこととして、こんどは返り値について考えてみよう。\\
+ついでに1つの未知の命令の働きを推測する方法も紹介する。
+\begin{lstlisting}
+int ymzwrite1(int value,int adr){
+                FIO4PIN=0x00;
+                FIO4PIN=adr;
+                FIO4PIN=(0x200+adr);
+                FIO4PIN=(0x100+value);
+                FIO4PIN=(0x300+value);
+return adr*16+value;
+}
+\end{lstlisting}
+この関数をコンパイルして出たアセンブリファイルを追っていこう。
+未知のlsl命令での演算を仮に\#とおく。
+\begin{lstlisting}
+ymzwrite1:
+.LFB15:
+	.loc 1 378 0
+	.cfi_startproc
+	push	{r4, lr}
+.LCFI19:
+	.cfi_def_cfa_offset 8
+	.cfi_offset 4, -8
+	.cfi_offset 14, -4
+.LVL117:
+	.loc 1 379 0
+	ldr	r3, .L171 @左辺を準備
+	mov	r4, #0 @まずFIO4PINの右辺を準備
+	.loc 1 381 0
+	mov	r2, #128 @代入処理を後回しにして次の仕込み
+	@いきなりr2に512を入れないのには、Thumb命令だからという制約があるはず
+	.loc 1 379 0
+	str	r4, [r3]@r4は0が入っていた。代入処理
+	.loc 1 381 0
+	lsl	r4, r2, #2 @r4には128#2を代入
+	add	r2, r1, r4 @r2=128#2+r1(adr)
+	.loc 1 382 0
+	add	r4, r0, #1 @r4=1+val
+	.loc 1 380 0
+	str	r1, [r3] @Adr代入
+	.loc 1 382 0
+	add	r4, r4, #255 @r4=r4+255=val+256
+	.loc 1 381 0
+	str	r2, [r3] @r2は128#2+r1(adr)である。3度目の代入である
+	@FIO4PIN=(0x200+adr);が行われているはずだ。
+	.loc 1 383 0
+	mov	r2, #192 @r2=192
+	.loc 1 382 0
+	str	r4, [r3] @val+256をr3に代入
+	.loc 1 383 0
+	lsl	r4, r2, #2
+	add	r2, r0, r4 @r2=val+r2(192)#2
+	.loc 1 385 0
+	lsl	r1, r1, #4 @r1=r1#4
+.LVL118:
+	add	r0, r1, r0 @r0=val+adr#4
+.LVL119:
+	.loc 1 383 0
+	str	r2, [r3] @
+	.loc 1 386 0
+	@ sp needed for prologue
+	pop	{r4}
+	pop	{r1}
+	bx	r1
+\end{lstlisting}
+以上から、\[
+0x200+A=0x80\#2+A
+\]
+\[
+0x300+B=0xC0\#2+B
+\]
+が分かる。\\
+どうやら、頭の少なくとも2bitが対応しているという可能性がある。すると、
+{\large \#}は\begin{itemize}
+\item 加算
+\item シフト
+\item 乗算
+\item その他ビット演算
+\end{itemize}
+の可能性がある。\\
+桁数から察するに、加算はおかしい。\\
+乗算だった場合、2が即値であったらありえない。
+
+ここで、\begin{lstlisting}[caption=戻り値？]
+	lsl	r1, r1, #4 @r1=r1#4
+.LVL118:
+	add	r0, r1, r0 @r0=val+adr#4
+\end{lstlisting}
+に注目する。すると、\\adr*16+value;\\
+が[戻り値？]の様に表現されている可能性があるとわかる。
+さらに戻り値の可能性をおっていくと、最初にpushしたlrを取り出すために、わざとpop \{r1\}をpop \{r4\}の後に行っていることに気づく。\\
+これは戻り先番地である。なぜならbx r1があり、どうやら呼び出し元に帰っているという予測ができるからだ。\\
+
+するとこの直前に置かれているr0がもっとも戻り値として最適であるはずだ。
+
+すると、adr$\times$16=adr\#4であることがわかる。\\
+
+これらの状況は、明らかに\#とlslがシフト演算である可能性が高い。\\
+その場合、戻り値はr0に記述される。
+この問題は\href{http://dl.dropbox.com/u/15570814/051020DDI0100HJ_v6_1.pdf}{ARMアーキテクチャマニュアル}で答え合わせが出来る。
+LSL命令は確かに左シフト演算であった。
+
+
+\begin{figure}[htb]
+ \begin{center}
+ \caption{ターゲットのマイコンボード}
+  \includegraphics[scale=0.25,bb=94 20 2500 1400,clip]{DSCN2011.JPG}
+ \end{center}
+ \end{figure}
+\clearpage
+\part{社会}
+\chapter{この論文に使われている技術}
+\section{ヴァージョン管理}
+ヴァージョン管理システムの長所は既にあげたとおりだ。\\
+これは何もソフトウェアにのみに適用されるものではない。以前の状態にもどしたり、もどしたことを取り消したり出来たら便利なのは当然である。\\
+2通りに分けて進めたり、後でそれぞれの成果をまとめたりするのも簡単にできる。\\
+
+ヴァージョン管理システムはさまざまなものがあるが、今回はgitを使用した。理由は\begin{itemize}
+\item 分散型であること──データの損失の可能性が非常に低くなる
+\item 簡単に扱えること
+\item 話題性があること
+\end{itemize}
+分散型というのは、手元など、一ヶ所のリポジトリに対して変更を書きつづける方法と違い、まず新しいヴァージョンを手元のリポジトリにコミットし、ある程度コミットがたまったり、1度重要なコミットをしたりなど、好きな時に中央のサーバにプッシュする形式をとるものである。\\
+複数の正式なリポジトリが存在するために、中央や開発者のマシンが壊れても両方同時に壊れることはほとんどないため、データが失われる可能性は極めてひくくなる。
+この様な形式をとるシステムは他に\href{http://mercurial.selenic.com/}{mercurial}などがある。\\
+このシステムの歴史は特異で、現在は日本人の濱野純氏によって開発が続けられているが、もともとはLinuxの開発者であるLinus Torvaldsによって開発された。\\
+これは、Linux Kernelの開発には、Bitkeeperというプロプライエタリなソフトウェア(バイナリのみ無料)を使用していたが、ライセンスや価格改定などの問題があって、乗り換えざるを得なくなったという背景に基づいて創られている。\\
+これは、常にプロプライエタリな製品を使いつづける危険に対して、OSSで立ち向かって解決したという構図にもとることが出来る。
+\section{\pLaTeX}
+\TeX というのはドナルドクヌースが開発した、非常にバグが少なく見た目のよい組版ソフトウェアであり、\pLaTeX はその拡張版である。\\
+また、バグが少ないのは、オープンソースであるとともに、バグか見つかった場合、前のバグ発見者に出した倍の謝礼が支払われるなどの遊びがあるためである。\\
+今回、私がこれを採用したのは、この分量をOpenOfficeなどで書くのは大変であること、編集はテキストエディタで行うため非常に安定していること、見た目が美しいことである。\\
+GUIでかつWYSWYGな編集ソフトも大変結構だが、あれでは執筆に集中することが出来ないだろう。\\
+だいたい、word形式など、ソフトウェアどころかヴァージョンやOSで見た目や果てはページ数まで変わって来てしまう。\\
+印刷が自前ならともかく、発注する場合は体裁が自分の手元から離れたときと紙になって帰ってきたときで変わってしまうかもしれないわけで、出版などでは致命的な問題に思える。
+\begin{figure}[htb]
+ \begin{center}
+ \caption{このような交差した配線などは高周波を流すのにはまったく向いていない}
+  \includegraphics[scale=0.25,bb=94 20 2500 1400,clip]{DSCN2036.JPG}
+ \end{center}
+ \end{figure}
+\chapter{ノウハウの共有}
+人間、誰しも最初は初心者である。であるから、初心者を育てることなしに、その分野の発展はむりである。それは、アマチュアの中でもかわらない。\\
+であるから、自分より初心者の人がリファレンスして分かるようなノウハウを残すことは発展上重要である。
+\section{ブログ}
+ブログでの問題点は、\begin{itemize}
+\item 整理された情報が少なく、どうしてもワンポイントノウハウになりがちである
+\item 整合性を気にして丁寧に書かれた立派なサイトと比べて間違いが非常に多く分布する
+\item 一度かかれた記事はメンテナンスされにくいという点があげられる。
+\end{itemize}
+しかし僕は、ブログの発展はオープンソースの推進に良い影響を与えていると信じている。それはこの様な状況になったからだ。\\
+\begin{itemize}
+\item オープンソースを利用する人の裾野がひろがり、数が増えたために、立派な体裁のサイトがすべてに存在するには厳しい状況となった
+\item マニュアルをよみながら操作を習得する方法は非常に有意であるが、実際はインストール後には殆ど常に読まれることは少ない
+\item その代わり、問題にぶつかった場合にHow-to-solve式にGoogle検索される風潮になった
+\item 人数が増えたのにもかかわらず、1次ソースのマニュアルのみが重宝されるというのは非効率的であって、利用者がそのまま指導者になる形が好ましい
+\item 大きなマニュアルと違い、ブログは、その日つまずいたことと直し方なり、その日の作業の要約なりで有用なノウハウが貯蓄されるにもかかわらず、目的が不在で、書きつづけ整備することにほとんど心の準備が必要ない
+\end{itemize}
+利用者が裾野が広がる形で増えたために、そこまで手間な方法でなくともノウハウの共有が必要とされた。ライトユーザをオープンソースが"ただの"利用者から"利用メインだが貢献もする"利用者に変えるという重要なオープンソースの発展の鍵にブログは最適にマッチした。これで、記事の間違いや死角は、人数によってカヴァーされるようになった。
+\section{SNS}
+近年のSocialNetworkServiceの発達は目覚ましい。\\
+このようなメディアを利用すると、どのようなことが技術者になるために役に立つのであろうか。
+\subsection{背中を見る視点}
+もっとも素晴らしいことは非常にすぐれた技術者との出会いがあるということだ。もし自分のまわりの知り合いだけが、知っている技術者であれば、関心のあるトピックが偏り、また、同じようなレベルの人とのつながりでしかない。このつながりは普段技術を身につける上ではもっとも大切で、得意な分野が違うために教え合うということが一番のモチベーションにもなり、またスキルアップにもつながる。\\
+しかし、それだけでは上への広がりが見えにくい。いま自分の持っている、または習得しようとしている技術がどのような展開をしていくか、ということを、その場でまさに使ったり、開発したりしている人がいるというのは意欲をかきたてられるし、背伸びして技術を学ぶようになる。\\
+初心者に限らず、技術者に限らず、すべてのスキルアップは背伸びなしにはありえない。\\
+\subsection{人に教えるということ}
+逆に、自分がある程度技術を持つようになると、今度は困った人をみる機会が多くなる。そのような場合に、いろいろなアドヴァイスをすることを楽しむというのは、非常に大きな自分の訓練になる。\\
+教わる、高度なGuru的技術者と話す、技術者同士がやりとりをしている現場を見る、そして教えるということ。これらのコミュニケーションは、プロプライエタリな、企業などの環境の外において、技術者として育つために必須の環境であることは間違いない。これが最もリアルタイムにできる場所という意味で、SNSは非常に有意である。\\
+
+SNSにはさまざまな種類のサービスがある。たとえば、githubにもSNSの機能がある。これは注目しているソフトウェアをウォッチするということで実現する。\\
+ウォッチしているソフトウェアにあたらしいリリースがなされれば、それが自分のダッシュボードでわかるというものだ。\\
+またプログラミングコンテストのSNSもある。Codeforcesなどでは頻繁にやりとりを行う人々もいるし、TopCoderなどでもどうやらそのようだ。
+
+また、専門性のない一般的なSNS、たとえばTwitterなどでも、そのようなメリットは享受できる。ハッカー(この場合は\href{http://cruel.org/freeware/hack.html}{What's a Hack?}での意味をとる)の掛け合い、文句、興味の最先端が垣間見れる。\\
+いままで、技術者は大学や会社などでしか育成出来なかった。それは人間が直接かかわらないと人間は育たないからだ。しかし、いま、誰でも好奇心さえあれば教えてもらえる立場に立つことが出来る。
+\section{フォーラム}
+もっと専門性の高い疑問や問題にぶつかって、サラッと答えられないような問題では、SNSでは解決がなされない。また、SNSでは過去のやりとりが流れて行ってしまって、ほとんど参照できない。少なくとも参照性がわるい。また、どうしても日本の中の、SNSでつながっている人間だけだと教えられる人が限られてくる。\\
+そこで海外のフォーラムを活用すべきだ。\\
+たとえば、\href{http://www.alteraforum.com/}{AlteraForum}は頻繁に利用した。ここでは、教えたことの量でランクづけがなされる。これはもしかしたら教える側にモチベーションの一つとなっているのだろうが、やはり一番はその質問者の"Thx!"だろう。\\
+\section{man}
+どのようにxxxはうごいているのか、とか、xxxとは一体何か、といった漠然とした疑問が初心者から出された場合、よくあるのは、「ここを参考にしろ」といってソースコードとオンラインマニュアルが示されることだ。この様な風潮だけでは初心者を遠ざけてしまう。\\
+しかし、manというコマンドがUNIX系のPC用OSには必ずといっていいほどあり、これが何十年もの間非常に重宝され、また丁寧にメンテナンスされてきたというのは事実であり、素晴らしい伝統である。\\
+\begin{figure}[htb]
+ \begin{center}
+ \caption{オシロスコープ}
+  \includegraphics[scale=0.25,bb=94 20 2500 1400,clip]{DSCN1986.JPG}
+ \end{center}
+ \end{figure}
+\chapter{社会に於けるオープンソースの立場}
+\section{ビジネスモデル}
+オープンソース製品を企業が開発することは、決して儲からないというわけではない。\\
+むしろ、そのような企業は年々増えている。これは、サポートの販売がメインとなっている。特にLinuxや仮想化などの、エンタープライズの分野ではよく耳にする。\\
+たとえば\href{http://goo.gl/IYDKx}{オープンソース ソリューションの検索結果}と\href{http://goo.gl/FxHG6}{windowsサーバ ソリューションの検索結果}ではほとんど数が変わらない。\\
+また、\href{http://japan.internet.com/allnet/20110124/12.html}{2011年はモバイルデバイスの販売数がパソコンを上回るとの予測─japan.internet}という予測速報が先日発表されたが、このようなモバイル端末のOSはAndroidにかぎらず、LinuxやTRONの様なオープンソースOSが搭載されていることが多い。\\
+さらに、OSや仮想化よりも上のレイヤにおける、HTTPサーバやメールサーバ、FTPサーバなど主要なサーバサービスやjavascriptなどもそれぞれApache、postfix、ncftpd、jQueryなど、OSSが1位のシェアを誇っている。\\
+また、ブラウザも、firefoxやchromeなど、著名なブラウザがオープンソースである。
+\section{ホスティングサービス}
+Googleやgithub.com、sourceforgeなどが、OSSホスティングを無料で行うサービスを近年発表したために、OSSをつくったが寄付も広告収入もなく、サーバ運営の実費は嵩んでいく…というようなリスクが回避され、巨大なOSSプロジェクトが成熟してきた今日において、今度は小さなプロジェクトがたくさんできるだろう。\\
+それらのうちの一部が、GIMPやInkscapeのように有名になるのだろう。\\
+それによる派生利益(ダウンロード時に人々が見る広告の収入やサポート費)は、既に集約されていたサーバシステムの追加管理費より当然大きくなる。\\
+結果として、そうはならなかったプロジェクトも恩恵を受けることが出来る。
+\section{Arduino}
+また、2008年ごろから注目が集まっている有名プロジェクトとしてArduinoがある。これは、手軽に初心者でも電子工作を楽のしめるように設計されたオープンハードウェア端末である。\\
+それまでにオープンソースソフトウェアが発達してきたのに対し、オープンソースハードウェアというものはあまり存在し無かったのだが、これをきっかけにArmadilloやGainerなど様々な電子工作を容易化するハードウェアが公開された。\\
+この他に、オープンソースハードウェアなモバイルPCやCPUなども数多く存在する。
+\section{幅広い層の参画}
+また、オープンソースはすでに技術的なプロダクトにのみ適用されるものではない。\\
+\href{http://www.yamdas.org/column/technique/rmsonp2pj.html}{Richard Stallman、P2Pを語る}で述べられているとおり、ソフトウェアだからといってproduct(製品)というだけの見方は正しくない。企業が営利のためだけに開発したものと違って、そこには哲学も流れているし、ソースコードが知らない人に読まれるということはソースコードやデータベースをいかに美しく築くかという努力も行われる。\\
+それはすでにArtworkの領域だ。\\
+
+また、逆に、本当の芸術活動としてのアートワークもオープンソース化されてきている。\\
+wikipediaの記事や、この論文にも適応されているような\href{http://creativecommons.jp/}{クリエイティブコモンズ}も既に有名であるし、GPLやMITライセンスが適応された芸術作品は、PCのデスクトップピクチャやアイコン、アピアランスがまだおおいものの、それ以外の芸術作品も徐々に増えている。\\
+駆け出しやいくら頑張ってもダメなどの様に売れないよりは、多くの人に楽しんでもらおう、という人もいれば、高クオリティ版や便利に視聴するためには料金が発生するが低クオリティ版や不便な形のものは再配布可能、という人もいる。\\
+もっとも好ましいのはオープンソースの発展に夢を感じている人が、それらのソフトウェアで利用出来るようにするためなどの目的で公開していることだろうが。\\
+たとえば以下のサイトがそうである。
+\begin{itemize}
+\item \href{http://art.gnome.org/}{gnome-art}
+\item \href{http://www.deviantart.com/}{deviantART}
+\item \href{http://kde-look.org/}{KDE-Look.org}
+\item \href{http://www.soundclick.com/business/license\_list.cfm}{SOUNDCLICK}
+\end{itemize}
+\chapter{90億総ソースコード・リテラシィの時代へ}
+\section{PC価格の低下}
+ここ数十年のコンピュータの価格は下落を続けている。\\
+それは性能あたりもそうだが、一般的な家庭用PCの中央値も下がり続けている。\\
+特に去年流行したネットブックなど、回線契約費を含めて1円だったこともある。とうぜん回線維持費はかかる訳だが、その端末でなければ接続できないわけでもない。\\
+これにともなって、子供のような、プログラミングを習得しやすい世代のうちに、コンピュータリテラシィを身につけるようになってきている。\\
+小さいころからプログラミングをした方が、よりすぐれたコンピュータ技術者になりやすいことは自明である。ネイティブスピーカーの方が、第2言語として学んだ人より堪能であるのは一般に知られた事実だ。\\
+事実、技術系の部活に所属していると、新しい世代の方が、よりすごい人が入ってくることが多いという実感がある。\\
+よりすぐれたコンピュータ技術者がより多い世代が活躍するようになれば、それだけ技術者の密度が上がるため交流が盛んにもなるはずだ。これはコンピュータ科学やオープンソーステクノロジに革新をもたらす可能性を秘めている。\\
+
+特に、発展途上国でも個人がPCを持つようになってきている。プログラミングは、ほとんどインタネットさえあれば出来る、お金のかからない趣味となりうる。
+\section{ツールの成熟、コミュニティの発達}
+また、これまで見てきた通り、コミュニティも開発環境も、十分とは言えないまでも、急速に成熟してきていて、今後、よりよい環境が整っていくことが期待される。\\
+よりよい開発環境や言語の登場はソフトウェア開発を加速させるであろう。
+
+もし、これから、学校の授業でコンピュータ科学などをおしえるまでになって、ほとんどの一般人がプログラミングできるようになり、読書やスポーツのように、ソースコードを読んだり書いたりする人がでてくればオープンソースコミュニティに本格的に参画する人は否応なしに増えるであろう。\\
+
+この究極的な形は、世界中の人口の大半がオープンソースソフトウェアを利用してオープンソースコミュニティの一員となることである。
+2050年には世界人口が90億に達するらしいので、おおげさにこの値を設定した。\\
+しかし、21世紀内に達成されないであろうと強く主張できる要素はどこにもない。\\
+
+そして、これこそが真の技術的特異点かもしれないのだ。
+
+\begin{figure}[htb]
+ \begin{center}
+ \caption{飲み干されたRedBullはRedNullである}
+  \includegraphics[scale=0.25,bb=94 20 2500 1400,clip]{DSCN2014.JPG}
+ \end{center}
+ \end{figure}
+\end{document}
+\chapter{文献集}
+\section{データシート}
+\subsection{半導体-英語}
+資料2 LPC23xx User Manual (UM10211)\\
+http://ics.nxp.com/support/documents/microcontrollers/pdf
+/user.manual.lpc23xx.pdf  (メーカのサイト)\\
+
+資料3 CYC1041DV33.pdf\\
+http://www.cypress.com/?docID=18144　(メーカのサイト)
+\section{お世話になった個人のサイト(必ずしもサイトのデータというわけではなく直接お話を伺った場合を含む、敬称略)}
+FPGAで遊んでみる　http://www.hmwr-lsi.co.jp/\\
+アルテラマスターP http://www001.upp.so-net.ne.jp/syrius/\\
+後閑 哲也 http://www.picfun.com/\\
+\section{公式サイト}
+参考1PROSUME 2010 http://www.prosume.org/ (PROSUME公式サイト)\\
+参考2The GNU General Public License - GNU Project - Free Software Foundation (FSF) http://www.gnu.org/licenses/gpl.html (オープンソース哲学の総本山)\\
+参考3licenses/GNU\_General\_Public\_License\_version\_3.0\\
+Open Source Group Japan Wiki - SourceForge.JP\\
+http://sourceforge.jp/projects/opensource/\\
+wiki/licenses/FGNU\_General\_Public\_License\_version\_3.0\\
+ALTERA http://altera.com/
+\section{解説書など}
+資料4 改訂・入門Verilog HDL記述 | 著者 小林 優 | 発行所CQ出版株式会社\\
+資料5 Interface 2009年5月号	| 編集・出版 CQ出版 ISSN:0387-9569\\
+資料6 Interface 2009年6月号	| 編集・出版 CQ出版 ISSN:0387-9569\\
+資料7 入門Git			| 著者 濱野 純 |ISBN-13: 978-4798023809
+ものづくり革命-パーソナル・ファブリケーションの夜明け- |　著 ニール・ガーシェンフェルド | 訳 糸川 洋 発行社 ソフトバンククリエイティブ ISBN-13: 978-4797333145
+
+\section{すべてのリンク}
+http://iorivr.b.sourceforge.jp\\
+http://www.youtube.com/user/iorivr\\
+http://creativecommons.org/licenses/by-nd/2.1/jp\\
+http://opensource.org/licenses/mit-license.php\\
+http://www.gnu.org/licenses/gpl.html\\
+http://sourceforge.jp/projects/opensource/wiki/licenses/MIT_license\\
+http://sourceforge.jp/projects/opensource/wiki/licenses\%252FGNU\_General\_Public\_License\_version\_3.0\\
+http://sourceforge.jp/projects/sfnet_lpc21isp/\\
+http://aitendo2.sakura.ne.jp/aitendo\_data/product\_img2/product\_img/camera/CAMERA30W-V7670/OV7670\_DS\_(1\_4).pdf\\
+http://akizukidenshi.com/download/24LC256.pdf\\
+http://www.cs.fsu.edu/~baker/devices/lxr/http/source/linux/drivers/media/video/ov7670.c\\
+http://www.hmwr-lsi.co.jp/fpga/fpga_9.htm\\
+http://www.alldatasheet.jp/datasheet-pdf/pdf/82065/YAMAHA/YMZ284.html\\
+http://infocenter.arm.com/help/topic/com.arm.doc.ihi0042d/IHI0042D_aapcs.pdf\\
+http://dl.dropbox.com/u/15570814/051020DDI0100HJ_v6_1.pdf\\
+http://mercurial.selenic.com\\
+http://cruel.org/freeware/hack.html\\
+http://www.alteraforum.com/\\
+http://goo.gl/IYDKx\\
+http://goo.gl/FxHG6\\
+http://japan.internet.com/allnet/20110124/12.html\\
+http://www.yamdas.org/column/technique/rmsonp2pj.html\\
+http://creativecommons.jp\\
+http://art.gnome.org/\\
+http://www.deviantart.com\\
+http://kde-look.org/\\
+http://www.soundclick.com/business/license\_list.cfm\\
+
+\clearpage
+\section{メモ}
+Verilogを書くのは、この論文がきっかけであった。\\
+であるから、問題が起きるとしたらここだろうなという気がしていたが、まさにそのような事態はおきてしまった。この場を借りて、辛抱強く待ってくださった本村先生に感謝の意をささげます。\\
+
+\clearpage
+\begin{figure}[htb]
+ \begin{center}
+ \caption{飲み干されたRedBullはRedNullである}
+  \includegraphics[scale=0.25,bb=94 20 2500 1400,clip]{DSCN2014.JPG}
+ \end{center}
+ \end{figure}
+\end{document}
+

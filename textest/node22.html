@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>AlteraCPLDの開発環境</TITLE>
+<META NAME="description" CONTENT="AlteraCPLDの開発環境">
+<META NAME="keywords" CONTENT="textest">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="textest.css">
+
+<LINK REL="next" HREF="node23.html">
+<LINK REL="previous" HREF="node21.html">
+<LINK REL="up" HREF="node20.html">
+<LINK REL="next" HREF="node23.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html402"
+  HREF="node23.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html398"
+  HREF="node20.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html392"
+  HREF="node21.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html400"
+  HREF="node2.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html403"
+  HREF="node23.html">その他</A>
+<B> Up:</B> <A NAME="tex2html399"
+  HREF="node20.html">オープンソースデスクトップ環境において</A>
+<B> Previous:</B> <A NAME="tex2html393"
+  HREF="node21.html">ARMマイコンのコンパイラ</A>
+ &nbsp; <B>  <A NAME="tex2html401"
+  HREF="node2.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION05012000000000000000">
+AlteraCPLDの開発環境</A>
+</H2><BIG CLASS="LARGE">
+Alteraの開発環境、Quartus IIはwindows,Linuxどちらでも動作する。過去のヴァージョンではSolarisで動作するものもあるようだ。
+<BR>逆に言えば、マイコンと違って、CPLDの開発環境は完全なブラックボックスであるので、windowsのみのサポートでは不満があったのだと思われる。
+<BR>
+Quartus IIにかぎらず、AlteraやXilinxなどの、PLDメーカがサポートしているLinuxディストリビューションは、Redhat系と言われるものの中でも、RedHatEnterpriseLinux(RHEL)とCentOS(RHELからサポートとロゴなどの著作権物を除いたOSSなOS)、およびOpenSuSEのみである。
+<BR></BIG>
+<P>
+<BIG CLASS="LARGE">ところが、Debianで動作させることが一般に可能であり、使う上で、特に問題があるわけではない。唯一ライブラリの問題があるが、古いライブラリを持ってきて展開すれば使用できる。
+<BR></BIG>
+<P>
+<BIG CLASS="LARGE">また、OpenSuSEでは、書き込み機であるUSB-Blasterの認識が不安定で、一般的な問題ではないようだが、私が使った上では、まったく使い物にならなかった。
+むしろ、サポート対象ではないはずのDebianでの使用の方が快適である。
+それには以下のようにする。
+</BIG><PRE>	#echo /dev/usbfs      /proc/bus/usb   usbfs   devmode=0666    0       0 &gt;&gt; /etc/fstab
+</PRE>
+<BR><HR>
+<ADDRESS>
+Iori Yoneji
+2011-01-26
+</ADDRESS>
+</BODY>
+</HTML>

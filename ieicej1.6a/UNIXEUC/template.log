@@ -1,0 +1,188 @@
+This is pTeXk, Version 3.141592-p3.1.11 (euc) (Web2C 7.5.4) (format=platex 2011.1.25)  26 JAN 2011 19:13
+ %&-line parsing enabled.
+**template.tex
+(./template.tex
+pLaTeX2e <2006/11/10>+0 (based on LaTeX2e <2009/09/24> patch level 0)
+(./ieicej.cls
+Document Class: ieicej 2010/04/05 v1.6a for Transactions of IEICE
+\@JQ=\dimen118
+\@Q=\dimen119
+\@EM=\dimen120
+\c@@paper=\count81
+LaTeX Font Info:    External font `min9 at8.8711pt' loaded for size
+(Font)              <9> on input line 442.
+\@authorlist=\toks15
+\@authorcnt=\count82
+\@alcnt=\count83
+\p@alcnt=\count84
+\@totalnumber=\count85
+\authornamesep=\dimen121
+\@spcnt=\count86
+\alignorder=\count87
+\totalnumberm@ne=\count88
+\@authorcntp@ne=\count89
+\chk@alcnt=\count90
+\chk@p@alcnt=\count91
+\eabstractbox=\box41
+\ekeywordbox=\box42
+\Pauthorsep=\dimen122
+\abstractbox=\box43
+\keywordbox=\box44
+\Lauthorsep=\dimen123
+\LPauthorsep=\dimen124
+\c@section=\count92
+\c@subsection=\count93
+\c@subsubsection=\count94
+\c@paragraph=\count95
+\c@subparagraph=\count96
+\@hlskip=\skip41
+\verbatimleftmargin=\dimen125
+\verbatimbaselineskip=\dimen126
+\c@figure=\count97
+\c@table=\count98
+\abovecaptionskip=\skip42
+\belowcaptionskip=\skip43
+\@tempboxb=\box45
+\capwidth=\dimen127
+\ecapwidth=\dimen128
+\symmincho=\mathgroup4
+LaTeX Font Info:    Overwriting symbol font `mincho' in version `bold'
+(Font)                  JY1/mc/m/n --> JY1/gt/m/n on input line 2852.
+\bibindent=\dimen129
+\c@profile=\count99
+\mathindent=\dimen130
+\@minsofar=\count100
+\@min=\count101
+\@cite@temp=\count102
+) (/usr/share/texmf-texlive/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-texlive/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks16
+)
+(/usr/share/texmf-texlive/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-texlive/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/etc/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: dvips.def on input line 91.
+
+(/usr/share/texmf-texlive/tex/latex/graphics/dvips.def
+File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+))
+\Gin@req@height=\dimen131
+\Gin@req@width=\dimen132
+)
+
+Class ieicej Warning: Author's name "" doesn't have a space.
+
+
+Class ieicej Warning: a space should be added between 1st and 2nd name: "".
+
+
+Class ieicej Warning: Check the "" label, it does not correspond to 
+  any labels in \authorentry command.
+
+No file template.aux.
+\openout1 = `template.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    External font `min8 at8.1318pt' loaded for size
+(Font)              <8> on input line 29.
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <8> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 29.
+LaTeX Font Info:    External font `goth8 at8.1318pt' loaded for size
+(Font)              <8> on input line 29.
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <9> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 35.
+LaTeX Font Info:    External font `goth9 at8.8711pt' loaded for size
+(Font)              <9> on input line 35.
+LaTeX Font Info:    External font `min10 at13.307pt' loaded for size
+(Font)              <12> on input line 41.
+LaTeX Font Info:    External font `min10 at11.089pt' loaded for size
+(Font)              <10.95> on input line 41.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 41.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 41.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 41.
+LaTeX Font Info:    External font `min6 at6.6533pt' loaded for size
+(Font)              <6> on input line 41.
+LaTeX Font Info:    External font `min10 at9.6104pt' loaded for size
+(Font)              <10> on input line 41.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 41.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 41.
+LaTeX Font Info:    External font `min5 at5.1748pt' loaded for size
+(Font)              <5> on input line 41.
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <10.95> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 43.
+LaTeX Font Info:    External font `goth10 at11.089pt' loaded for size
+(Font)              <10.95> on input line 43.
+LaTeX Font Info:    External font `min7 at7.3926pt' loaded for size
+(Font)              <7> on input line 50.
+
+Class ieicej Warning: Check the 1st. argument of \profile{}{}{}.
+
+
+Class ieicej Warning: Profile's name "" doesn't have a space.
+
+LaTeX Font Info:    External font `min10 at17.742pt' loaded for size
+(Font)              <17.28> on input line 63.
+
+LaTeX Warning: Reference `ieicej@lastpage' on page 1 undefined on input line 63
+.
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 63.
+(/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 63.
+ [1
+
+
+
+] [2
+
+
+] (./template.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 903 strings out of 257674
+ 10541 string characters out of 1191153
+ 65432 words of memory out of 3000000
+ 4104 multiletter control sequences out of 10000+50000
+ 19311 words of font info for 75 fonts, out of 2000000 for 2000
+ 14 hyphenation exceptions out of 8191
+ 28i,11n,19p,354b,461s stack positions out of 5000i,500n,6000p,200000b,40000s
+
+Output written on template.dvi (2 pages, 1528 bytes).

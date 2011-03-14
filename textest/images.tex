@@ -1,0 +1,929 @@
+\batchmode
+\documentclass[morisawa,12px]{jsarticle}
+\RequirePackage{ifthen}
+
+
+\usepackage[dvipdfm,bookmarks=true,bookmarksnumbered=true,bookmarkstype=tocx,a4paper]{hyperref}
+\usepackage[dvipdfm]{graphicx}
+\usepackage{listings,jlisting}
+%
+\renewcommand{\lstlistingname}{リスト}
+\lstset{language=C,%
+  basicstyle=\ttfamily\small ,%
+  commentstyle=\textit,%
+  classoffset=1,%
+  keywordstyle=\bfseries ,%
+  frame=tRBl,%
+  framesep=10pt,%
+  showstringspaces=false,%
+  numbers=left,%
+  stepnumber=1,%
+  numberstyle=\footnotesize ,%
+  tabsize=2}%
+
+
+
+
+\usepackage[dvips]{color}
+
+
+\pagecolor[gray]{.7}
+
+\usepackage[]{inputenc}
+
+
+
+\makeatletter
+
+\makeatletter
+\count@=\the\catcode`\_ \catcode`\_=8 
+\newenvironment{tex2html_wrap}{}{}%
+\catcode`\<=12\catcode`\_=\count@
+\newcommand{\providedcommand}[1]{\expandafter\providecommand\csname #1\endcsname}%
+\newcommand{\renewedcommand}[1]{\expandafter\providecommand\csname #1\endcsname{}%
+  \expandafter\renewcommand\csname #1\endcsname}%
+\newcommand{\newedenvironment}[1]{\newenvironment{#1}{}{}\renewenvironment{#1}}%
+\let\newedcommand\renewedcommand
+\let\renewedenvironment\newedenvironment
+\makeatother
+\let\mathon=$
+\let\mathoff=$
+\ifx\AtBeginDocument\undefined \newcommand{\AtBeginDocument}[1]{}\fi
+\newbox\sizebox
+\setlength{\hoffset}{0pt}\setlength{\voffset}{0pt}
+\addtolength{\textheight}{\footskip}\setlength{\footskip}{0pt}
+\addtolength{\textheight}{\topmargin}\setlength{\topmargin}{0pt}
+\addtolength{\textheight}{\headheight}\setlength{\headheight}{0pt}
+\addtolength{\textheight}{\headsep}\setlength{\headsep}{0pt}
+\setlength{\textwidth}{349pt}
+\newwrite\lthtmlwrite
+\makeatletter
+\let\realnormalsize=\normalsize
+\global\topskip=2sp
+\def\preveqno{}\let\real@float=\@float \let\realend@float=\end@float
+\def\@float{\let\@savefreelist\@freelist\real@float}
+\def\liih@math{\ifmmode$\else\bad@math\fi}
+\def\end@float{\realend@float\global\let\@freelist\@savefreelist}
+\let\real@dbflt=\@dbflt \let\end@dblfloat=\end@float
+\let\@largefloatcheck=\relax
+\let\if@boxedmulticols=\iftrue
+\def\@dbflt{\let\@savefreelist\@freelist\real@dbflt}
+\def\adjustnormalsize{\def\normalsize{\mathsurround=0pt \realnormalsize
+ \parindent=0pt\abovedisplayskip=0pt\belowdisplayskip=0pt}%
+ \def\phantompar{\csname par\endcsname}\normalsize}%
+\def\lthtmltypeout#1{{\let\protect\string \immediate\write\lthtmlwrite{#1}}}%
+\newcommand\lthtmlhboxmathA{\adjustnormalsize\setbox\sizebox=\hbox\bgroup\kern.05em }%
+\newcommand\lthtmlhboxmathB{\adjustnormalsize\setbox\sizebox=\hbox to\hsize\bgroup\hfill }%
+\newcommand\lthtmlvboxmathA{\adjustnormalsize\setbox\sizebox=\vbox\bgroup %
+ \let\ifinner=\iffalse \let\)\liih@math }%
+\newcommand\lthtmlboxmathZ{\@next\next\@currlist{}{\def\next{\voidb@x}}%
+ \expandafter\box\next\egroup}%
+\newcommand\lthtmlmathtype[1]{\gdef\lthtmlmathenv{#1}}%
+\newcommand\lthtmllogmath{\dimen0\ht\sizebox \advance\dimen0\dp\sizebox
+  \ifdim\dimen0>.95\vsize
+   \lthtmltypeout{%
+*** image for \lthtmlmathenv\space is too tall at \the\dimen0, reducing to .95 vsize ***}%
+   \ht\sizebox.95\vsize \dp\sizebox\z@ \fi
+  \lthtmltypeout{l2hSize %
+:\lthtmlmathenv:\the\ht\sizebox::\the\dp\sizebox::\the\wd\sizebox.\preveqno}}%
+\newcommand\lthtmlfigureA[1]{\let\@savefreelist\@freelist
+       \lthtmlmathtype{#1}\lthtmlvboxmathA}%
+\newcommand\lthtmlpictureA{\bgroup\catcode`\_=8 \lthtmlpictureB}%
+\newcommand\lthtmlpictureB[1]{\lthtmlmathtype{#1}\egroup
+       \let\@savefreelist\@freelist \lthtmlhboxmathB}%
+\newcommand\lthtmlpictureZ[1]{\hfill\lthtmlfigureZ}%
+\newcommand\lthtmlfigureZ{\lthtmlboxmathZ\lthtmllogmath\copy\sizebox
+       \global\let\@freelist\@savefreelist}%
+\newcommand\lthtmldisplayA{\bgroup\catcode`\_=8 \lthtmldisplayAi}%
+\newcommand\lthtmldisplayAi[1]{\lthtmlmathtype{#1}\egroup\lthtmlvboxmathA}%
+\newcommand\lthtmldisplayB[1]{\edef\preveqno{(\theequation)}%
+  \lthtmldisplayA{#1}\let\@eqnnum\relax}%
+\newcommand\lthtmldisplayZ{\lthtmlboxmathZ\lthtmllogmath\lthtmlsetmath}%
+\newcommand\lthtmlinlinemathA{\bgroup\catcode`\_=8 \lthtmlinlinemathB}
+\newcommand\lthtmlinlinemathB[1]{\lthtmlmathtype{#1}\egroup\lthtmlhboxmathA
+  \vrule height1.5ex width0pt }%
+\newcommand\lthtmlinlineA{\bgroup\catcode`\_=8 \lthtmlinlineB}%
+\newcommand\lthtmlinlineB[1]{\lthtmlmathtype{#1}\egroup\lthtmlhboxmathA}%
+\newcommand\lthtmlinlineZ{\egroup\expandafter\ifdim\dp\sizebox>0pt %
+  \expandafter\centerinlinemath\fi\lthtmllogmath\lthtmlsetinline}
+\newcommand\lthtmlinlinemathZ{\egroup\expandafter\ifdim\dp\sizebox>0pt %
+  \expandafter\centerinlinemath\fi\lthtmllogmath\lthtmlsetmath}
+\newcommand\lthtmlindisplaymathZ{\egroup %
+  \centerinlinemath\lthtmllogmath\lthtmlsetmath}
+\def\lthtmlsetinline{\hbox{\vrule width.1em \vtop{\vbox{%
+  \kern.1em\copy\sizebox}\ifdim\dp\sizebox>0pt\kern.1em\else\kern.3pt\fi
+  \ifdim\hsize>\wd\sizebox \hrule depth1pt\fi}}}
+\def\lthtmlsetmath{\hbox{\vrule width.1em\kern-.05em\vtop{\vbox{%
+  \kern.1em\kern0.8 pt\hbox{\hglue.17em\copy\sizebox\hglue0.8 pt}}\kern.3pt%
+  \ifdim\dp\sizebox>0pt\kern.1em\fi \kern0.8 pt%
+  \ifdim\hsize>\wd\sizebox \hrule depth1pt\fi}}}
+\def\centerinlinemath{%
+  \dimen1=\ifdim\ht\sizebox<\dp\sizebox \dp\sizebox\else\ht\sizebox\fi
+  \advance\dimen1by.5pt \vrule width0pt height\dimen1 depth\dimen1 
+ \dp\sizebox=\dimen1\ht\sizebox=\dimen1\relax}
+
+\def\lthtmlcheckvsize{\ifdim\ht\sizebox<\vsize 
+  \ifdim\wd\sizebox<\hsize\expandafter\hfill\fi \expandafter\vfill
+  \else\expandafter\vss\fi}%
+\providecommand{\selectlanguage}[1]{}%
+\makeatletter \tracingstats = 1 
+
+
+\begin{document}
+\pagestyle{empty}\thispagestyle{empty}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength hsize=\the\hsize}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength vsize=\the\vsize}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength hoffset=\the\hoffset}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength voffset=\the\voffset}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength topmargin=\the\topmargin}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength topskip=\the\topskip}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength headheight=\the\headheight}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength headsep=\the\headsep}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength parskip=\the\parskip}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength oddsidemargin=\the\oddsidemargin}\lthtmltypeout{}%
+\makeatletter
+\if@twoside\lthtmltypeout{latex2htmlLength evensidemargin=\the\evensidemargin}%
+\else\lthtmltypeout{latex2htmlLength evensidemargin=\the\oddsidemargin}\fi%
+\lthtmltypeout{}%
+\makeatother
+\setcounter{page}{1}
+\onecolumn
+
+% !!! IMAGES START HERE !!!
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1622}%
+$SCCB$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline1624}%
+$I^2C$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline289}%
+$Sonitus \over Lucis \times Colorum$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{part}
+{\newpage\clearpage
+\lthtmlpictureA{tex2html_wrap1854}%
+\includegraphics[scale=0.25,bb=92 20 2500 1400,clip]{DSCN2008.JPG}%
+\lthtmlpictureZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{part}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{subsubsection}
+\stepcounter{subsubsection}
+\stepcounter{subsubsection}
+{\newpage\clearpage
+\lthtmlpictureA{tex2html_wrap1866}%
+\includegraphics[scale=0.25,bb=92 20 2500 1400,clip]{DSCN2012.JPG}%
+\lthtmlpictureZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{part}
+\stepcounter{section}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline291}%
+$アドレス長 \times 1アドレスに於けるデータ幅 = vetical \times horizonal\times 2 \times 8bit$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline293}%
+$アドレス長 \times 1アドレスに於けるデータ幅 = vetical \times horizonal\times 2 \times 16bit$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline295}%
+$\overline {CE}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline297}%
+$\overline {WE}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline299}%
+$\overline {BLE}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline301}%
+$\overline {BHE}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline305}%
+$\overline{OE}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlpictureA{tex2html_wrap1894}%
+\includegraphics[scale=0.25,bb=92 20 2500 1400,clip]{DSCN2006.JPG}%
+\lthtmlpictureZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{part}
+\stepcounter{section}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{subsubsection}
+\stepcounter{subsubsection}
+\stepcounter{section}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlpictureA{tex2html_wrap1906}%
+\includegraphics[scale=0.7,bb=10 20 600 400,clip]{fig1.eps}%
+\lthtmlpictureZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlpictureA{tex2html_wrap1910}%
+\includegraphics[scale=0.25,bb=92 20 2500 1400,clip]{DSCN1987.JPG}%
+\lthtmlpictureZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{part}
+\stepcounter{section}
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlfigureA{lstlisting164}%
+\begin{lstlisting}[caption=分周器]
+module clkdivider (input clk, output xclk);
+	reg [1:0] t_count = 0;
+	always@(posedge clk) t_count[0] <= ~t_count[0];
+	always@(posedge t_count[0]) t_count[1] <= ~t_count[1];
+	assign xclk = t_count[1];
+endmodule
+\end{lstlisting}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlfigureA{lstlisting168}%
+\begin{lstlisting}[caption=特定のピクセルのサイクルのときに立ち上がる、一部省略]
+module TimingManager(
+	input VSYNC, 
+	input HREF,
+	input pclk,
+	output reg Sig_En,
+	output enC);
+reg [8:0] line = 0;
+reg [8:0] foo = 0;
+always @(posedge HREF or posedge VSYNC)begin
+  if(HREF == 1'b1)line <= line +1'b1;
+  else line = 8'h00;
+  end
+assign enC = (line==9'h30 ) ? 1'b1 : 1'b0;
+\par
+always @(posedge pclk)begin
+		if ( HREF&enC ) foo <= foo + 1'b1;
+		else foo <= 7'b0000000;
+		if(foo[0]&foo[8]&HREF)begin
+			Sig_En<=1'b1;
+			foo <= 7'b0000000;
+		end
+		else begin
+			Sig_En<=1'b0;
+		end
+	end
+endmodule
+\end{lstlisting}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlpictureA{tex2html_wrap1919}%
+\includegraphics[width=\hsize]{tmchart.eps}%
+\lthtmlpictureZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{lstlisting178}%
+\begin{lstlisting}[caption=ピクセルごとのカウンタ]
+always @(posedge pclk)begin
+		if ( HREF&enC ) foo <= foo + 1'b1;
+		else foo <= 7'b0000000;
+		if(foo[0]&foo[8]&HREF)begin
+			Sig_En<=1'b1;
+			foo <= 7'b0000000;
+		end
+		else begin
+			Sig_En<=1'b0;
+		end
+	end
+\end{lstlisting}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{lstlisting180}%
+\begin{lstlisting}[caption=行のカウンタ]
+always @(posedge HREF or posedge VSYNC)begin
+  if(HREF == 1'b1)line <= line +1'b1;
+  else line = 8'h00;
+  end
+assign enC = (line==9'h30 ) ? 1'b1 : 1'b0;
+\end{lstlisting}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlfigureA{lstlisting183}%
+\begin{lstlisting}[caption=データコミッタ]
+module Dtacutcmmit(
+	input SigEn,
+	input [7:0]pshdta,
+	output WrCmplt,
+	output reg [11:0]popdta
+	);
+	assign WrCmplt = ~SigEn;
+	reg [3:0]redpx;
+	always @(posedge SigEn)begin
+		redpx [3:0] <= pshdta[3:0];
+	end
+	always @(negedge SigEn)begin
+		popdta[11:0]<= { redpx[3:0], pshdta[7:0] };
+	end
+endmodule
+\end{lstlisting}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlfigureA{lstlisting187}%
+\begin{lstlisting}
+module transmittr (
+	input Srialclk,
+	input Wrtcmplt,
+	input [11:0]data,
+	output SrialData
+);
+reg [11:0]Datareg;
+reg Endflg;
+wire Endtoken;
+assign Endtoken = Endflg & ~Srialclk;
+assign SrialData = Endtoken ? ~Datareg[0] : Datareg[0];
+reg  [3:0]ShftCount = 0;
+	always@( posedge Srialclk )begin
+			Datareg[11:0] <= { 1'b0, Datareg[11:1] };
+			ShftCount <= ShftCount + 4'h1;
+			if ( ShftCount == 4'hB )begin
+				Endflg <= 1'b1;
+				if( Wrtcmplt )begin
+					ShftCount <= 0;
+					end
+				end
+			else if ( ShftCount == 4'h0 )begin
+				Endflg <= 0;
+				Datareg[11:0] <= data[11:0];
+				end
+			end
+\par
+endmodule
+\par
+\end{lstlisting}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlfigureA{lstlisting192}%
+\begin{lstlisting}[caption=一気にシミュレーションまで行う1行スクリプト]
+vsim work.TEST;add wave -r /*;run 1600000;
+\end{lstlisting}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlpictureA{tex2html_wrap1927}%
+\includegraphics[width=0.7\hsize]{fig2.eps}%
+\lthtmlpictureZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlpictureA{tex2html_wrap1931}%
+\includegraphics[width=0.7\hsize]{fig3.eps}%
+\lthtmlpictureZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlfigureA{lstlisting207}%
+\begin{lstlisting}[caption=回路検証のためのモジュール.実回路には組み込まれない]
+module TEST;
+reg VSYNC;
+reg HREF;
+//wire WEb; ここら辺は外付けのSRAMを使う予定だったころの名残りが残っている
+//wire BHEb;
+//wire BLEb;always @(posedge pclk)begin
+		if ( HREF&enC ) foo <= foo + 1'b1;
+		else foo <= 7'b0000000;
+		if(foo[0]&foo[8]&HREF)begin
+			Sig_En<=1'b1;
+			foo <= 7'b0000000;
+		end
+		else begin
+			Sig_En<=1'b0;
+		end
+	end
+wire pclk;
+//wire Enasg; これはピクセル選択モジュールのイネーブルシグナルの観測用
+reg clk; //40MHzのマスタクロック
+wire xclk;
+reg [64:0]countpclk = 0;
+wire [7:0]pixdata = 8'h46;
+//wire [7:0] line,foo;バスの観測用
+//wire CEb;
+//wire [17:0] adr;
+//wire pck;
+reg Serck = 0;
+wire Serot;
+assign pclk = ~xclk;
+wire [11:0]pixbus;
+//wire Serctl,Serck,Serot;
+wire TEST;
+ReShynth i1(clk,pclk,HREF,VSYNC,Serck,Serot,pixdata,xclk,pixbus,TEST);
+initial clk <= 1'b0;
+initial HREF <= 1'b0;
+initial VSYNC <= 1'b1;
+initial #9408 VSYNC <= 0;
+\par
+always begin
+#1000 Serck <= ~Serck;
+end
+always begin
+#1 clk <= ~clk; //マスタクロック生成
+end
+always begin
+  #576 HREF <= 1;
+  #2560 HREF <= 0;
+end
+always begin
+  #1589952 VSYNC <= 1;
+  #9408 VSYNC <= 0;
+end
+always @(negedge pclk)
+  if(VSYNC) countpclk <= 0;
+  else
+  countpclk <= countpclk + 1;
+always @pixbus $display($time, "pix:%d countpclk is %d", pixbus,countpclk);
+endmodule
+\end{lstlisting}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{lstlisting211}%
+\begin{lstlisting}
+always begin
+  #576 HREF <= 1;
+  #2560 HREF <= 0;
+end
+always begin
+  #1589952 VSYNC <= 1;
+  #9408 VSYNC <= 0;
+end
+\end{lstlisting}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlpictureA{tex2html_wrap1936}%
+\includegraphics[scale=0.25,bb=92 20 2500 1400,clip]{DSCN2010.JPG}%
+\lthtmlpictureZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{part}
+\stepcounter{part}
+\stepcounter{section}
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlfigureA{lstlisting225}%
+\begin{lstlisting}[caption=ov7670\_set\_up.ttl]
+; OV7670<81>@set up macro
+;
+; delay set
+pause_ms =0
+; delay for debug
+;pause_ms =2000
+;
+; ADR=0x12 WDATA=0x04
+sendln  'W1204'
+sendln
+mpause pause_ms
+;
+; ADR=0x40 WDATA=0xd0
+sendln  'W40D0'
+sendln
+mpause pause_ms
+;
+; ADR=0x8c WDATA=0x02
+sendln  'W8C02'
+sendln
+mpause pause_ms
+sendln  'W703a'
+sendln
+mpause pause_ms
+sendln  'W7135'
+sendln
+mpause pause_ms
+sendln  'W7211'
+sendln
+mpause pause_ms
+sendln  'W73f0'
+sendln
+mpause pause_ms
+sendln  'Wa202'
+sendln
+mpause pause_ms
+sendln  'W1500'
+sendln
+mpause pause_ms
+sendln  'W7A20'
+	:
+	:
+	:
+	:
+\end{lstlisting}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{lstlisting227}%
+\begin{lstlisting}
+	SCCBByteWrite(0x1204); 
+	vTaskDelay(2 / portTICK_RATE_MS);
+	SCCBByteWrite(0x40D0); 
+	vTaskDelay(2 / portTICK_RATE_MS);
+	SCCBByteWrite(0x8C02); 
+	vTaskDelay(2 / portTICK_RATE_MS);
+	SCCBByteWrite(0x703a); 
+	vTaskDelay(2 / portTICK_RATE_MS);
+	SCCBByteWrite(0x7211); 
+	vTaskDelay(2 / portTICK_RATE_MS);
+	SCCBByteWrite(0x40D0); 
+	vTaskDelay(2/portTICK_RATE_MS);
+	SCCBByteWrite(0x8C02); 
+		:
+		:
+		:
+		:
+		:
+\end{lstlisting}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{lstlisting229}%
+\begin{lstlisting}[caption=i2c.cのvi2cタスクの冒頭]
+	printf("Setup begin[>  ");
+	fflush(stdout);
+	for(regpointer=0;regpointer!=129;){
+		if(SCCBByteWrite(OV7670[regpointer])==-1)continue;
+		regpointer++;
+		switch (regpointercase 0:
+			Loopy='|';
+			break;
+			case 1:
+			Loopy='/';
+			break;
+			case 2:
+			Loopy='-';
+			break;
+			case 3:
+			Loopy='\\';
+			break;
+			}
+		printf("\b\b\b=>%c",Loopy);
+		fflush(stdout);
+		vTaskDelay(10 / portTICK_RATE_MS);
+		{
+	printf("\rData transmition End!\n");
+	fflush(stdout);
+\end{lstlisting}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{lstlisting232}%
+\begin{lstlisting}[caption=OV7670userconfig.hの抜粋]
+const int OV7670[]={
+0x1204,
+0x40D0,
+0x8C02,
+0x703a,
+0x7211,
+    :
+    :
+    :
+    :
+\end{lstlisting}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{lstlisting234}%
+\begin{lstlisting}
+Hello, world!1:0
+203PDIRRegister Reset
+Setup begin
+[======================================>      \
+\end{lstlisting}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{part}
+{\newpage\clearpage
+\lthtmlfigureA{lstlisting237}%
+\begin{lstlisting}[caption=子ルーチン]
+.LVL64:
+.loc 1 264 0
+mov ip, #0
+.loc 1 265 0
+mov r0, ip
+mov r1, #66
+mov r2, #8
+.loc 1 264 0
+str ip, [r4, #0]
+.loc 1 265 0
+bl i2csender
+\end{lstlisting}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{lstlisting239}%
+\begin{lstlisting}[caption=孫ルーチン]
+i2csender:
+.LFB5:
+.loc 1 134 0
+.cfi_startproc
+@ Function supports interworking.
+@ args = 0, pretend = 0, frame = 0
+@ frame_needed = 0, uses_anonymous_args = 0
+.LVL22:
+.loc 1 136 0
+cmp r0, #0
+.loc 1 134 0
+stmfd sp!, {r3, r4, r5, r6, r7, lr}
+.LCFI1:
+.cfi_def_cfa_offset 24
+.loc 1 134 0
+mov r4, r1
+.cfi_offset 14, -4
+.cfi_offset 7, -8
+.cfi_offset 6, -12
+.cfi_offset 5, -16
+.cfi_offset 4, -20
+.cfi_offset 3, -24
+mov r6, r2
+.loc 1 136 0
+beq .L58
+.loc 1 148 0 discriminator 1
+cmp r2, #0
+.loc 1 149 0 discriminator 1
+ldrne r5, .L71
+.loc 1 150 0 discriminator 1
+movne r7, #40
+.loc 1 148 0 discriminator 1
+beq .L57
+.LVL23:
+.L68:
+.loc 1 149 0
+and r1, r4, #255
+str r1, [r5, #8]
+.loc 1 150 0
+str r7, [r5, #24]
+.L63:
+.loc 1 151 0 discriminator 1
+ldr r3, [r5, #4]
+cmp r3, #40
+bne .L63
+.loc 1 152 0
+ldr r0, .L71+4
+mov r1, r4
+bl printf
+\end{lstlisting}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{lstlisting242}%
+\begin{lstlisting}[caption=孫ルーチン:C言語]
+void i2csender(int Continue, unsigned int Data, int place){
+if(Continue==0){
+I22DAT = Data;
+I22CONSET |= 0×04;
+I22CONCLR  = 0×08;
+printf(“requesting\%x”,Data);
+while(I22STAT!=0×18 && I22STAT!=0×20)printf(“.”);
+if(I22STAT==0×20){
+printf(“No such device\%4x\n”,Data);
+i2cErr = 0×22;
+return;
+}
+}else {
+for(;place != 0;place-=8){
+I22DAT = (Data & 0xFF);
+I22CONCLR  = 0×28;
+while(I22STAT!=0×28);
+printf(“Data\%4x\n”,Data);
+Data = Data >> 8;
+}
+}
+}
+\end{lstlisting}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{lstlisting246}%
+\begin{lstlisting}[caption=子ルーチンさらに抜粋]
+.LVL64:
+.loc 1 264 0
+mov ip, #0
+.loc 1 265 0
+mov r0, ip @引数1つめ、なんでうえのmov ip, #0をへるのか不明過ぎる、mov r0, #0ではだめなのか
+mov r1, #66 @引数2つめ
+mov r2, #8 @引数3つめ
+.loc 1 264 0
+str ip, [r4, #0]
+.loc 1 265 0
+bl i2csender
+\end{lstlisting}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{lstlisting250}%
+\begin{lstlisting}[caption=printf呼び出し:アセンブリ]
+.LCFI1:
+.cfi_def_cfa_offset 24
+.loc 1 134 0
+mov r4, r1
+.cfi_offset 14, -4
+.cfi_offset 7, -8
+.cfi_offset 6, -12
+.cfi_offset 5, -16
+.cfi_offset 4, -20
+.cfi_offset 3, -24
+mov r6, r2　@第3引数をr6に退避(r2が0だと0フラグが立つ)
+.loc 1 136 0
+beq .L58 @0フラグ立ってたら分岐
+.loc 1 148 0 discriminator 1
+cmp r2, #0 
+.loc 1 149 0 discriminator 1
+ldrne r5, .L71 @I22DATのアドレス
+.loc 1 150 0 discriminator 1
+movne	r7, #40 @0を第3引数にしてないので、r7に40を入れる。
+.loc 1 148 0 discriminator 1
+beq	.L57 
+.LVL23:
+.L68:
+.loc 1 149 0
+and	r1, r4, #255
+str	r1, [r5, #8] @I22DATにいれます
+.loc 1 150 0
+str	r7, [r5, #24] @I22CONCLRに0×28をいれる
+.L63:
+.loc 1 151 0 discriminator 1
+ldr	r3, [r5, #4] @I22STATをロード
+cmp	r3, #40 @それって0×28？
+bne	.L63 @違う間ループ, 3命令かな？(実は.locがようわかってない)
+.loc 1 152 0
+ldr	r0, .L71+4 ここが問題のprintf()にたいする引数渡し
+mov	r1, r4
+bl	printf
+\end{lstlisting}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{lstlisting252}%
+\begin{lstlisting}[caption=ラベルL71]
+.L71:
+.word -536346624
+.word .LC3
+.word .LC1
+.word .LC2
+.word i2cErr
+.cfi_endproc
+\end{lstlisting}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{lstlisting254}%
+\begin{lstlisting}[caption=ラベルLC3]
+.LC3:
+.ascii ”Data\%4x$\backslash$012$\backslash$000″
+.space 3
+\end{lstlisting}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline341}%
+$https://dl.dropbox.com/u/15570814/051020DDI0100HJ_v6_1.pdf$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline343}%
+$\backslash$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{lstlisting256}%
+\begin{lstlisting}[caption=ラベルLC3]
+.LC3:
+.ascii “Data\%4x::::1200″
+.space 3
+.L71:
+.word -536346624
+.word .LC3
+.word .LC1
+.word .LC2
+.word i2cErr
+.cfi_endproc
+\end{lstlisting}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{lstlisting258}%
+\begin{lstlisting}[caption=printf()呼び出し部]
+ldr r0, .L71+4
+mov r1, r4
+bl printf
+\end{lstlisting}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{lstlisting260}%
+\begin{lstlisting}[caption=objdumpで見たprintf()呼び出し部]
+3c: e59f009c ldr r0, [pc, #156] ; e0 <i2csender+0xe0>
+40: e1a01004 mov r1, r4
+44: ebfffffe bl 0 <printf>
+e0: 0000003c .word 0x0000003c
+\end{lstlisting}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlpictureA{tex2html_wrap1970}%
+\includegraphics[scale=0.25,bb=92 20 2500 1400,clip]{DSCN2011.JPG}%
+\lthtmlpictureZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{part}
+\stepcounter{section}
+\stepcounter{subsection}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{subsection}
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlpictureA{tex2html_wrap1983}%
+\includegraphics[scale=0.25,bb=92 20 2500 1400,clip]{DSCN2014.JPG}%
+\lthtmlpictureZ
+\lthtmlcheckvsize\clearpage}
+
+
+\end{document}

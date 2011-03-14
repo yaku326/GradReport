@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>OV7670用のレジスタセットアップデータの整理</TITLE>
+<META NAME="description" CONTENT="OV7670用のレジスタセットアップデータの整理">
+<META NAME="keywords" CONTENT="textest">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="textest.css">
+
+<LINK REL="previous" HREF="node42.html">
+<LINK REL="up" HREF="node41.html">
+<LINK REL="next" HREF="node44.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html657"
+  HREF="node44.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html653"
+  HREF="node41.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html649"
+  HREF="node42.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html655"
+  HREF="node2.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html658"
+  HREF="node44.html">関数値渡しの謎</A>
+<B> Up:</B> <A NAME="tex2html654"
+  HREF="node41.html">SCCBでのOV7670コンフィギュレーション</A>
+<B> Previous:</B> <A NAME="tex2html650"
+  HREF="node42.html">との違い</A>
+ &nbsp; <B>  <A NAME="tex2html656"
+  HREF="node2.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION08020000000000000000">
+OV7670用のレジスタセットアップデータの整理</A>
+</H1><BIG CLASS="LARGE">
+http://www.cs.fsu.edu/&nbsp;baker/devices/lxr/http/source/linux/drivers/media/video/ov7670.c
+ここに、OV7670用のlinuxドライバがあるが、非常に不思議な事に、データシートにはalways "0"などとかかれた場所やreserved領域に書き込んだりしている。
+ともかく、これをどれほど信用すべきなのかんがえあぐねているところに、http://www.hmwr-lsi.co.jp/fpga/fpga_9.htmFPGAで遊んでみるさんが既に試していた。
+<BR>
+<BR>
+29#29
+<BR>
+これはTeratermかなんかのスクリプトで、このままでは使えないので、vimで整形し、そのままSCCBレジスタに書き込む関数にした。
+<BR>
+<BR>
+30#30
+<BR>
+しかし、その後、関数内に定数を置いてしまうことによる、保守性、可読性、コード密度の低さなどの問題があり、これを解決するために分離することとなった:
+<BR>
+31#31
+<BR>
+とし、
+<BR>
+32#32
+<BR>
+というヘッダファイルを設けた。これにより、ループを回して書き込むようになったというのと、設定ファイルを別ファイル扱いにできたので、修正が容易になった。
+<BR>また、これにより、二次的なメリットが得られた。
+<BR>
+33#33
+<BR>
+いままでのメッセージはデバッグを目的とした冗長な出力がなされていたため、上の様なメッセージととした。
+簡潔であり、また十分な情報量である。
+<BR>ひとつのノウハウとしては、バグが存在する間は冗長な出力が好ましいが、安定して動かせるようになったら静かな方が好ましい。
+<BR></BIG>
+<BR><HR>
+<ADDRESS>
+Iori Yoneji
+2011-01-26
+</ADDRESS>
+</BODY>
+</HTML>

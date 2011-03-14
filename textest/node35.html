@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>ピクセルデータフェッチ,連結モジュール</TITLE>
+<META NAME="description" CONTENT="ピクセルデータフェッチ,連結モジュール">
+<META NAME="keywords" CONTENT="textest">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="textest.css">
+
+<LINK REL="previous" HREF="node34.html">
+<LINK REL="up" HREF="node33.html">
+<LINK REL="next" HREF="node36.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html563"
+  HREF="node36.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html559"
+  HREF="node33.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html555"
+  HREF="node34.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html561"
+  HREF="node2.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html564"
+  HREF="node36.html">データ転送レイヤ</A>
+<B> Up:</B> <A NAME="tex2html560"
+  HREF="node33.html">データ抽出レイヤ</A>
+<B> Previous:</B> <A NAME="tex2html556"
+  HREF="node34.html">ピクセル選択モジュール</A>
+ &nbsp; <B>  <A NAME="tex2html562"
+  HREF="node2.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION06032000000000000000">
+ピクセルデータフェッチ,連結モジュール</A>
+</H2><BIG CLASS="LARGE">
+<BR>
+21#21
+<BR>
+このモジュールは、SigEnの両エッジで働く。
+これもだいぶ悩んだ末に落ち着いた形であって、SigEnと言うのはピクセル選択モジュールであるTimingManagerのものと同じである。
+これは、上で述べた変更によってpclkの立ち上がりエッジでのみ動作するようになったため、Sig_Enのエッジ動作時には、ピクセルデータが流れているpshdtaは必ず保証されている。
+これは上のタイミングチャートを見てほしい。pclk立ち下がりエッジのときにデータ値が変化し、逆に立ち上がりエッジの前約15ms以上と後8msが保証されている。(ただし24MHz動作時、今回はさらに2.4倍遅い)
+<BR>
+</BIG>
+<BR><HR>
+<ADDRESS>
+Iori Yoneji
+2011-01-26
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>関数値渡しの謎</TITLE>
+<META NAME="description" CONTENT="関数値渡しの謎">
+<META NAME="keywords" CONTENT="textest">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="textest.css">
+
+<LINK REL="next" HREF="node45.html">
+<LINK REL="previous" HREF="node41.html">
+<LINK REL="up" HREF="textest.html">
+<LINK REL="next" HREF="node45.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html669"
+  HREF="node45.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html665"
+  HREF="textest.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html659"
+  HREF="node43.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html667"
+  HREF="node2.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html670"
+  HREF="node45.html">文献集</A>
+<B> Up:</B> <A NAME="tex2html666"
+  HREF="textest.html">Visual Synthesizer := Lucis</A>
+<B> Previous:</B> <A NAME="tex2html660"
+  HREF="node43.html">OV7670用のレジスタセットアップデータの整理</A>
+ &nbsp; <B>  <A NAME="tex2html668"
+  HREF="node2.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION09000000000000000000">
+関数値渡しの謎</A>
+</H1><BIG CLASS="LARGE">
+ARMでの関数の値渡しに疑問を持ち研究を行った。
+<BR>
+FreeRTOS上でにあるプロセスのサブルーチンが孫ルーチンを呼ぶ部分をまず見てみることにする。
+<BR>子ルーチン:(思ったより長くなったので抜粋)
+<BR>
+<BR>
+34#34
+<BR>
+<BR>
+35#35
+<BR>
+ここで、孫ルーチンのC言語での記述を見てみよう。
+<BR>
+36#36
+<BR>
+呼び出し部:引数が3つある。		i2csender(0,0×42,8);
+0,0×42(0d66),8を投げている。もう一度子ルーチンを見る。
+<BR>
+37#37
+<BR>
+ということでどうやらARMでは3つの引数を渡すときにr0〜r2に置くということが分かった。本当だろうか。
+最初にあるstmfd sp!, r3, r4, r5, r6, r7, lrと最後にあるldmfd sp!, r3, r4, r5, r6, r7, lrをみる。つまり、スタックにr3〜r7とlrを積んで、作業スペースを確保しているのだろう。
+</BIG>
+<P>
+<BIG CLASS="LARGE">では次に、printf()のような文字列引数の場合、どうやって渡してるんだろうという疑問が沸く。レジスタ1こ文字列が収まりきるとは限らないからだ。
+<BR>
+38#38
+<BR>
+さて、L71+4が何をさすのだろうか。
+<BR>
+39#39
+<BR>
+</BIG>
+<P>
+<BIG CLASS="LARGE">ふむ。+4ということは、きっと.LC3だろう。(4byte = 32bit,まえのが.wordだから32bitでアラインされている)
+.LC3にはなにがはいっているのであろうか。
+<BR>
+40#40
+<BR>
+</BIG>
+<P>
+<BIG CLASS="LARGE">これを見るとどうやら.asciiというアライン方法があるらしいが、そんなものは見たことが無い。
+<BR>ということで、データシートを開く。
+<BR><!-- MATH
+ $https://dl.dropbox.com/u/15570814/051020DDI0100HJ_v6_1.pdf$
+ -->
+<SPAN CLASS="MATH">41#41</SPAN>
+しかし載ってない。
+<BR>あれ？とにかく、.asciiっていうアライン方法で、 “ASCIIencoded string“ってやってやれば、(多分アセンブラが)対応するバイナリに変換してLC3に置いているのだろう。
+<BR>ところで、<SPAN CLASS="MATH">42#42</SPAN>012<SPAN CLASS="MATH">42#42</SPAN>000ってなんだろう。
+とりあえず、<SPAN CLASS="MATH">42#42</SPAN>nを<SPAN CLASS="MATH">42#42</SPAN>tに変えてもっかいコンパイルする。
+<BR>.ascii “Data%4x<SPAN CLASS="MATH">42#42</SPAN>011<SPAN CLASS="MATH">42#42</SPAN>000″
+どうやら<SPAN CLASS="MATH">42#42</SPAN>nが<SPAN CLASS="MATH">42#42</SPAN>012で、<SPAN CLASS="MATH">42#42</SPAN>tでは<SPAN CLASS="MATH">42#42</SPAN>011っぽい。
+しかし、なんのことかわからない。
+<BR>では、PCではどうなるんだろう。
+<BR>.string “Hello,World!”
+おや？
+<BR>
+movl $.LC0, %edi
+<BR>
+call puts
+<BR>おい、そんな最適化いらないぞ！ということで....
+<BR><SPAN CLASS="MATH">42#42</SPAN>tにしてみる。
+<BR>.string “Hello,world!<SPAN CLASS="MATH">42#42</SPAN>t”
+<BR>ほう。<SPAN CLASS="MATH">42#42</SPAN>tとな。ふぅむ。<SPAN CLASS="MATH">42#42</SPAN>012<SPAN CLASS="MATH">42#42</SPAN>000にあたりそうなasciiコードも<SPAN CLASS="MATH">42#42</SPAN>nになさそうだし、PCじゃふつうに<SPAN CLASS="MATH">42#42</SPAN>tって渡すし。
+<BR>とにかく、これでは8byteなため、r0にわたしてprintfにリンク付き分岐するみたい。
+<BR>
+printf(“Data%4x::::<SPAN CLASS="MATH">42#42</SPAN>n”,Data);
+<BR>と言う風に変えてみた。
+<BR>ところが、
+<BR>
+43#43
+<BR>
+</BIG>
+<P>
+<BIG CLASS="LARGE">命令も
+<BR>
+44#44
+<BR>
+変わらない。
+<BR>もしや、.L71+4には.LC3のアドレスがはいってるのか？
+<BR>
+arm-none-eabi-objdumpする
+<BR>
+45#45
+<BR>
+あれ？3cってだれ？0x3cをr0にロードしているのにもかかわらず、0x3cをなにがはいるかは未知であるはず。
+<BR></BIG>
+<DIV ALIGN="CENTER"><A NAME="264"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 9:</STRONG>
+ターゲットのマイコンボード</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+  46#46
+ 
+</DIV></TD></TR>
+</TABLE>
+</DIV>
+<BR><HR>
+<ADDRESS>
+Iori Yoneji
+2011-01-26
+</ADDRESS>
+</BODY>
+</HTML>

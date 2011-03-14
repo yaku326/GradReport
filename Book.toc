@@ -1,0 +1,91 @@
+\contentsline {section}{\numberline {0.1}アブストラクト}{2}{section.0.1}
+\contentsline {section}{\numberline {0.2}キーワード}{2}{section.0.2}
+\contentsline {section}{\numberline {0.3}お品書き}{2}{section.0.3}
+\contentsline {section}{\numberline {0.4}コンタクトなど}{3}{section.0.4}
+\contentsline {section}{\numberline {0.5}ライセンス}{3}{section.0.5}
+\contentsline {part}{第I部\hspace {1zw}導入}{9}{part.1}
+\contentsline {chapter}{\numberline {第1章}哲学}{11}{chapter.1}
+\contentsline {section}{\numberline {1.1}前口上 -お目汚し-}{11}{section.1.1}
+\contentsline {section}{\numberline {1.2}実用性 -音楽的要素がなくても-}{12}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}こういった、直接の役に立たない物作りの土壌}{12}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}キーワードとしての オープンソース ラピット・プロトタイピング パーソナル・ファブリケーション}{13}{subsection.1.2.2}
+\contentsline {subsubsection}{オープンソースとは一体何か}{13}{section*.2}
+\contentsline {subsubsection}{ラピット・プロトタイピング}{15}{section*.3}
+\contentsline {subsubsection}{パーソナルファブリケーション}{16}{section*.4}
+\contentsline {chapter}{\numberline {第2章}内部仕様について}{19}{chapter.2}
+\contentsline {section}{\numberline {2.1}最初期の仕様}{19}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}カメラ -目玉-}{19}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}プロセッサ -大脳-}{19}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}CPLD -脊髄脳髄その他-}{19}{subsection.2.1.3}
+\contentsline {subsection}{\numberline {2.1.4}SRAM -海馬。中期記憶-}{19}{subsection.2.1.4}
+\contentsline {section}{\numberline {2.2}現在の仕様}{21}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}SRAMの破棄}{21}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}音源デヴァイス}{22}{subsection.2.2.2}
+\contentsline {chapter}{\numberline {第3章}開発環境}{23}{chapter.3}
+\contentsline {section}{\numberline {3.1}オープンソースデスクトップ環境において}{23}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}ARMマイコンのコンパイラ}{25}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}ARMマイコンLPCxxxxの書き込み}{25}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}AlteraCPLDの開発環境}{25}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}その他}{26}{subsection.3.1.4}
+\contentsline {subsubsection}{Make}{26}{section*.5}
+\contentsline {subsubsection}{git}{26}{section*.6}
+\contentsline {section}{\numberline {3.2}Windows環境において}{27}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}ARMの開発環境}{27}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}AlteraCPLDの開発環境}{27}{subsection.3.2.2}
+\contentsline {section}{\numberline {3.3}gitとgithubについて}{27}{section.3.3}
+\contentsline {part}{第II部\hspace {1zw}開発}{31}{part.2}
+\contentsline {chapter}{\numberline {第4章}Verilogを書く}{33}{chapter.4}
+\contentsline {section}{\numberline {4.1}モジュールの構成}{33}{section.4.1}
+\contentsline {section}{\numberline {4.2}clkdivider(分周器)}{34}{section.4.2}
+\contentsline {section}{\numberline {4.3}データ抽出レイヤ}{34}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}ピクセル選択モジュール}{34}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}ピクセルデータフェッチ,連結モジュール}{38}{subsection.4.3.2}
+\contentsline {section}{\numberline {4.4}データ転送モジュール}{39}{section.4.4}
+\contentsline {section}{\numberline {4.5}シミュレーション}{39}{section.4.5}
+\contentsline {subsection}{\numberline {4.5.1}シミュレータの意義}{39}{subsection.4.5.1}
+\contentsline {subsection}{\numberline {4.5.2}シミュレーションモデル}{41}{subsection.4.5.2}
+\contentsline {chapter}{\numberline {第5章}I2Cセットアップ関数の開発}{45}{chapter.5}
+\contentsline {section}{\numberline {5.1}データ送出関数}{45}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}動作}{46}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}問題点}{46}{subsection.5.1.2}
+\contentsline {section}{\numberline {5.2}シーケンシャルデータ受信関数}{46}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}バイトリード}{47}{subsection.5.2.1}
+\contentsline {section}{\numberline {5.3}OV7670全リード関数}{47}{section.5.3}
+\contentsline {section}{\numberline {5.4}OV7670バイトライト関数}{47}{section.5.4}
+\contentsline {chapter}{\numberline {第6章}SCCBでのOV7670コンフィギュレーション}{49}{chapter.6}
+\contentsline {section}{\numberline {6.1}OV7670の注意点}{49}{section.6.1}
+\contentsline {section}{\numberline {6.2}OV7670用のレジスタセットアップデータの整理}{49}{section.6.2}
+\contentsline {chapter}{\numberline {第7章}独自シリアル転送プロトコル}{55}{chapter.7}
+\contentsline {section}{\numberline {7.1}トランスミッタ}{55}{section.7.1}
+\contentsline {subsection}{\numberline {7.1.1}何が起きているか}{56}{subsection.7.1.1}
+\contentsline {subsection}{\numberline {7.1.2}公開とREADME}{56}{subsection.7.1.2}
+\contentsline {section}{\numberline {7.2}レシーバ}{57}{section.7.2}
+\contentsline {chapter}{\numberline {第8章}SSGドライバの製作と研究}{59}{chapter.8}
+\contentsline {section}{\numberline {8.1}SSGというのは}{59}{section.8.1}
+\contentsline {section}{\numberline {8.2}ハードウェア層での結線}{59}{section.8.2}
+\contentsline {section}{\numberline {8.3}ソフトウェア層での工夫}{60}{section.8.3}
+\contentsline {subsection}{\numberline {8.3.1}SOUND文と同じ機能}{60}{subsection.8.3.1}
+\contentsline {subsection}{\numberline {8.3.2}更なる改善を求めて}{61}{subsection.8.3.2}
+\contentsline {section}{\numberline {8.4}制御速度に関する実験}{62}{section.8.4}
+\contentsline {chapter}{\numberline {第9章}ソースコードを読む技術}{65}{chapter.9}
+\contentsline {section}{\numberline {9.1}関数値渡しの謎}{65}{section.9.1}
+\contentsline {section}{\numberline {9.2}返り値の研究}{70}{section.9.2}
+\contentsline {part}{第III部\hspace {1zw}社会}{75}{part.3}
+\contentsline {chapter}{\numberline {第10章}この論文に使われている技術}{77}{chapter.10}
+\contentsline {section}{\numberline {10.1}ヴァージョン管理}{77}{section.10.1}
+\contentsline {section}{\numberline {10.2}p\LaTeX }{78}{section.10.2}
+\contentsline {chapter}{\numberline {第11章}ノウハウの共有}{81}{chapter.11}
+\contentsline {section}{\numberline {11.1}ブログ}{81}{section.11.1}
+\contentsline {section}{\numberline {11.2}SNS}{82}{section.11.2}
+\contentsline {subsection}{\numberline {11.2.1}背中を見る視点}{82}{subsection.11.2.1}
+\contentsline {subsection}{\numberline {11.2.2}人に教えるということ}{82}{subsection.11.2.2}
+\contentsline {section}{\numberline {11.3}フォーラム}{83}{section.11.3}
+\contentsline {section}{\numberline {11.4}man}{83}{section.11.4}
+\contentsline {chapter}{\numberline {第12章}社会に於けるオープンソースの立場}{85}{chapter.12}
+\contentsline {section}{\numberline {12.1}ビジネスモデル}{85}{section.12.1}
+\contentsline {section}{\numberline {12.2}ホスティングサービス}{85}{section.12.2}
+\contentsline {section}{\numberline {12.3}Arduino}{86}{section.12.3}
+\contentsline {section}{\numberline {12.4}幅広い層の参画}{86}{section.12.4}
+\contentsline {chapter}{\numberline {第13章}90億総ソースコード・リテラシィの時代へ}{89}{chapter.13}
+\contentsline {section}{\numberline {13.1}PC価格の低下}{89}{section.13.1}
+\contentsline {section}{\numberline {13.2}ツールの成熟、コミュニティの発達}{89}{section.13.2}

@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>オープンソースデスクトップ環境において</TITLE>
+<META NAME="description" CONTENT="オープンソースデスクトップ環境において">
+<META NAME="keywords" CONTENT="textest">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="textest.css">
+
+<LINK REL="next" HREF="node26.html">
+<LINK REL="previous" HREF="node19.html">
+<LINK REL="up" HREF="node19.html">
+<LINK REL="next" HREF="node21.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html373"
+  HREF="node21.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html369"
+  HREF="node19.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html363"
+  HREF="node19.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html371"
+  HREF="node2.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html374"
+  HREF="node21.html">ARMマイコンのコンパイラ</A>
+<B> Up:</B> <A NAME="tex2html370"
+  HREF="node19.html">開発環境</A>
+<B> Previous:</B> <A NAME="tex2html364"
+  HREF="node19.html">開発環境</A>
+ &nbsp; <B>  <A NAME="tex2html372"
+  HREF="node2.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION05010000000000000000">
+オープンソースデスクトップ環境において</A>
+</H1><BIG CLASS="LARGE">
+このサブセクション内で、一般に、ソフトウェアと言った場合、オープンソースであることとする。
+<BR>また、デスクトップ環境とは、いわゆるPCでの環境のことを指し、ここでは<SPAN  CLASS="textbf">ホスト</SPAN>と同意義である。
+<BR>『ホスト』は組み込み開発の『ターゲット』に対する用語とし、組み込み開発の母艦というニュアンスを含む。
+<BR>プロプライエタリ(私企業や個人、政府が保有し、OSSでない)ソフトウェアの場合は配布企業とプロプライエタリであることを明示する。
+<BR>オープンソースデスクトップ環境(以降OSSDE)として、以下の3つのOSを対象とした。
+<BR></BIG>
+<UL>
+<LI>Debian GNU/Linux(Debian project)
+</LI>
+<LI>OpenSuSE (OpenSuSE project)
+</LI>
+<LI>OpenBSD (OpenBSD)
+</LI>
+</UL><BIG CLASS="LARGE">
+また、オープンソースではないデスクトップ環境(以降non-OSSDE)として、以下の2つのOSを対象とした。
+<BR></BIG>
+<UL>
+<LI>Windows 7 リリース候補版(マイクロソフト)
+</LI>
+<LI>Windows XP professional(マイクロソフト)
+</LI>
+</UL><BIG CLASS="LARGE">
+OSSDEとして使用したOSはいずれもUNIX互換プラットフォームであり、強力なコンソールを備える(その他にも十分に便利なX windows systemを備える)。
+対して、windowsでは、コマンドプロンプトの機能は貧弱であるといわざるを得ない。
+<BR>これはCygwin(後述)などといったソフトウェアを利用することにより補完されるものの、パッケージ管理などといった大きなOSSDE側のアドヴァンテージを解消することはできない。
+<BR>パッケージ管理システムとは、UNIX互換の環境などにおいて存在する機能で、OS(正確には開発/配布者)ごとに存在する。
+<BR>たとえばDebianの場合、dpkgというソフトウェアがパッケージを管理し、インストール、依存関係の確認、リムーブ、パージなど管理を行う。パッケージとは、ソフトウェアについて、作者による定義ファイルやバイナリファイル、場合によってはソースコードなどインストールに必要な情報が入った圧縮ファイルである。一般にパッケージ管理システムはこれだけの機能しかないわけではない。
+<BR>
+Debianではaptというソフトウェア群が、あるソフトウェアの導入に伴って、依存関係の洗い出しを行い、必要なソフトウェアを自動でインストールし、不要になれば自動的に削除する。
+<BR>これにより、さまざまな(開発が私企業でなく、個人が参加しているため<SPAN  CLASS="textbf">本当に</SPAN>さまざまな)ライブラリが存在するにもかかわらず、使用者はライブラリを意識することなくただ目的のソフトウェアにありつけるし、開発者としても依存するライブラリとそのヴァージョンについて定義しておけば、利用者は必ずこのライブラリを持っているとみなせるので、自分が開発したいソフトウェアのみに専念することができる。
+<BR>今回の組み込みに対する開発では、ホスト側とっては一利用者に過ぎないことになるが、これらのOSSDEの特徴は、まさにprosumeという風潮に適したシステムだと言える。
+<BR></BIG>
+<P>
+<BIG CLASS="LARGE">また、強力なコンソールを備えている事は、開発において、自動化したい部分をスクリプト化することで能率をあげることもでき、また、ウィンドウを利用してマウス操作でディレクトリの移動やソフトウェアの起動を行うよりも素早くて、なおかつ開発に関係の無いことに患わされることが無いことを意味する。
+<BR>これについてはさらに後述する。
+</BIG>
+<P>
+<BIG CLASS="LARGE">まず、開発環境の導入の最初の一歩はインストールである。開発環境のインストールについて、比較する。
+</BIG>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html375"
+  HREF="node21.html">ARMマイコンのコンパイラ</A>
+<LI><A NAME="tex2html376"
+  HREF="node22.html">AlteraCPLDの開発環境</A>
+<LI><A NAME="tex2html377"
+  HREF="node23.html">その他</A>
+<UL>
+<LI><A NAME="tex2html378"
+  HREF="node24.html">Make</A>
+<LI><A NAME="tex2html379"
+  HREF="node25.html">git</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+<ADDRESS>
+Iori Yoneji
+2011-01-26
+</ADDRESS>
+</BODY>
+</HTML>

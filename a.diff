@@ -1,0 +1,216 @@
+diff --git a/textest.tex b/textest.tex
+index 0c300a5..91deed0 100644
+--- a/textest.tex
++++ b/textest.tex
+@@ -40,8 +40,8 @@ writtern with \pLaTeX2e
+ \item パーソナルファブリケーションとオープンソースをとりまく社会とビジネスモデルの現状と今後の予測
+ \item 本研究で開発したハードウェア、およびソフトウェアの新規性、および課題
+ \end{itemize}
+-を明らかにする\\
+-ことを目的とする。\\
++を明らかにし、
++以上のことから、{\large 90億総ソースコード・リテラシィ}の時代になる事を主張することを目的とする。\\
+ 今回の製作対象の、外から見た仕様について\begin{itemize}
+ \item 学生が買える、廉価なカメラモジュールで、室内等の明るさや色などを元にパラメータを作成する。
+ \item パラメータを元にスピーカから音が鳴る。
+@@ -109,27 +109,59 @@ Prosume(
+ 
+ 「第三の波」が1980年に書かれていることは非常に衝撃的である。なぜか？それは、上にあげた様々な革命がほとんど無名の赤ん坊でしかなかった時代だからだ。\\
+ \subsubsection{オープンソースとは一体何か}
+-参考2として、最も普及しているオープンソースライセンス及び哲学のうちの特に歴史があるものとして、GPL(GNU General Public License)の原文のリンクを示す。\\
+-これが何を示しているのか。引用開始\\
++参考2として、最も普及しているオープンソースライセンス及び哲学のうちの特に歴史があるものとして、FreeBSDライセンスとGPL(GNU General Public License)を示す。\\
++\href{http://opensource.org/licenses/mit-license.php}{The MIT License}
+ \begin{verse}
+-You may convey verbatim copies of the Program's source code as you receive it,in any medium, provided that you conspicuously and appropriately publish on each copy an appropriate copyright notice;
++Copyright (c) <year> <copyright holders>
++
++Permission is hereby granted, free of charge, to any person obtaining a copy
++of this software and associated documentation files (the "Software"), to deal
++in the Software without restriction, including without limitation the rights
++to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
++copies of the Software, and to permit persons to whom the Software is
++furnished to do so, subject to the following conditions:
++
++The above copyright notice and this permission notice shall be included in
++all copies or substantial portions of the Software.
++
++THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
++AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
++OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
++THE SOFTWARE.
+ \end{verse}
+-拙訳-入手した(GPLでライセンスされた)ソースコードの(一字一句正しい)原本をどんな形でも配布できる。そのとき、GPLライセンスされたソフトウェアであることを、明らかに分かるように示さなければならない\\
++\href{http://www.gnu.org/licenses/gpl.html}{GNU GENERAL PUBLIC LICENSE}
+ \begin{verse}
++You may convey verbatim copies of the Program's source code as you receive it,in any medium, provided that you conspicuously and appropriately publish on each copy an appropriate copyright notice;
+ a) The work must carry prominent notices stating that you modified it, and giving a relevant date.
+ b) The work must carry prominent notices stating that it is released under this License and any conditions added under section 7. This requirement modifies the requirement in section 4 to “keep intact all notices”.
+ c) You must license the entire work, as a whole, under this License to anyone who comes into possession of a copy. This License will therefore apply, along with any applicable section 7 additional terms, to the whole of the work, and all its parts, regardless of how they are packaged. This License gives no permission to license the work in any other way, but it does not invalidate such permission if you have separately received it.
+ d) If the work has interactive user interfaces, each must display Appropriate Legal Notices; however, if the Program has interactive interfaces that do not display Appropriate Legal Notices, your work need not make them do so.
+ \end{verse}
+-参考3にしめすのはsourceforge社(オープンソース文化のハブとして活躍し続けるプログラム開発支援やテクノロジ系ニュースコミュニティのホスト会社として世界的に有名)にホストされているOpenSourceGroupJapanによる非公式訳である。引用開始\\
++参考3にしめすのはsourceforge社(オープンソース文化のハブとして活躍し続けるプログラム開発支援やテクノロジ系ニュースコミュニティのホスト会社として世界的に有名)にホストされているOpenSourceGroupJapanによる非公式訳である。\\
++\href{http://sourceforge.jp/projects/opensource/wiki/licenses/MIT_license}{The MIT License}
+ \begin{verse}
++Copyright (c) <year> <copyright holders>
++
++以下に定める条件に従い、本ソフトウェアおよび関連文書のファイル（以下「ソフトウェア」）の複製を取得するすべての人に対し、ソフトウェアを無制限に扱うことを無償で許可します。これには、ソフトウェアの複製を使用、複写、変更、結合、掲載、頒布、サブライセンス、および/または販売する権利、およびソフトウェアを提供する相手に同じことを許可する権利も無制限に含まれます。
++
++上記の著作権表示および本許諾表示を、ソフトウェアのすべての複製または重要な部分に記載するものとします。
++
++ソフトウェアは「現状のまま」で、明示であるか暗黙であるかを問わず、何らの保証もなく提供されます。ここでいう保証とは、商品性、特定の目的への適合性、および権利非侵害についての保証も含みますが、それに限定されるものではありません。 作者または著作権者は、契約行為、不法行為、またはそれ以外であろうと、ソフトウェアに起因または関連し、あるいはソフトウェアの使用またはその他の扱いによって生じる一切の請求、損害、その他の義務について何らの責任も負わないものとします。
++\end{verse}
++\href{http://sourceforge.jp/projects/opensource/wiki/licenses\%252FGNU\_General\_Public\_License\_version\_3.0}{GNU 一般公衆利用許諾書 (GNU General Public License)}
++\begin{verse}
++入手した(GPLでライセンスされた)ソースコードの(一字一句正しい)原本をどんな形でも配布できる。そのとき、GPLライセンスされたソフトウェアであることを、明らかに分かるように示さなければならない
+ a) 作品には、あなたが作品を改変したということと、改変に関連した日時を記述した告知を目立つように載せなければならない。
+ b) 作品には、それが本許諾書と、下記第7項に従って追加された条件すべての下で公開されていることを記述した告知を目立つように載せなければな らない。この条件は、上記第4項における「告知をすべてそのまま保全」するための条項を改変する。
+ c) 作品の全部分を、総体として、コピーを所有するに至った人全員に、本許諾書の下でライセンスしなければならない。そこで、本許諾書は、本許諾 書第7項に基づく適用可能な追加的条項のすべてとともに、作品全体に、すなわちその全部分に、それらがどのようにパッケージされているかに関わらず 適用されることになる。本許諾書は、これ以外のやり方には作品をライセンスする許可を与えないが、あなたが本許諾書以外で別途許可を得ていた場合 には、それによって得られた許可まで無効とするものではない。
+-d) 改変された作品が対話的なユーザインターフェースを有する場合、それらのインターフェースは『適切な法的告知』を表示しなければならない。た だし、『プログラム』に元々『適切な法的告知』を表示しない対話的なインターフェースがある場合、あなたの作品で表示するようにする必要はない。
++d) 改変された作品が対話的なユーザインターフェースを有する場合、それらのインターフェースは『適切な法的告知』を表示しなければならない。ただし、『プログラム』に元々『適切な法的告知』を表示しない対話的なインターフェースがある場合、あなたの作品で表示するようにする必要はない。
+ \end{verse}
+-ここで特徴的なのはコピーされ、改変されたwork(作品)もGPLでライセンスされることであるが、オープンソースして重要なのはそこではない。\\
+-だれかが先行して何かをオープンソースとして作った場合、それをいかなる形でも利用でき、その成果をオープンにすれば誰かに利用してもらえるのだ。\\
++ここで特徴的なのはコピーされ、改変されたwork(作品)もGPLでライセンスされることであるが、オープンソースして重要なのはそこではない。\\\\
++
++オープンソースの全体的な一般論として、だれかが先行して何かをオープンソースとして作った場合、それをいかなる形でも利用でき、その成果をオープンにすれば誰かに利用してもらえるのだ。\\
+ これは開発期間の短縮及びモチベーションの向上につながる。\\
+ また、ソースコードを作品と呼んでいるのも、ProsumeやMake:的な感性に置ける、芸術としての技術的作品という側面を強く押し出しているとも言えよう。\\
+ しかし、このGPLというライセンスすらも、1989年になって初版が策定されるのだ。
+@@ -295,7 +327,7 @@ Quartus II
+ また、OpenSuSEでは、書き込み機であるUSB-Blasterの認識が不安定で、一般的な問題ではないようだが、私が使った上では、まったく使い物にならなかった。
+ むしろ、サポート対象ではないはずのDebianでの使用の方が快適である。
+ それには以下のようにする。
+-\begin{verbatim}	#echo /dev/usbfs      /proc/bus/usb   usbfs   devmode=0666    0       0 >> /etc/fstab\end{verbatim}
++\begin{verbatim}#echo /dev/usbfs　/proc/bus/usb　usbfs　devmode=0666 0　0 >> /etc/fstab\end{verbatim}
+ \subsection{その他}
+ \subsubsection{Make}
+ UNIX系OSでのコマンドラインによる快適な操作と相まって、Makeというのはすばらしいソフトウェアである。\\
+@@ -373,8 +405,6 @@ To git@github.com:iori-yja/Report.git
+  \end{figure}
+ \clearpage
+ \part{Verilogを書く}
+-Verilogを書くのは、この論文がきっかけであった。\\
+-であるから、問題が起きるとしたらここだろうなという気がしていたが、まさにそのような事態はおきてしまった。この場を借りて、辛抱強く待ってくださった本村先生に感謝の意をささげます。\\
+ \section{モジュールの構成}
+ このモジュールの全体像を示す。\\
+ \begin{figure}[htb]
+@@ -892,8 +922,77 @@ Setup begin
+ \\
+ メーカはデータシートなど、デバイスを使用するに当たってどうしても必要な情報は大口顧客などにのみ提供するのではなく、万人が使えるものにするよう努めるべきである。
+ \part{独自シリアル転送プロトコル}
++必要なロジックエレメンツの数を最小限にとどめるため、できるだけシンプルなシリアル送信プロトコルが必要だったが、探してもなかなか出てこなかったため作ることとした。\\
++目標は
++\begin{itemize}
++\item 非常に小さいこと
++\item デバッグが簡単であること
++\item 実装が難しくないこと
++\end{itemize}
++とさだめた。
+ \section{トランスミッタ}
++\begin{lstlisting}
++module transmittr (
++	input Srialclk,
++	input Wrtcmplt,
++	input [11:0]data,
++	output SrialData
++);
++reg [11:0]Datareg;
++reg Endflg;
++wire Endtoken;
++assign Endtoken = Endflg & ~Srialclk;
++assign SrialData = Endtoken ? ~Datareg[0] : Datareg[0];
++reg  [3:0]ShftCount = 0;
++	always@( posedge Srialclk )begin
++			Datareg[11:0] <= { 1'b0, Datareg[11:1] };
++			ShftCount <= ShftCount + 4'h1;
++			if ( ShftCount == 4'hB )begin
++				Endflg <= 1'b1;
++				if( Wrtcmplt )begin
++					ShftCount <= 0;
++					end
++				end
++			else if ( ShftCount == 4'h0 )begin
++				Endflg <= 0;
++				Datareg[11:0] <= data[11:0];
++				end
++			end
++
++endmodule
++\end{lstlisting}
++
+ \section{レシーバ}
++\begin{lstlisting}
++void getISSI( void )
++{
++int bitshift=0;
++int il=0;
++int prv;
++int crr;
++vTaskDelay( 1 / portTICK_RATE_MS );
++	printf("start ISSI connection\n");
++
++	while(1){
++		il++;
++		FIO2SET = 2;
++		prv=(FIO2PIN&6)>>2;
++		printf("up\t%x\n",prv);
++		bitshift = (bitshift<<1)+prv;
++		vTaskDelay(1 / portTICK_RATE_MS);
++		FIO2CLR = 2;
++		printf("prv=%x",prv);
++		crr=(FIO0PIN&6)>>2;
++		printf("Cr=%d",crr);
++		if(crr&2!=prv&2){
++			printf("-%d\t%d\n",crr,il);
++			break;
++			}
++		vTaskDelay(1 / portTICK_RATE_MS);
++		printf("Delaying%d",0.01 / portTICK_RATE_MS);
++		}
++	}
++\end{lstlisting}
+ 
+ \part{関数値渡しの謎}
+ ARMでの関数の値渡しに疑問を持ち研究を行った。\\
+@@ -995,7 +1094,7 @@ Data = Data >> 8;
+ .loc 1 264 0
+ mov ip, #0
+ .loc 1 265 0
+-mov r0, ip @引数1つめ、なんでうえのmov ip, #0をへるのか不明過ぎる、mov r0, #0ではだめなのか
++mov r0, ip @引数1つめ、何故mov ip, #0をへるのか不明、mov r0, #0ではいけないのか
+ mov r1, #66 @引数2つめ
+ mov r2, #8 @引数3つめ
+ .loc 1 264 0
+@@ -1080,11 +1179,11 @@ $https://dl.dropbox.com/u/15570814/051020DDI0100HJ_v6_1.pdf$
+ おや？\\
+ movl \$.LC0, \%edi\\
+ call puts\\
+-おい、そんな最適化いらないぞ！ということで....\\
++そんな最適化いらないぞ！ということで....\\
+ $\backslash$tにしてみる。\\
+ .string “Hello,world!$\backslash$t”\\
+-ほう。$\backslash$tとな。ふぅむ。$\backslash$012$\backslash$000にあたりそうなasciiコードも$\backslash$nになさそうだし、PCじゃふつうに$\backslash$tって渡すし。\\
+-とにかく、これでは8byteなため、r0にわたしてprintfにリンク付き分岐するみたい。\\
++$\backslash$とでた。$\backslash$012$\backslash$000にあたりそうなasciiコードも$\backslash$nになさそうだし、PCじゃふつうに$\backslash$tって渡すため謎。\\
++とにかく、これでは8byteなため、r0にわたしてprintfにリンク付き分岐するようだ。\\
+ printf(“Data\%4x::::$\backslash$n”,Data);\\
+ と言う風に変えてみた。\\
+ ところが、
+@@ -1166,6 +1265,12 @@ ALTERA http://altera.com/
+ \section{よむものリスト}
+ 需要と供給の関係の本具体的に例をあげる\\
+ 第三の波さがす
++\clearpage
++\section{メモ}
++Verilogを書くのは、この論文がきっかけであった。\\
++であるから、問題が起きるとしたらここだろうなという気がしていたが、まさにそのような事態はおきてしまった。この場を借りて、辛抱強く待ってくださった本村先生に感謝の意をささげます。\\
++
++\clearpage
+ \subsection{センサ}
+ \subsection{規格}
+ \begin{figure}[htb]

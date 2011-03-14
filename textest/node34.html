@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>ピクセル選択モジュール</TITLE>
+<META NAME="description" CONTENT="ピクセル選択モジュール">
+<META NAME="keywords" CONTENT="textest">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="textest.css">
+
+<LINK REL="next" HREF="node35.html">
+<LINK REL="previous" HREF="node33.html">
+<LINK REL="up" HREF="node33.html">
+<LINK REL="next" HREF="node35.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html553"
+  HREF="node35.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html549"
+  HREF="node33.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html543"
+  HREF="node33.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html551"
+  HREF="node2.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html554"
+  HREF="node35.html">ピクセルデータフェッチ,連結モジュール</A>
+<B> Up:</B> <A NAME="tex2html550"
+  HREF="node33.html">データ抽出レイヤ</A>
+<B> Previous:</B> <A NAME="tex2html544"
+  HREF="node33.html">データ抽出レイヤ</A>
+ &nbsp; <B>  <A NAME="tex2html552"
+  HREF="node2.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION06031000000000000000">
+ピクセル選択モジュール</A>
+</H2><BIG CLASS="LARGE">
+<BR>
+17#17
+<BR>
+このモジュールでは、カメラが生成する制御信号をすべて取り扱っていて、ほかのモジュールと分け合っていたりしないため、タイミング系で不具合が発生した場合はここに問題がある、と比較的迅速に問題の特定が出来る。
+<BR>まず、簡単にOV7670の制御信号について説明する。
+<BR>
+CMOSカメラOV7670モジュールの外に出ている制御信号は</BIG>
+<UL>
+<LI>VSYNC
+</LI>
+<LI>HREF
+</LI>
+<LI>pclk
+</LI>
+</UL><BIG CLASS="LARGE">
+のたった3つである。また、カメラ内に止まっていて、普段引き出されないものにHSYNCがあるが、基本的に使わずにすむようだ。
+<BR>フレーム(1つの画像)の最初の行の最初のピクセルを送出する前に、VSYNCが立ち上がり、3行分の時間ホールドされる。その間、有効なデータは流れてきていないが、なんの値が出ているのかは未だ不明であり、タダの不定値である。
+<BR>その後、VSYNCが立ち下がり、実データが送出される条件が一つ揃うようになる。
+<BR>次に、17フレーム分の時間、制御信号のバスに変化は無い。その後、HREFが上がると、ようやく実データが送出され始める。1行がおわると、一度HREFが立ち下がり、144px分やすむ。
+<BR>その間、データシートによると、実データはキューに入れられて待っているらしい。
+<BR></BIG>
+<DIV ALIGN="CENTER"><A NAME="174"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 5:</STRONG>
+OV7670のデータシートによるタイミングチャート</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+  18#18
+ 
+</DIV></TD></TR>
+</TABLE>
+</DIV>
+<BIG CLASS="LARGE">
+まず、このソースの目につくのは、pclk立ち上がりエッジで起動する以下のカウンタ
+<BR>
+<BR>
+19#19
+<BR>
+であろう。しかし、このカウンタは、中のif文の通り、HREFとenCがHでなければ動かない。また、ifを満たさない場合は0にリセットされる。
+<BR>
+HREFがLのとき、無効なデータがやってくる。だからこのデータを手っ取り早く見ないようにするためには、カウンタをリセットして、0のときに少なくともデータを見ない様にすればいい。
+<BR>ただ、enCとはなんだろうか。これは、
+<BR>
+20#20
+<BR>
+でアサインされているワイヤがenCであり、line(行数)の値によってドライブされる。つまり、特定の行の時のみピクセルカウンタが起動される様になっているわけだ。
+<BR>実を言うと、この設計にたどり着くまで、もっと別の設計でやろうとしていた。最初は一つのalwaysでやっていたが、implicit latchを生成しますよ！っていうワーニングや、always@文で呼び起こされたのに何も値を変えないことがあります、といったワーニングが出ていて、調べても何の事だかよく分かっていなかった。
+<BR>もし、この設計を思いついていなかったら、ずーっと気持ち悪いままだったが、これによってワーニングが消えたどころか、使用するロジックエレメントの数もグッと減ったため、きっと裏でなにかあって、always@文が何のレジスタの値も変えない可能性があると、無駄なラッチを生成することがある様だ。
+<BR>ということがわかったが、具体的なバッドノウハウもリゾルブノウハウもほとんど出回っていないという状態であるため、今後のワーニングメッセージの改善や、教本、ノウハウ集として有用なブログなどの登場を期待する必要があると感じた。
+<BR>このためには、半導体ベンダ側の努力のみならず、企業のような、ノウハウが閉鎖的にこもりがちな顧客だけ、という状態から脱して、それこそ手芸やバレエのごとく、幅広い一般人がFPGAやCPLDなどを使うようになる必要も、当然あるだろう。どれくらい未来になるか分からないが、ITがもっと陳腐化すればいずれ来る未来であると思う。
+<BR>
+</BIG>
+<BR><HR>
+<ADDRESS>
+Iori Yoneji
+2011-01-26
+</ADDRESS>
+</BODY>
+</HTML>

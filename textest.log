@@ -1,4 +1,4 @@
-This is pTeXk, Version 3.141592-p3.1.11 (euc) (Web2C 7.5.4) (format=platex 2011.1.25)  31 JAN 2011 17:07
+This is pTeXk, Version 3.141592-p3.1.11 (euc) (Web2C 7.5.4) (format=platex 2011.1.25)  28 FEB 2011 02:17
  %&-line parsing enabled.
 **textest.tex
 (./textest.tex
@@ -214,6 +214,28 @@ Package: jlisting 2006/02/20 0.2 (Thor)
 \lst@nextchar=\count108
 \lst@inputfile=\read1
 )
+
+! LaTeX Error: File `bibtex.sty' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: sty)
+
+Enter file name: q
+
+! LaTeX Error: File `q.sty' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: sty)
+
+Enter file name: 
+! Interruption.
+<to be read again> 
+                   }
+l.7 \renewcommand
+                 {\lstlistingname}{¥ê¥¹¥È}^^M
+? q
+OK, entering \batchmode...
+
 (/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
@@ -224,29 +246,30 @@ File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
 LaTeX Warning: Unused global option(s):
     [12px].
 
-(./textest.aux)
+ (./textest.aux)
 \openout1 = `textest.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-Package hyperref Info: Link coloring OFF on input line 20.
- (/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+Package hyperref Info: Link coloring OFF on input line 21.
+
+(/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
 Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
 
 (/usr/share/texmf-texlive/tex/latex/oberdiek/refcount.sty
@@ -254,85 +277,83 @@ Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
 )
 \c@section@level=\count109
 )
-LaTeX Info: Redefining \ref on input line 20.
-LaTeX Info: Redefining \pageref on input line 20.
- (./textest.out)
-(./textest.out)
+LaTeX Info: Redefining \ref on input line 21.
+LaTeX Info: Redefining \pageref on input line 21.
+ (./textest.out) (./textest.out)
 \@outlinefile=\write3
 \openout3 = `textest.out'.
 
 \AtBeginShipoutBox=\box44
 \c@lstlisting=\count110
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 16.60605pt on input line 25.
+(Font)              scaled to size 16.60605pt on input line 26.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 16.60605pt on input line 25.
+(Font)              scaled to size 16.60605pt on input line 26.
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 19.9311pt on input line 25.
+(Font)              scaled to size 19.9311pt on input line 26.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 19.9311pt on input line 25.
+(Font)              scaled to size 19.9311pt on input line 26.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <20.74> on input line 25.
+(Font)              <20.74> on input line 26.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 25.
+(Font)              <14.4> on input line 26.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 25.
+(Font)              <12> on input line 26.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 13.83836pt on input line 25.
+(Font)              scaled to size 13.83836pt on input line 26.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 11.53198pt on input line 25.
+(Font)              scaled to size 11.53198pt on input line 26.
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 11.53198pt on input line 25.
+(Font)              scaled to size 11.53198pt on input line 26.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 25.
+(Font)              <8> on input line 26.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 25.
+(Font)              <6> on input line 26.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 5.76599pt on input line 25.
+(Font)              scaled to size 5.76599pt on input line 26.
  [1
 
 
 ]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 26.
+(Font)              <7> on input line 27.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 26.
+(Font)              <5> on input line 27.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 6.72699pt on input line 26.
+(Font)              scaled to size 6.72699pt on input line 27.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 4.805pt on input line 26.
+(Font)              scaled to size 4.805pt on input line 27.
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 6.72699pt on input line 26.
+(Font)              scaled to size 6.72699pt on input line 27.
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 13.83836pt on input line 28.
+(Font)              scaled to size 13.83836pt on input line 29.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 13.83836pt on input line 28.
+(Font)              scaled to size 13.83836pt on input line 29.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 13.83836pt on input line 28.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 30.
+(Font)              scaled to size 13.83836pt on input line 29.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 31.
  (/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 30.
-
-[1]
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 31.
+ [1]
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 58.
+(Font)              scaled to size 8.64899pt on input line 60.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 58.
+(Font)              scaled to size 8.64899pt on input line 60.
 File: by-sa.eps Graphic file (type eps)
  <by-sa.eps> [2
 
 ]
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 23.90964pt on input line 64.
+(Font)              scaled to size 23.90964pt on input line 66.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 23.90964pt on input line 64.
+(Font)              scaled to size 23.90964pt on input line 66.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 23.90964pt on input line 64.
+(Font)              scaled to size 23.90964pt on input line 66.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 23.90964pt on input line 64.
+(Font)              scaled to size 23.90964pt on input line 66.
  (./textest.toc
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
 (Font)              scaled to size 11.53198pt on input line 6.
@@ -351,56 +372,56 @@ LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 
 File: DSCN2008.JPG Graphic file (type eps)
  <DSCN2008.JPG>
-Overfull \hbox (100.47139pt too wide) in paragraph at lines 68--69
+Overfull \hbox (100.47139pt too wide) in paragraph at lines 70--71
  [] 
  []
 
-[4] [5]
+ [4] [5]
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 19.9311pt on input line 72.
+(Font)              scaled to size 19.9311pt on input line 74.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 19.9311pt on input line 72.
+(Font)              scaled to size 19.9311pt on input line 74.
  [6
 
 
 ]
 Âè1¾Ï
-[7
+ [7
 
 ] [8] [9] [10]
 File: DSCN2012.JPG Graphic file (type eps)
  <DSCN2012.JPG>
-Overfull \hbox (150.65889pt too wide) in paragraph at lines 195--196
+Overfull \hbox (150.65889pt too wide) in paragraph at lines 197--198
  [] 
  []
 
-[11] [12]
+ [11] [12]
 Âè2¾Ï
-[13
+ [13
 
 
 ] [14]
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 276.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 278.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 286.
+(Font)              <9> on input line 288.
 File: DSCN2016.JPG Graphic file (type eps)
  <DSCN2016.JPG>
-Overfull \hbox (150.65889pt too wide) in paragraph at lines 287--288
+Overfull \hbox (150.65889pt too wide) in paragraph at lines 289--290
  [] 
  []
 
-[15] [16]
+ [15] [16]
 Âè3¾Ï
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <12> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 299.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 301.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 11.53198pt on input line 299.
+(Font)              scaled to size 11.53198pt on input line 301.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <12> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 299.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 301.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 11.53198pt on input line 299.
-[17
+(Font)              scaled to size 11.53198pt on input line 301.
+ [17
 
 
 ] [18] [19] [20]
@@ -410,74 +431,63 @@ File: fig1.eps Graphic file (type eps)
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Overfull \hbox (65.60353pt too wide) in paragraph at lines 418--418
+Overfull \hbox (65.60353pt too wide) in paragraph at lines 420--420
 []\OT1/cmtt/m/n/12 Makepdf  textest.aux  textest.dvi  textest.log textest.out  
 textest.pdf  textest.tex[] 
  []
 
-[21]
+ [21]
 File: DSCN1987.JPG Graphic file (type eps)
  <DSCN1987.JPG>
-Overfull \hbox (150.65889pt too wide) in paragraph at lines 424--425
+Overfull \hbox (150.65889pt too wide) in paragraph at lines 426--427
  [] 
  []
 
-[22] [23] [24
+ [22] [23] [24
 
 
 ]
 Âè4¾Ï
 File: print.pdf Graphic file (type eps)
-<print.pdf>
-Overfull \hbox (88.92828pt too wide) in paragraph at lines 435--436
+ <print.pdf>
+Overfull \hbox (88.92828pt too wide) in paragraph at lines 437--438
  [] 
  []
 
-[25
+ [25
 
 ]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 443.
+nput line 445.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 443.
+(Font)              scaled to size 8.64899pt on input line 445.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 443.
-
-
-! Package keyval Error: °ìÉô¾ÊÎ¬ undefined.
-
-See the keyval package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.456 ...¥ë¤Î¥µ¥¤¥¯¥ë¤Î¤È¤­¤ËÎ©¤Á¾å¤¬¤ë, °ìÉô¾ÊÎ¬]
-                                                  
-? 
-[26
+(Font)              scaled to size 8.64899pt on input line 445.
+ [26
 
 ]
 LaTeX Font Info:    Font shape `JT1/gt/bx/n' in size <9> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 466.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 468.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 466.
+(Font)              scaled to size 8.64899pt on input line 468.
 LaTeX Font Info:    Font shape `JY1/gt/bx/n' in size <9> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 466.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 468.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 466.
+(Font)              scaled to size 8.64899pt on input line 468.
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <9> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 466.
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 468.
 File: tmchart.eps Graphic file (type eps)
  <tmchart.eps> [27] [28] [29] [30
 
 ]
 LaTeX Font Info:    Font shape `JT1/gt/m/it' in size <9> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 572.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 574.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 572.
+(Font)              scaled to size 8.64899pt on input line 574.
 LaTeX Font Info:    Font shape `JY1/gt/m/it' in size <9> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 572.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 574.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 572.
+(Font)              scaled to size 8.64899pt on input line 574.
 File: fig2.eps Graphic file (type eps)
  <fig2.eps>
 File: fig3.eps Graphic file (type eps)
@@ -487,149 +497,148 @@ File: fig3.eps Graphic file (type eps)
 
 ]
 File: DSCN2010.JPG Graphic file (type eps)
-
-<DSCN2010.JPG>
-Overfull \hbox (150.65889pt too wide) in paragraph at lines 674--675
+ <DSCN2010.JPG>
+Overfull \hbox (150.65889pt too wide) in paragraph at lines 676--677
  [] 
  []
 
 
-Overfull \hbox (37.46596pt too wide) in paragraph at lines 669--677
+Overfull \hbox (37.46596pt too wide) in paragraph at lines 671--679
 []\OT1/cmr/m/n/12 http://aitendo2.sakura.ne.jp/aitendo[]data/product[]img2/prod
 uct[]img/camera/CAMERA30W-
  []
 
-[34] [35]
+ [34] [35]
 Âè5¾Ï
-[36
+ [36
 
 
 ] [37] [38] [39]
 Âè6¾Ï
 
-Overfull \hbox (28.32103pt too wide) in paragraph at lines 795--798
+Overfull \hbox (28.32103pt too wide) in paragraph at lines 797--800
 []\OT1/cmr/m/n/12 http://www.cs.fsu.edu/ bak-er/de-vices/lxr/http/-source/lin-u
 x/-driver-s/-me-di-a/video/ov7670.c
  []
 
-[40
+ [40
 
 ] [41] [42]
 File: DSCN2009.JPG Graphic file (type eps)
  <DSCN2009.JPG>
-Overfull \hbox (150.65889pt too wide) in paragraph at lines 923--924
+Overfull \hbox (150.65889pt too wide) in paragraph at lines 925--926
  [] 
  []
 
-[43] [44]
+ [43] [44]
 Âè7¾Ï
-[45
+ [45
 
 
-] [46]
+] [46] [47]
 File: DSCN2019.JPG Graphic file (type eps)
  <DSCN2019.JPG>
-Overfull \hbox (150.65889pt too wide) in paragraph at lines 1026--1027
+Overfull \hbox (150.65889pt too wide) in paragraph at lines 1049--1050
  [] 
  []
 
-[47] [48]
+ [48] [49]
 Âè8¾Ï
-[49
+ [50
 
 
 ]
 File: DSCN2023.JPG Graphic file (type eps)
  <DSCN2023.JPG>
-Overfull \hbox (63.24254pt too wide) in paragraph at lines 1075--1076
+Overfull \hbox (63.24254pt too wide) in paragraph at lines 1098--1099
  [] 
  []
 
 File: DSCN2024.JPG Graphic file (type eps)
-<DSCN2024.JPG>
-Overfull \hbox (63.24254pt too wide) in paragraph at lines 1081--1082
+ <DSCN2024.JPG>
+Overfull \hbox (63.24254pt too wide) in paragraph at lines 1104--1105
  [] 
  []
 
 
-Overfull \hbox (15.33331pt too wide) in paragraph at lines 1071--1085
+Overfull \hbox (15.33331pt too wide) in paragraph at lines 1094--1108
 [][] 
  []
 
 File: DSCN2025.JPG Graphic file (type eps)
-<DSCN2025.JPG>
-Overfull \hbox (150.65889pt too wide) in paragraph at lines 1091--1092
+ <DSCN2025.JPG>
+Overfull \hbox (150.65889pt too wide) in paragraph at lines 1114--1115
  [] 
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[50] [51] [52]
+ [51] [52] [53]
 File: DSCN2037.JPG Graphic file (type eps)
  <DSCN2037.JPG>
-Overfull \hbox (150.65889pt too wide) in paragraph at lines 1157--1158
+Overfull \hbox (150.65889pt too wide) in paragraph at lines 1180--1181
  [] 
  []
 
-[53] [54]
+ [54] [55]
 Âè9¾Ï
-[55
+ [56
 
-] [56] [57] [58] [59] [60] [61]
+] [57] [58] [59] [60] [61] [62]
 File: DSCN2011.JPG Graphic file (type eps)
  <DSCN2011.JPG>
-Overfull \hbox (150.65889pt too wide) in paragraph at lines 1492--1493
+Overfull \hbox (150.65889pt too wide) in paragraph at lines 1515--1516
  [] 
  []
 
-[62] [63] [64
+ [63] [64] [65
 
 
 ]
 Âè10¾Ï
 File: DSCN2036.JPG Graphic file (type eps)
-<DSCN2036.JPG>
-Overfull \hbox (150.65889pt too wide) in paragraph at lines 1524--1525
+ <DSCN2036.JPG>
+Overfull \hbox (150.65889pt too wide) in paragraph at lines 1547--1548
  [] 
  []
 
-[65
+ [66
 
-] [66] [67]
+] [67] [68]
 Âè11¾Ï
-[68
+ [69
 
-] [69]
+] [70]
 File: DSCN1986.JPG Graphic file (type eps)
  <DSCN1986.JPG>
-Overfull \hbox (150.65889pt too wide) in paragraph at lines 1572--1573
+Overfull \hbox (150.65889pt too wide) in paragraph at lines 1596--1597
  [] 
  []
 
-[70] [71]
+ [71] [72]
 Âè12¾Ï
-[72
+ [73
 
-] [73]
+] [74]
 Âè13¾Ï
-[74
+ [75
 
 ]
 File: DSCN2014.JPG Graphic file (type eps)
  <DSCN2014.JPG>
-Overfull \hbox (150.65889pt too wide) in paragraph at lines 1634--1635
+Overfull \hbox (150.65889pt too wide) in paragraph at lines 1658--1659
  [] 
  []
 
-[75] (./textest.aux) ) 
+ [76] (./textest.aux) ) 
 Here is how much of TeX's memory you used:
- 6083 strings out of 257674
- 86019 string characters out of 1191153
- 198488 words of memory out of 3000000
- 9159 multiletter control sequences out of 10000+50000
+ 6117 strings out of 257674
+ 86473 string characters out of 1191153
+ 198498 words of memory out of 3000000
+ 9191 multiletter control sequences out of 10000+50000
  20158 words of font info for 91 fonts, out of 2000000 for 2000
  19 hyphenation exceptions out of 8191
  38i,13n,49p,638b,1848s stack positions out of 5000i,500n,6000p,200000b,40000s
 
-Output written on textest.dvi (76 pages, 327816 bytes).
+Output written on textest.dvi (77 pages, 333512 bytes).

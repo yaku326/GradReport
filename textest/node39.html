@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>シミュレーションモデル</TITLE>
+<META NAME="description" CONTENT="シミュレーションモデル">
+<META NAME="keywords" CONTENT="textest">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="textest.css">
+
+<LINK REL="previous" HREF="node38.html">
+<LINK REL="up" HREF="node37.html">
+<LINK REL="next" HREF="node40.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html609"
+  HREF="node40.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html605"
+  HREF="node37.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html601"
+  HREF="node38.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html607"
+  HREF="node2.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html610"
+  HREF="node40.html">I2Cセットアップ関数の開発</A>
+<B> Up:</B> <A NAME="tex2html606"
+  HREF="node37.html">シミュレーション</A>
+<B> Previous:</B> <A NAME="tex2html602"
+  HREF="node38.html">シミュレータの意義</A>
+ &nbsp; <B>  <A NAME="tex2html608"
+  HREF="node2.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION06052000000000000000">
+シミュレーションモデル</A>
+</H2><BIG CLASS="LARGE">
+他の、実回路で動かすためのVerilogと違い、シミュレーションではさまざまな便利な命令を使うことが出来るが、私が思うに、これらを一まとめにしてVerilogと呼んでいる現状が、現在の簡易的では無いが実装されるべき構文の、実回路での論理合成可能性がいまだに上がらないままである元凶であるように見える。
+<BR>ちなみに、このシミュレーションモデルでは、コメントアウトした部分も、わざと掲載している。それは、消してしまうのではなく、コメントアウトすることによって、また後で検証対象モジュールのバスを観測したくなったときにすぐ戻せるようにするという技を明示的に示すためだ。
+<BR>
+<BR>
+26#26
+<BR>
+このテスト用モジュールは、主に</BIG>
+<UL>
+<LI>クロックソースの流し込み(マスタクロック,シリアルクロック,ピクセルクロック)
+</LI>
+<LI>カメラの制御信号の生成、流し込み
+</LI>
+<LI>バスデータの仮想的な提供
+</LI>
+<LI>特定の観測しているワイヤに変化があった場合のモニタリング
+</LI>
+</UL><BIG CLASS="LARGE">
+を行っている。
+<BR>たとえば
+<BR>
+27#27
+<BR>
+ここの下りでは、カメラから送られてくる制御信号を提供しているが、これはカメラのデータシート(
+<BR>
+http://aitendo2.sakura.ne.jp/aitendo_data/product_img2/product_img/camera/CAMERA30W-V7670/OV7670_DS_(1_4).pdf
+<BR>)を参考することによって比較的早くにできあがっていた。
+<BR>逆に、テストモジュールを書きづらいのは、仕様が決まってない自分の回路にたいしてであったりするため、侮れない。
+</BIG>
+<DIV ALIGN="CENTER"><A NAME="215"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 8:</STRONG>
+CPLDボードの裏側の水晶発振子とそのデータシート</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+  28#28
+ 
+</DIV></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+<BR><HR>
+<ADDRESS>
+Iori Yoneji
+2011-01-26
+</ADDRESS>
+</BODY>
+</HTML>

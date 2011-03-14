@@ -1,0 +1,17 @@
+No implementation found for style `jsarticle'
+No implementation found for style `hyperref'
+No implementation found for style `graphicx'
+No implementation found for style `listings'
+No implementation found for style `jlisting'
+
+textest.tex is newer than textest.aux: Please rerun latex.
+
+? brace missing for \
+
+Substitution of arg to newlabelxx delayed.
+
+? brace missing for \textit
+
+*** Images are not strictly valid within HTML <pre> tags
+Please change your use of {tabbing} to a {tabular} environment.
+

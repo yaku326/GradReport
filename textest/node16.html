@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>SRAM -海馬。中期記憶-</TITLE>
+<META NAME="description" CONTENT="SRAM -海馬。中期記憶-">
+<META NAME="keywords" CONTENT="textest">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="textest.css">
+
+<LINK REL="previous" HREF="node15.html">
+<LINK REL="up" HREF="node12.html">
+<LINK REL="next" HREF="node17.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html318"
+  HREF="node17.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html314"
+  HREF="node12.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html310"
+  HREF="node15.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html316"
+  HREF="node2.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html319"
+  HREF="node17.html">現在の仕様</A>
+<B> Up:</B> <A NAME="tex2html315"
+  HREF="node12.html">最初期の仕様</A>
+<B> Previous:</B> <A NAME="tex2html311"
+  HREF="node15.html">CPLD -脊髄脳髄その他-</A>
+ &nbsp; <B>  <A NAME="tex2html317"
+  HREF="node2.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION04014000000000000000">
+SRAM -海馬。中期記憶-</A>
+</H2>
+SDRAMはコマンドがある。RAMに一度カメラからのコンスタントな情報をプールするのはCPLDになるので、実質制御はCPLDになろう。すると、ロジックICでしか処理出来ない速度で、SRAM以上の複雑なコマンドを送るのは、初めてのRAM制御としては酷であると判断した。
+<BR>よってSRAMを使用する。
+<BR>
+SDRAMは価格が比較的安く、入手性も高いが、今回は簡単に実現できる事を優先させていただく。
+
+<P>
+さらに、なぜこのチップを選択したかというと、実はカメラのデータアウトプットと深い関係がある。
+<BR>カメラのデータバス幅は8bitである。しかし、1pixelのデータは16bit、そう、1データ集合を2回に分けて送信してくるのだ!!
+<BR>
+<P>
+そこで、16bit幅の普通のRAMで簡単に制御しようとすると、実際のカメラからのデータの2倍のデータ容量が必要となる。
+<BR>必要となるRAM容量=
+<BR><!-- MATH
+ $アドレス長 \times 1アドレスに於けるデータ幅 = vetical \times horizonal\times 2 \times 8bit$
+ -->
+<SPAN CLASS="MATH">6#6</SPAN>
+<BR>
+<P>
+16bit幅のRAMを同じ方法で(1回受信し8シフトして次回受信分と足すという大変な作業無しで)扱うときの必要とされるRAM容量=
+<BR><!-- MATH
+ $アドレス長 \times 1アドレスに於けるデータ幅 = vetical \times horizonal\times 2 \times 16bit$
+ -->
+<SPAN CLASS="MATH">7#7</SPAN>
+<BR>となり、2倍のRAM容量が必要なのは自明だ。
+<BR>
+<P>
+しかもこの方式では、プロセッサがRAMから値をとるという簡単な行為のために2cycleも浪費しなければならない。残念である上に、連結処理に(Greenが上位bitsと下位bitsに分かれているため)時間を割く必要がある。手間も割く。しかし、このSRAMのデータシートを読むと16bitのSRAMでありながら、下位bit、上位bitのゲートの開け閉めが任意に行えるため、上位bitに関する値だけ取り込みたい！といったあと、下位bitだけまた同じアドレスに取り込みたい!といったわがままが効くのだ。
+<BR>しかも、上位も下位も開けておけば16bitいっぺんに読み込み書き込み可能なのである。
+<BR><BIG CLASS="LARGE">It's fits into just my needs!!
+引用開始。資料2*****
+</BIG>
+<BLOCKQUOTE><BIG CLASS="LARGE">To write to the device, take Chip Enable (<!-- MATH
+ $\overline {CE}$
+ -->
+<SPAN CLASS="MATH">8#8</SPAN>) and Write Enable
+(<!-- MATH
+ $\overline {WE}$
+ -->
+<SPAN CLASS="MATH">9#9</SPAN>) inputs LOW. If Byte Low Enable (<!-- MATH
+ $\overline {BLE}$
+ -->
+<SPAN CLASS="MATH">10#10</SPAN>) is LOW, then data
+from IO pins (IO<SMALL CLASS="SMALL">0</SMALL> through IO<SMALL CLASS="SMALL">7</SMALL>) is written into the location
+specified on the address pins (A<SMALL CLASS="SMALL">0</SMALL> through A<SMALL CLASS="SMALL">15</SMALL>). If Byte High
+Enable (<!-- MATH
+ $\overline {BHE}$
+ -->
+<SPAN CLASS="MATH">11#11</SPAN>) is LOW, then data from IO pins (IO<SMALL CLASS="SMALL">8</SMALL> through IO<SMALL CLASS="SMALL">15</SMALL>)
+is written into the location specified on the address pins (A<SMALL CLASS="SMALL">0</SMALL>through A<SMALL CLASS="SMALL">15</SMALL>).
+<BR>
+To read from the device, take Chip Enable (<SPAN CLASS="MATH">8#8</SPAN>) and OutputEnable (<SPAN CLASS="MATH">12#12</SPAN>) LOW while forcing the Write Enable (<SPAN CLASS="MATH">9#9</SPAN>) HIGH. If Byte Low Enable (<!-- MATH
+ $\overline{BLE}$
+ -->
+<SPAN CLASS="MATH">10#10</SPAN>) is LOW, then data from the memory location specified by the address pins appear on IO<SMALL CLASS="SMALL">0</SMALL> to IO<SMALL CLASS="SMALL">7</SMALL>. If Byte High Enable (<!-- MATH
+ $\overline{BHE}$
+ -->
+<SPAN CLASS="MATH">11#11</SPAN>) is LOW, then data from memory appears on IO<SMALL CLASS="SMALL">8</SMALL> to IO<SMALL CLASS="SMALL">15</SMALL>. See the “Truth Table” on page 9 for a complete description of read and write modes.
+
+<BR></BIG></BLOCKQUOTE><BIG CLASS="LARGE">
+引用終了。
+また、文中に参照しろ！と書いてあるTruth Table(真理表)
+<BR><BIG CLASS="XLARGE">Truth Table</BIG>
+</BIG><PRE><TT>
+<SPAN CLASS="MATH">8#8</SPAN>		<SPAN CLASS="MATH">9#9</SPAN>		<SPAN CLASS="MATH">12#12</SPAN>		<SPAN CLASS="MATH">11#11</SPAN>		<SPAN CLASS="MATH">10#10</SPAN>		Input/Output		      Mode
+<BR>
+H		X		X		X		X		     HighZ		Deselect
+<BR>
+PowerDown
+<BR>
+L		X		X		H		H		HighZ		Output Disabled
+<BR>
+L		H		L		L		L		Data Out (IO<SMALL CLASS="SMALL">0</SMALL>-IO<SMALL CLASS="SMALL">15</SMALL>)		Read
+<BR>
+L		H		L		H		L		Data Out (IO<SMALL CLASS="SMALL">0</SMALL>-IO<SMALL CLASS="SMALL">7</SMALL>);		Read
+<BR>
+IO<SMALL CLASS="SMALL">8</SMALL>-IO<SMALL CLASS="SMALL">15</SMALL> in High Z
+<BR>
+L		H		L		L		H		Data Out (IO<SMALL CLASS="SMALL">8</SMALL>-IO<SMALL CLASS="SMALL">15</SMALL>);		Read
+<BR>
+IO<SMALL CLASS="SMALL">0</SMALL>-IO<SMALL CLASS="SMALL">7</SMALL> in HighZ
+<BR>
+L		H		H		L		L		HighZ		Output Disabled
+<BR>
+L		H		H		H		L		HighZ		Output Disabled
+<BR>
+L		H		H		L		H		HighZ		Output Disabled
+<BR>
+L		L		X		L		L		Data In(IO<SMALL CLASS="SMALL">0</SMALL>-IO<SMALL CLASS="SMALL">15</SMALL>)		Write
+<BR>
+L		L		X		H		L		Data In(IO<SMALL CLASS="SMALL">0</SMALL>-IO<SMALL CLASS="SMALL">7</SMALL>);		Write
+<BR>
+IO<SMALL CLASS="SMALL">8</SMALL>-IO<SMALL CLASS="SMALL">15</SMALL> in High Z
+<BR>
+L		L		X		L		H		Data In(IO<SMALL CLASS="SMALL">8</SMALL>-IO<SMALL CLASS="SMALL">15</SMALL>);		Write
+<BR>
+IO<SMALL CLASS="SMALL">0</SMALL>-IO<SMALL CLASS="SMALL">7</SMALL> in High Z
+<BR>
+</TT></PRE>
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html318"
+  HREF="node17.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html314"
+  HREF="node12.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html310"
+  HREF="node15.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html316"
+  HREF="node2.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html319"
+  HREF="node17.html">現在の仕様</A>
+<B> Up:</B> <A NAME="tex2html315"
+  HREF="node12.html">最初期の仕様</A>
+<B> Previous:</B> <A NAME="tex2html311"
+  HREF="node15.html">CPLD -脊髄脳髄その他-</A>
+ &nbsp; <B>  <A NAME="tex2html317"
+  HREF="node2.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Iori Yoneji
+2011-01-26
+</ADDRESS>
+</BODY>
+</HTML>
